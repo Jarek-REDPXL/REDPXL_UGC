@@ -62,8 +62,8 @@ export default function Nav() {
     >
       <nav className="container-x grid h-16 grid-cols-[auto_1fr_auto] items-center">
         {/* Left: wordmark */}
-        <a href="#top" aria-label="REDPXL home" className="flex items-center">
-          <Logo className="h-[22px] w-auto" />
+        <a href="#top" aria-label="REDPXL UGC home" className="flex items-center">
+          <Logo variant="ugc" />
         </a>
 
         {/* Center: anchors (lg+) */}

@@ -13,37 +13,50 @@ renders in the production build.
 
 ---
 
-## 1 · Video slots (13)
+## 1 · Video slots (15)
 
 Drop MP4s into `public/videos/`, then pass `src` to the slot. All slots are
 9:16 `PhoneFrame`s. Muted/looped/`playsInline`, `preload="none"`. Until a `src`
-is set, the slot renders a `PosterCanvas` (per-niche duotone + UGC caption) with
-a play button.
+is set, hero slots render an **`EditorialPoster`** (soft niche duotone + a
+blurred SVG texture + a two-chip hook/meta caption) and reel slots render a
+`PosterCanvas` (per-niche duotone). Both show a play button.
 
-| # | Where | `chip` | Suggested file | Prop to set |
-|---|-------|--------|----------------|-------------|
-| 1 | Hero cluster (L) | `FITNESS · REELS` | `fitness.mp4` | `src` on `PhoneFrame` |
-| 2 | Hero cluster (mid, caption cycles) | `SKINCARE · TIKTOK` | `skincare.mp4` | `src` on `PhoneFrame` |
-| 3 | Hero cluster (R) | `SAAS · YOUTUBE` | `saas.mp4` | `src` on `PhoneFrame` |
-| 4 | Work reel | `SKINCARE · TIKTOK` | `skincare.mp4` | `src` in `Work.tsx` map |
-| 5 | Work reel | `SUPPLEMENTS · META` | `supplements.mp4` | ″ |
-| 6 | Work reel | `FASHION · TIKTOK` | `fashion.mp4` | ″ |
-| 7 | Work reel | `MOBILE APP · META` | `app.mp4` | ″ |
-| 8 | Work reel | `BEAUTY · TIKTOK` | `beauty.mp4` | ″ |
-| 9 | Work reel | `FITNESS · REELS` | `fitness.mp4` | ″ |
-| 10 | Work reel | `FOOD & BEV · TIKTOK` | `food.mp4` | ″ |
-| 11 | Work reel | `SAAS · YOUTUBE` | `saas.mp4` | ″ |
-| 12 | Work reel | `PET CARE · TIKTOK` | `pet.mp4` | ″ |
-| 13 | Work reel | `HOME & LIVING · REELS` | `home.mp4` | ″ |
+**Hero arc — 5 editorial slots** (left → right; `EditorialPoster` is the interim
+placeholder until real stills/clips land). Set `src` on each `<PhoneFrame>` in
+[Hero.tsx](components/Hero.tsx) `PHONES`:
 
-> The Hero mobile view (`sm:hidden`) reuses slots 2 & 3 — no extra files.
-> The Work reel duplicates its 10 phones for the seamless marquee; you only set
-> `src` once per niche in the `CHIPS`/reel map.
+| # | Variant · palette | Hook / meta caption | Suggested file |
+|---|-------------------|---------------------|----------------|
+| 1 | leaf · sand | `HYDRATION THAT LASTS` / `30S · HOOK: PROBLEM` | `hero-01.mp4` |
+| 2 | smear · mist | `12 WEEKS, NO GYM` / `25S · HOOK: TRANSFORMATION` | `hero-02.mp4` |
+| 3 | sphere · cream (center, cycles) | `THE £40 AD THAT SOLD OUT` / `30S · HOOK: BENEFIT STACK` (+2 more) | `hero-03.mp4` |
+| 4 | ripple · blush | `CLEAN SKIN, NO COMPROMISES` / `27S · HOOK: OBJECTION` | `hero-04.mp4` |
+| 5 | gel · sage | `DAILY CARE, REAL RESULTS` / `20S · HOOK: REMINDER` | `hero-05.mp4` |
 
-**How to wire the reel:** in [Work.tsx](components/Work.tsx) the reel maps over
-`CHIPS`. Change it to map over `{ chip, src }` objects and pass `src={item.src}`
-to `<PhoneFrame>`. **How to wire the hero:** add `src="/videos/…​.mp4"` to each
-`<PhoneFrame>` in [Hero.tsx](components/Hero.tsx) (lines ~105–127).
+**Work reel — 10 niche slots.** Set `src` once per niche in the `Work.tsx` map:
+
+| # | `chip` | Suggested file |
+|---|--------|----------------|
+| 6 | `SKINCARE · TIKTOK` | `skincare.mp4` |
+| 7 | `SUPPLEMENTS · META` | `supplements.mp4` |
+| 8 | `FASHION · TIKTOK` | `fashion.mp4` |
+| 9 | `MOBILE APP · META` | `app.mp4` |
+| 10 | `BEAUTY · TIKTOK` | `beauty.mp4` |
+| 11 | `FITNESS · REELS` | `fitness.mp4` |
+| 12 | `FOOD & BEV · TIKTOK` | `food.mp4` |
+| 13 | `SAAS · YOUTUBE` | `saas.mp4` |
+| 14 | `PET CARE · TIKTOK` | `pet.mp4` |
+| 15 | `HOME & LIVING · REELS` | `home.mp4` |
+
+> Below 1024 the hero drops its outer pair (slots 1 & 5); below 768 it shows
+> slots 2–4 with the neighbours cropped at the edges — no extra files.
+> The Work reel duplicates its 10 phones for the seamless marquee; set `src`
+> once per niche.
+
+**How to wire the hero:** add `src="/videos/hero-0X.mp4"` to each entry of the
+`PHONES` array in [Hero.tsx](components/Hero.tsx). **How to wire the reel:** in
+[Work.tsx](components/Work.tsx) map over `{ chip, src }` and pass `src` to
+`<PhoneFrame>`.
 
 Optional: pass a `poster="/videos/….jpg"` first-frame image per slot for a
 crisper initial paint.
@@ -89,7 +102,7 @@ All in [lib/site.ts](lib/site.ts):
 
 ## Launch checklist
 
-- [ ] 13 MP4s in `public/videos/`, every `PhoneFrame`/`VideoSlot` has a `src`
+- [ ] 15 MP4s in `public/videos/` (5 hero + 10 reel), every slot has a `src`
 - [ ] No dashed **PLACEHOLDER** badges remain in `npm run dev`
 - [ ] Real client logos in `LogoStrip.tsx`
 - [ ] All `TODO:REAL-DATA` numbers verified or removed

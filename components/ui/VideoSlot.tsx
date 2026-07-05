@@ -1,7 +1,19 @@
 import { Play } from "lucide-react";
 import PosterCanvas from "./PosterCanvas";
+import EditorialPoster, {
+  type PosterPalette,
+  type PosterVariant,
+} from "./EditorialPoster";
 
 type Ratio = "9:16" | "1:1" | "16:9";
+
+export type EditorialSpec = {
+  variant: PosterVariant;
+  palette: PosterPalette;
+  hook: string;
+  meta: string;
+  cycleSets?: { hook: string; meta: string }[];
+};
 
 type VideoSlotProps = {
   /* TODO:REAL-DATA drop MP4s in /public/videos and pass e.g. src="/videos/skincare.mp4" */
@@ -14,6 +26,9 @@ type VideoSlotProps = {
   rounded?: string;
   /** hero middle phone: cycle the poster's top caption through these hooks */
   cycleHooks?: string[];
+  /** hero posters: use the editorial poster (texture + two-chip caption) and
+      suppress the niche chip; when absent the marquee PosterCanvas is used */
+  editorial?: EditorialSpec;
 };
 
 const ratioClass: Record<Ratio, string> = {
@@ -30,6 +45,7 @@ export default function VideoSlot({
   ratio = "9:16",
   rounded = "rounded-card",
   cycleHooks,
+  editorial,
 }: VideoSlotProps) {
   return (
     <div
@@ -38,7 +54,11 @@ export default function VideoSlot({
       {/* poster inner content — scales 1.03 on card hover (§1) */}
       {!src && (
         <div className="absolute inset-0 transition-transform duration-[180ms] ease-[var(--ease-out)] group-hover:scale-[1.03]">
-          <PosterCanvas chip={chip} cycleHooks={cycleHooks} />
+          {editorial ? (
+            <EditorialPoster {...editorial} />
+          ) : (
+            <PosterCanvas chip={chip} cycleHooks={cycleHooks} />
+          )}
         </div>
       )}
 
@@ -68,10 +88,13 @@ export default function VideoSlot({
         />
       )}
 
-      {/* label chip */}
-      <span className="mono-note absolute left-2 top-2 z-20 rounded-chip border border-line bg-white/[0.92] px-2 py-[3px] !text-ink">
-        {chip}
-      </span>
+      {/* niche label chip — suppressed for editorial hero posters (they carry
+          their own two-chip caption) */}
+      {!editorial && (
+        <span className="mono-note absolute left-2 top-2 z-20 rounded-chip border border-line bg-white/[0.92] px-2 py-[3px] !text-ink">
+          {chip}
+        </span>
+      )}
 
       {/* dev-only placeholder badge — flags an unfilled slot in development;
           never renders in the production build (see ASSETS.md drop-in map) */}

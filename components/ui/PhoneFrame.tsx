@@ -1,4 +1,4 @@
-import VideoSlot from "./VideoSlot";
+import VideoSlot, { type EditorialSpec } from "./VideoSlot";
 
 /**
  * DESIGN.md §8.4 — PhoneFrame: bezel wrapper (radius 28, bg bezel, 6px padding
@@ -9,11 +9,13 @@ export default function PhoneFrame({
   chip,
   className = "",
   cycleHooks,
+  editorial,
 }: {
   src?: string;
   chip: string;
   className?: string;
   cycleHooks?: string[];
+  editorial?: EditorialSpec;
 }) {
   return (
     <div
@@ -26,6 +28,7 @@ export default function PhoneFrame({
           ratio="9:16"
           rounded="rounded-[20px]"
           cycleHooks={cycleHooks}
+          editorial={editorial}
         />
       </div>
     </div>

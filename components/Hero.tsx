@@ -1,134 +1,145 @@
-import { Annotation } from "./ui/Section";
 import Button from "./ui/Button";
 import PhoneFrame from "./ui/PhoneFrame";
 import BatchCaption from "./BatchCaption";
 import { site } from "@/lib/site";
+import type { EditorialSpec } from "./ui/VideoSlot";
 
-// hero middle-phone caption cycles through these (client PosterCanvas)
-const HERO_HOOKS = [
-  "POV: I finally found the one",
-  "stop scrolling if you need this",
-  "3 reasons your ads flop",
+// center phone: its two-chip caption crossfades through these
+const CENTER_SETS = [
+  { hook: "THE £40 AD THAT SOLD OUT", meta: "30S · HOOK: BENEFIT STACK" },
+  { hook: "STOP SCROLLING, START SELLING", meta: "28S · HOOK: PATTERN INTERRUPT" },
+  { hook: "3 REASONS YOUR ADS FLOP", meta: "26S · HOOK: LISTICLE" },
 ];
 
-// Attio-style corner ticks on the hero frame
-const CORNERS = [
-  "left-0 top-0 -translate-x-1/2 -translate-y-1/2",
-  "right-0 top-0 translate-x-1/2 -translate-y-1/2",
-  "left-0 bottom-0 -translate-x-1/2 translate-y-1/2",
-  "right-0 bottom-0 translate-x-1/2 translate-y-1/2",
-];
+type HeroPhone = {
+  chip: string; // aria label only (editorial hides the visible niche chip)
+  editorial: EditorialSpec;
+  /** responsive width + arc step-down (margin-top); outer pair hidden < lg */
+  wrap: string;
+  z: number;
+  delay: string;
+};
 
-function CornerTick({ className }: { className: string }) {
-  return (
-    <svg
-      width="8"
-      height="8"
-      viewBox="0 0 8 8"
-      aria-hidden
-      className={`absolute text-text-3 ${className}`}
-    >
-      <path d="M4 0V8M0 4H8" stroke="currentColor" strokeWidth="1" />
-    </svg>
-  );
-}
+// left → right; variants a–e, palettes sand/mist/cream/blush/sage.
+// TODO:REAL-DATA drop hero-01…05 MP4s in /public/videos and pass `src`.
+const PHONES: HeroPhone[] = [
+  {
+    chip: "Skincare editorial ad",
+    editorial: { variant: "leaf", palette: "sand", hook: "HYDRATION THAT LASTS", meta: "30S · HOOK: PROBLEM" },
+    wrap: "hidden lg:block w-[224px] xl:w-[264px] mt-16 xl:mt-24",
+    z: 10,
+    delay: "0.58s",
+  },
+  {
+    chip: "Fitness editorial ad",
+    editorial: { variant: "smear", palette: "mist", hook: "12 WEEKS, NO GYM", meta: "25S · HOOK: TRANSFORMATION" },
+    wrap: "w-[176px] md:w-[208px] lg:w-[248px] xl:w-[288px] mt-8 lg:mt-12",
+    z: 20,
+    delay: "0.50s",
+  },
+  {
+    chip: "Skincare editorial ad",
+    editorial: {
+      variant: "sphere",
+      palette: "cream",
+      hook: "THE £40 AD THAT SOLD OUT",
+      meta: "30S · HOOK: BENEFIT STACK",
+      cycleSets: CENTER_SETS,
+    },
+    wrap: "w-[200px] md:w-[236px] lg:w-[272px] xl:w-[312px]",
+    z: 30,
+    delay: "0.42s",
+  },
+  {
+    chip: "Beauty editorial ad",
+    editorial: { variant: "ripple", palette: "blush", hook: "CLEAN SKIN, NO COMPROMISES", meta: "27S · HOOK: OBJECTION" },
+    wrap: "w-[176px] md:w-[208px] lg:w-[248px] xl:w-[288px] mt-8 lg:mt-12",
+    z: 20,
+    delay: "0.50s",
+  },
+  {
+    chip: "Supplements editorial ad",
+    editorial: { variant: "gel", palette: "sage", hook: "DAILY CARE, REAL RESULTS", meta: "20S · HOOK: REMINDER" },
+    wrap: "hidden lg:block w-[224px] xl:w-[264px] mt-16 xl:mt-24",
+    z: 10,
+    delay: "0.58s",
+  },
+];
 
 /**
- * Server component. The load sequence (§7.2) is CSS (`hero-rise`, staggered via
- * animation-delay) so the LCP text is server-rendered and painted at first
- * paint — never gated behind JS hydration. Only the poster subtree and the
- * batch-number caption are client islands.
+ * DESIGN.md §9 [00] — HERO "Centered Monument". Open white (no frame, no
+ * canvas). Centered annotation → H1 → sub → CTAs, then a full-bleed arc of 5
+ * editorial PhoneFrames (center largest + highest, stepped down and edge-cropped
+ * outward, bottoms bleeding out of the section). Server component; the CSS
+ * `hero-rise` / `phone-rise` load sequence keeps the LCP text server-rendered.
  */
 export default function Hero() {
   return (
-    <section id="top" aria-labelledby="hero-title" className="overflow-x-clip">
-      <div className="container-x grid grid-cols-1 items-center gap-12 pb-24 pt-16 xl:grid-cols-[7fr_5fr] xl:gap-16">
-        {/* Left column — server-rendered text, CSS staggered rise */}
-        <div>
-          <div className="hero-rise" style={{ animationDelay: "0.05s" }}>
-            <Annotation
-              idx="00"
-              name="AI UGC video ads, done for you"
-              labelId="hero-title"
-            />
-          </div>
-
-          <h1
-            id="hero-title"
-            className="display-1 mt-5 hero-rise"
-            style={{ animationDelay: "0.14s" }}
-          >
-            UGC ads engineered to convert.
-          </h1>
-
-          <p
-            className="body-lg mt-3 hero-rise"
-            style={{ animationDelay: "0.23s" }}
-          >
-            Hyper-realistic AI-generated video and static ads for your brand.
-            Scripted with proven direct-response hooks, delivered in 72 hours,
-            ready for TikTok, Meta and YouTube.
-          </p>
-
-          <div
-            className="mt-8 flex flex-col gap-4 hero-rise sm:flex-row sm:items-center"
-            style={{ animationDelay: "0.32s" }}
-          >
-            <Button href={site.bookingUrl} external variant="primary">
-              Book a free strategy call
-            </Button>
-            <Button href="#work" variant="secondary">
-              See the work
-            </Button>
-          </div>
+    <section id="top" aria-labelledby="hero-title" className="relative overflow-x-clip pt-12">
+      <div className="container-x flex flex-col items-center text-center">
+        {/* annotation */}
+        <div
+          className="hero-rise flex items-center justify-center gap-2.5"
+          style={{ animationDelay: "0.05s" }}
+        >
+          <span className="h-1.5 w-1.5 bg-accent" aria-hidden />
+          <span className="mono-note">
+            <span className="text-accent-dark">[00]</span> AI UGC VIDEO ADS · DONE FOR YOU
+          </span>
         </div>
 
-        {/* Right column — hero frame */}
-        <div
-          className="relative w-full hero-rise-slow"
-          style={{ animationDelay: "0.41s" }}
+        {/* H1 — one line at >=1280, balances to two below */}
+        <h1
+          id="hero-title"
+          className="display-1 hero-rise mx-auto mt-6 max-w-[1120px] text-balance text-[clamp(2.5rem,5.3vw,3.9rem)]"
+          style={{ animationDelay: "0.14s" }}
         >
-          {/* warmth wash so the cluster sits on light, not void (§00) */}
-          <div
-            aria-hidden
-            className="hero-blob pointer-events-none absolute -inset-6 -z-10 rounded-[48px]"
-          />
+          UGC ads engineered to convert.
+        </h1>
 
-          <div className="relative rounded-frame border border-line bg-bg p-6 shadow-[var(--shadow-frame)]">
-            {CORNERS.map((c) => (
-              <CornerTick key={c} className={c} />
-            ))}
+        {/* sub */}
+        <p
+          className="body-lg hero-rise mx-auto mt-5 max-w-[620px] text-center"
+          style={{ animationDelay: "0.23s" }}
+        >
+          Hyper-realistic AI-generated video and static ads for your brand.
+          Scripted with proven direct-response hooks, delivered in 72 hours,
+          ready for TikTok, Meta and YouTube.
+        </p>
 
-            {/* desktop: 3-phone cluster (§8.4); middle phone caption cycles */}
-            <div className="hidden items-center justify-center sm:flex">
-              {/* TODO:REAL-DATA drop MP4s in /public/videos and pass src */}
-              <PhoneFrame
-                chip="FITNESS · REELS"
-                className="-mr-6 w-[180px] -rotate-[2.5deg] lg:w-[200px] xl:w-[220px]"
-              />
-              <PhoneFrame
-                chip="SKINCARE · TIKTOK"
-                cycleHooks={HERO_HOOKS}
-                className="relative z-10 w-[200px] -translate-y-3 lg:w-[220px] xl:w-[240px]"
-              />
-              <PhoneFrame
-                chip="SAAS · YOUTUBE"
-                className="-ml-6 w-[180px] rotate-[2deg] lg:w-[200px] xl:w-[220px]"
-              />
+        {/* CTAs */}
+        <div
+          className="hero-rise mt-8 flex w-full flex-col gap-3 sm:w-auto sm:flex-row sm:items-center sm:justify-center sm:gap-4"
+          style={{ animationDelay: "0.32s" }}
+        >
+          <Button href={site.bookingUrl} external variant="primary" className="w-full sm:w-auto">
+            Book a free strategy call
+          </Button>
+          <Button href="#work" variant="secondary" className="w-full sm:w-auto">
+            See the work →
+          </Button>
+        </div>
+      </div>
+
+      {/* output-log caption — container-aligned, top-left of the phone band */}
+      <div className="container-x mt-16">
+        <div className="hero-rise" style={{ animationDelay: "0.4s" }}>
+          <BatchCaption className="text-text-3" />
+        </div>
+      </div>
+
+      {/* THE PHONE ARC — full-bleed, clips horizontally + crops phone bottoms */}
+      <div className="relative mt-3 h-[320px] w-full overflow-hidden sm:h-[400px] lg:h-[460px] xl:h-[500px]">
+        <div className="flex items-start justify-center">
+          {PHONES.map((p, i) => (
+            <div
+              key={i}
+              className={`phone-rise -mx-1.5 shrink-0 ${p.wrap}`}
+              style={{ zIndex: p.z, animationDelay: p.delay }}
+            >
+              <PhoneFrame chip={p.chip} editorial={p.editorial} />
             </div>
-
-            {/* mobile: 2 phones, no rotation */}
-            <div className="flex items-center justify-center gap-4 sm:hidden">
-              <PhoneFrame
-                chip="SKINCARE · TIKTOK"
-                cycleHooks={HERO_HOOKS}
-                className="w-[150px]"
-              />
-              <PhoneFrame chip="SAAS · YOUTUBE" className="w-[150px]" />
-            </div>
-          </div>
-
-          <BatchCaption />
+          ))}
         </div>
       </div>
     </section>

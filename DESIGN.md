@@ -1,4 +1,4 @@
-# REDPXL UGC — Design Specification v2.2
+# REDPXL UGC — Design Specification v2.3
 
 This document is the single source of truth for the REDPXL UGC landing page.
 Every colour, size, weight, spacing value and interaction on the page derives
@@ -415,23 +415,46 @@ Per §8.2. Anchors: Work `#work`, Why AI UGC `#why`, Process `#process`,
 Pricing `#pricing`, FAQ `#faq`. CTA href: `https://calendly.com/meeting-redpxl`
 (target _blank). Sits above the canvas stack, outside the 16px viewport margin.
 
-### [00] HERO — canvas `white` (open, no border) — lg+: 2-col (7/5), <lg: stacked
-Left col: annotation `[00] AI UGC VIDEO ADS — DONE FOR YOU`; H1 `display-1`:
-**"UGC ads engineered to convert."** (white canvas → single-tone `--ink`, no
-deep phrase); sub `body-lg` max-w 560px: "Hyper-realistic AI-generated video
-and static ads for your brand. Scripted with proven direct-response hooks,
-delivered in 72 hours, ready for TikTok, Meta and YouTube."; CTA row (16px
-gap): Primary "Book a free strategy call" + Secondary "See the work →"
-(`#work`).
-Right col: hero frame per §5 (16px radius) with 24px inner padding on `--bg`,
-sitting over the `.hero-blob` warmth wash — contains the 3-phone cluster
-(§8.4). Below frame, caption `mono-note`: `OUTPUT / BATCH 014 — SKINCARE ·
-9:16 · 72H`.
-**+ Logos:** a `mono-note` line "Trusted by brands across e-commerce, apps and
-FMCG" + the logo marquee (§8.11) render inside the hero canvas as connective
-tissue — no separate section, no annotation.
-Mobile: text → CTAs stacked full-width → frame (2 phones only, no rotation) →
-logos.
+### [00] HERO — "Centered Monument" (open white, no frame, no canvas)
+Centered single column, no 2-col grid, no hero-frame card, no cream blob.
+Stacked and centered, pt ~48px below nav:
+- Annotation, centered: 6px `--accent` square + `[00] AI UGC VIDEO ADS · DONE
+  FOR YOU` (`mono-note`, `[00]` in `--accent-dark` for AA; `·` separators, no
+  em dash per §1).
+- H1 `display-1`, centered, **"UGC ads engineered to convert."** — one line at
+  ≥1280 (size capped to `clamp(2.5rem,5.3vw,3.9rem)`, `max-w-[1120px]`),
+  `text-wrap: balance` below that. Single-tone `--ink`.
+- Sub `body-lg`, centered, `max-w 620px`: "Hyper-realistic AI-generated video
+  and static ads for your brand. Scripted with proven direct-response hooks,
+  delivered in 72 hours, ready for TikTok, Meta and YouTube."
+- CTA row centered (16px gap): Primary "Book a free strategy call" + Secondary
+  "See the work →" (`#work`, lenis). Stacks full-width < 640.
+
+**The phone arc** (below CTAs, ~72px gap): a full-bleed band of 5 editorial
+`PhoneFrame`s in a symmetric arc — center largest (~312px) and highest, inner
+pair stepped down 48px, outer pair (~264px) stepped down 96px and cropped by the
+viewport edges. Slight overlap, center on top (z). The band clips horizontally
+and crops the phone bottoms (phones bleed out of the section). Load: annotation
+→ H1 → sub → CTAs → phones rise from below, staggered center-out (`phone-rise`,
+`dur-slow`); reduced-motion static. Above the band, container-aligned top-left:
+the output-log caption `output / batch 014 · skincare · 9:16 · 72h` (`mono-note`,
+`BatchCaption` ticker).
+
+**Posters** use `EditorialPoster` (§12): a soft 2-stop niche duotone + one
+hand-built blurred SVG texture (leaf-shadow / cream-smear / sphere / ripple /
+gel-drop, palettes sand·mist·cream·blush·sage left→right) + 4% grain + a
+two-chip caption (hook `--ink` on white/92, meta `--text-2` on white/80). The
+center phone's chip pair crossfades through 3 sets (§ CyclingChips). Play circle
+stays; the niche chip + progress bar are suppressed on hero posters.
+
+**Responsive:** ≥1280 five phones edge-cropped; 1024–1279 five, outer heavily
+cropped; 768–1023 three (outer pair dropped); <768 three (center ~200px, inner
+pair cropped at edges) — still a monument. Zero page-level horizontal scroll at
+every width (band `overflow: hidden`; section `overflow-x: clip`).
+
+The nav wordmark here uses the "REDPXL" mark with the trailing red square cropped
+off, followed by a small bordered `UGC` chip (§8.2); the footer keeps the square.
+LogoStrip remains its own section below (unchanged).
 
 ### [01] THE PROBLEM — canvas `sand` (deep `--deep-sand`) — note `/ CREATIVE FATIGUE`
 Title two-tone: "Your winning ad is " + deep "already dying." Two-column
@@ -763,3 +786,5 @@ PhoneFrame reel — note reads `/ 10 NICHES · LOOPING`.
 *v2.1 — Graphics converted to pure-CSS server components (no client hydration) for mobile perf. Contrast + cascade fix: type scale moved to `@layer components` so colour utilities override on the dark canvas; `--text-3` darkened to `#6B6E75` for AA legibility on tints. Copy humanised across all sections (no em/en dashes, ellipses or fancy punctuation; plain professional voice). Responsive: hero cluster stacks below xl and clips decorative bleed; canvas annotation note hides below 380px. Responsive audit tooling (Playwright, 8 widths, automated overflow check) + ASSETS.md drop-in map + dev-only placeholder badges.*
 
 *v2.2 — Mobile-perf pass: motion JS library removed entirely. Scroll reveals, the FAQ accordion (grid-rows), and the hero caption cycle are now pure CSS / tiny native islands; PosterCanvas is a server component (only the one cycling hero caption hydrates); CountUp uses a native IntersectionObserver; Lenis is desktop-only and dynamically imported so touch devices never load it. Film grain switched from ~29 SVG feTurbulence filters to one cached tiled raster (`public/noise.png`). Off-screen sections use `content-visibility: auto`. Net: motion library and most client hydration gone; real-world mobile is fast (FCP ~0.9s, SI ~0.9s, CLS 0). `lib/motion.ts` removed. A11y contrast: the `[NN]` index uses `--accent-dark` (AA at 12px on the pill) and the LogoStrip wordmarks use `--text-2` (dropped the 0.7 opacity).*
+
+*v2.3 — Hero redesign to "Centered Monument" (§9 [00]): open white, centered annotation/H1/sub/CTAs, then a full-bleed 5-phone editorial arc (center largest + highest, stepped down and edge-cropped outward, bottoms bleeding), staggered `phone-rise` load. New `EditorialPoster` (soft niche duotone + one blurred SVG texture per variant: leaf/smear/sphere/ripple/gel + 4% grain + two-chip hook/meta caption; center phone cycles via `CyclingChips`), wired through `VideoSlot`/`PhoneFrame` (suppresses the niche chip). Nav wordmark = REDPXL with the red square cropped + a bordered `UGC` chip; footer keeps the square. Zero horizontal overflow 320→1920 (band clips; section `overflow-x: clip`). Everything else unchanged.*

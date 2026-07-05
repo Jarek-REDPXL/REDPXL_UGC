@@ -512,14 +512,6 @@ button:focus-visible,
   animation-play-state: paused;
 }
 
-/* v2.0 §13 — hero warmth blob behind the phone cluster */
-.hero-blob {
-  background: radial-gradient(
-    60% 60% at 50% 45%,
-    color-mix(in srgb, var(--canvas-cream) 60%, transparent),
-    transparent 70%
-  );
-}
 .mask-fade-x {
   -webkit-mask-image: linear-gradient(
     90deg,
@@ -571,6 +563,22 @@ button:focus-visible,
   animation: hero-rise var(--dur-slow) var(--ease-out) both;
 }
 
+/* §9 [00] hero phone arc — each phone rises from below, staggered center-out.
+   Transform is reserved for the rise, so the arc's vertical step uses margin. */
+@keyframes phone-rise {
+  from {
+    opacity: 0;
+    transform: translateY(44px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.phone-rise {
+  animation: phone-rise var(--dur-slow) var(--ease-out) both;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
@@ -582,7 +590,8 @@ button:focus-visible,
     transform: none;
   }
   .hero-rise,
-  .hero-rise-slow {
+  .hero-rise-slow,
+  .phone-rise {
     animation: none;
   }
 }

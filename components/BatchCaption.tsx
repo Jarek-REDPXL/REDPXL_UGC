@@ -8,7 +8,7 @@ import { useEffect, useState } from "react";
  * server-rendered. Reduced motion (checked via matchMedia, no motion library)
  * jumps straight to 014.
  */
-export default function BatchCaption() {
+export default function BatchCaption({ className = "" }: { className?: string }) {
   const [batch, setBatch] = useState(12);
 
   useEffect(() => {
@@ -25,7 +25,7 @@ export default function BatchCaption() {
   }, []);
 
   return (
-    <p className="mono-note mt-4 text-center">
+    <p className={`mono-note ${className}`}>
       output / batch{" "}
       <span className="tabular-nums">{String(batch).padStart(3, "0")}</span> ·
       skincare · 9:16 · 72h
