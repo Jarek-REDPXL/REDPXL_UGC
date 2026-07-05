@@ -19,6 +19,10 @@ type HeroPhone = {
   delay: string;
 };
 
+// Video file number per phone position (left → right). Positions 2 and 4 are
+// swapped, so the arc plays Main Hero (1)(4)(3)(2)(5).
+const VIDEO_ORDER = [1, 4, 3, 2, 5];
+
 // left → right; variants a–e, palettes sand/mist/cream/blush/sage.
 // Each phone plays /public/videos/Main Hero (1…5).mp4; the editorial poster is
 // the fallback if a video fails to load.
@@ -128,11 +132,11 @@ export default function Hero() {
               className={`phone-rise -mx-1.5 shrink-0 ${p.wrap}`}
               style={{ zIndex: p.z, animationDelay: p.delay }}
             >
-              {/* real videos: Main Hero (1)…(5), left → right (spaces encoded) */}
+              {/* real videos, left → right (spaces encoded); 2 & 4 swapped */}
               <PhoneFrame
                 chip={p.chip}
                 editorial={p.editorial}
-                src={`/videos/Main%20Hero%20(${i + 1}).mp4`}
+                src={`/videos/Main%20Hero%20(${VIDEO_ORDER[i]}).mp4`}
               />
             </div>
           ))}
