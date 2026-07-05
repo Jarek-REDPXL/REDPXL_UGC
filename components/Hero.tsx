@@ -1,6 +1,5 @@
 import Button from "./ui/Button";
 import PhoneFrame from "./ui/PhoneFrame";
-import BatchCaption from "./BatchCaption";
 import { site } from "@/lib/site";
 import type { EditorialSpec } from "./ui/VideoSlot";
 
@@ -121,15 +120,8 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* output-log caption — container-aligned, top-left of the phone band */}
-      <div className="container-x mt-16">
-        <div className="hero-rise" style={{ animationDelay: "0.4s" }}>
-          <BatchCaption className="text-text-3" />
-        </div>
-      </div>
-
       {/* THE PHONE ARC — full-bleed, clips horizontally + crops phone bottoms */}
-      <div className="relative mt-3 h-[320px] w-full overflow-hidden sm:h-[400px] lg:h-[460px] xl:h-[500px]">
+      <div className="relative mt-16 h-[320px] w-full overflow-hidden sm:h-[400px] lg:h-[460px] xl:h-[500px]">
         <div className="flex items-start justify-center">
           {PHONES.map((p, i) => (
             <div
