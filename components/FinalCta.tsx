@@ -15,7 +15,7 @@ export default function FinalCta() {
         <div className="container-x">
           <Reveal>
             <Annotation
-              idx="08"
+              idx="09"
               name="START"
               note="15 MIN CALL"
               tone="dark"
@@ -25,14 +25,14 @@ export default function FinalCta() {
 
           <Reveal>
             <h2 id="cta-title" className="display-2 text-white mt-5">
-              The next era of ad creative runs on AI.
+              Stop running tired ads.
             </h2>
           </Reveal>
 
           <Reveal>
             <p className="body-lg text-white/65 mt-3">
-              Book a free strategy call. We&apos;ll show you live examples for
-              your niche and map your first batch.
+              Get your first batch this week and give your paid social the
+              creative volume it&apos;s been missing.
             </p>
           </Reveal>
 

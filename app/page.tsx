@@ -1,6 +1,7 @@
 import Nav from "@/components/Nav";
 import Hero from "@/components/Hero";
 import LogoStrip from "@/components/LogoStrip";
+import Problem from "@/components/Problem";
 import Work from "@/components/Work";
 import Why from "@/components/Why";
 import Process from "@/components/Process";
@@ -18,6 +19,7 @@ export default function Home() {
       <main className="flex-1">
         <Hero />
         <LogoStrip />
+        <Problem />
         <Work />
         <Why />
         <Process />

@@ -20,7 +20,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: "REDPXL UGC — AI UGC Video Ads That Convert",
   description:
-    "Done-for-you, hyper-realistic AI UGC video ads. Scripted with proven direct-response hooks, delivered in 48 hours, ready for TikTok, Meta and YouTube. A Redpxl company, London.",
+    "Done-for-you, hyper-realistic AI UGC video and static ads. Scripted with proven direct-response hooks, delivered in 72 hours, ready for TikTok, Meta and YouTube. A Redpxl company, London.",
   keywords: [
     "AI UGC",
     "UGC video ads",
@@ -37,14 +37,14 @@ export const metadata: Metadata = {
     siteName: "REDPXL UGC",
     title: "REDPXL UGC — AI UGC Video Ads That Convert",
     description:
-      "Hyper-realistic AI-generated UGC videos for your brand. Proven direct-response hooks, delivered in 48 hours.",
+      "Hyper-realistic AI-generated UGC video and static ads for your brand. Proven direct-response hooks, delivered in 72 hours.",
     locale: "en_GB",
   },
   twitter: {
     card: "summary_large_image",
     title: "REDPXL UGC — AI UGC Video Ads That Convert",
     description:
-      "Hyper-realistic AI-generated UGC videos for your brand. Delivered in 48 hours.",
+      "Hyper-realistic AI-generated UGC video and static ads for your brand. Delivered in 72 hours.",
   },
   robots: { index: true, follow: true },
   icons: {

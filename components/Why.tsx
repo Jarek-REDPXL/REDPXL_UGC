@@ -1,8 +1,7 @@
 import type { ComponentType, ReactNode } from "react";
 import Section from "@/components/ui/Section";
-import Chip from "@/components/ui/Chip";
 import { StaggerGroup, RevealItem } from "@/components/Stagger";
-import { Users, Zap, Clock, Layers, Smartphone, FileCheck } from "lucide-react";
+import { Users, Zap, Clock, Layers, PoundSterling, Smartphone } from "lucide-react";
 
 /**
  * DESIGN.md §8.6 Bento card — white, 1px line, radius 12px, padding 28px.
@@ -31,12 +30,12 @@ function BentoCard({
   );
 }
 
-/** §9 [02] WHY AI UGC — 12-col bento (§4.5), two wide cards + four thirds. */
+/** §9 [03] WHY AI UGC — 12-col bento (§4.5), two wide cards + four thirds. */
 export default function Why() {
   return (
     <Section
       id="why"
-      idx="02"
+      idx="03"
       name="WHY AI UGC"
       note="06 REASONS"
       title="Everything creators do. None of what slows you down."
@@ -64,9 +63,9 @@ export default function Why() {
             </p>
             <div className="mt-4 rounded-btn border border-line bg-bg-subtle p-3">
               {[
-                "POV: I FOUND OUT WHY MY SKIN…",
+                "POV: YOU'VE BEEN DOING IT WRONG",
                 "STOP SCROLLING IF YOU…",
-                "3 REASONS YOUR ADS…",
+                "3 REASONS YOUR ADS FLOP",
               ].map((line) => (
                 <div
                   key={line}
@@ -80,46 +79,50 @@ export default function Why() {
           </BentoCard>
         </RevealItem>
 
-        {/* Delivery — stat variant */}
+        {/* Speed — stat variant */}
         <RevealItem className="md:col-span-3">
-          <BentoCard icon={Clock} label="DELIVERY">
-            <div className="mt-4 flex items-baseline gap-2">
-              <span className="stat text-ink">48</span>
+          <BentoCard icon={Clock} label="SPEED">
+            <div className="flex items-baseline gap-2">
+              <span className="stat text-ink">72</span>
               <span className="mono-note">HOURS</span>
             </div>
-            <h3 className="title-1 mt-3">48h turnaround</h3>
-          </BentoCard>
-        </RevealItem>
-
-        {/* Testing */}
-        <RevealItem className="md:col-span-3">
-          <BentoCard icon={Layers} label="TESTING">
-            <h3 className="title-1 mt-4">Unlimited variations</h3>
+            <h3 className="title-1 mt-3">72h turnaround</h3>
             <p className="body-copy mt-2">
-              Same ad, ten angles. Test hooks, creators and formats without
-              reshooting.
+              Fresh statics and videos in three days — not the two weeks a
+              creator shoot takes.
             </p>
           </BentoCard>
         </RevealItem>
 
-        {/* Formats */}
+        {/* Volume */}
         <RevealItem className="md:col-span-3">
-          <BentoCard icon={Smartphone} label="FORMATS">
-            <h3 className="title-1 mt-4">Every format</h3>
-            <div className="mt-3 flex flex-wrap gap-2">
-              <Chip>9:16</Chip>
-              <Chip>1:1</Chip>
-              <Chip>16:9</Chip>
-            </div>
+          <BentoCard icon={Layers} label="VOLUME">
+            <h3 className="title-1 mt-4">The volume you need</h3>
+            <p className="body-copy mt-2">
+              Most brands ship 2–4 ads a month. Winning on paid social takes
+              15–20. We produce at that pace.
+            </p>
           </BentoCard>
         </RevealItem>
 
-        {/* Rights */}
+        {/* Cost */}
         <RevealItem className="md:col-span-3">
-          <BentoCard icon={FileCheck} label="RIGHTS">
-            <h3 className="title-1 mt-4">Full usage rights</h3>
+          <BentoCard icon={PoundSterling} label="COST">
+            <h3 className="title-1 mt-4">A fraction of the cost</h3>
             <p className="body-copy mt-2">
-              Yours forever. No creator licensing fees, no renewal negotiations.
+              Creator video runs £150–500 a piece. Our plans work out from
+              around £100 an ad.
+            </p>
+          </BentoCard>
+        </RevealItem>
+
+        {/* Native */}
+        <RevealItem className="md:col-span-3">
+          <BentoCard icon={Smartphone} label="NATIVE">
+            <h3 className="title-1 mt-4">Native, not glossy</h3>
+            <p className="body-copy mt-2">
+              UGC-style creative built to convert on paid social — not studio
+              gloss that gets scrolled past.
             </p>
           </BentoCard>
         </RevealItem>

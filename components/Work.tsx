@@ -67,7 +67,7 @@ export default function Work() {
       <div className="container-x">
         <Reveal>
           <Annotation
-            idx="01"
+            idx="02"
             name="THE WORK"
             note="HOLD ↔ DRAG"
             labelId="work-title"
@@ -82,7 +82,7 @@ export default function Work() {
 
         <Reveal>
           <p className="body-lg mt-3">
-            Every video below was generated, scripted and edited by our pipeline.
+            See it, then judge it. Most people can&apos;t tell it&apos;s AI — and on paid social, native beats polished.
           </p>
         </Reveal>
       </div>

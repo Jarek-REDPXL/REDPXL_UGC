@@ -23,7 +23,7 @@ const ROWS: { label: string; cells: [Cell, Cell, Cell] }[] = [
     cells: [
       { verdict: "neg", text: "£150–£400" },
       { verdict: "neutral", text: "Your time" },
-      { verdict: "pos", text: "From £40" /* TODO:REAL-DATA price */ },
+      { verdict: "pos", text: "From £100/ad on plans" },
     ],
   },
   {
@@ -31,7 +31,7 @@ const ROWS: { label: string; cells: [Cell, Cell, Cell] }[] = [
     cells: [
       { verdict: "neg", text: "2–4 weeks" },
       { verdict: "neutral", text: "Days of trial and error" },
-      { verdict: "pos", text: "48 hours" },
+      { verdict: "pos", text: "72 hours" },
     ],
   },
   {
@@ -83,7 +83,7 @@ const MOBILE_ORDER = [2, 0, 1] as const;
 export default function Comparison() {
   return (
     <Section
-      idx="05"
+      idx="06"
       name="THE DIFFERENCE"
       note="OLD WAY VS REDPXL"
       title="The old way vs the Redpxl way."

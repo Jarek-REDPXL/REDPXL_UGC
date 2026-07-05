@@ -34,9 +34,9 @@ export default function Hero() {
           </motion.h1>
 
           <motion.p variants={heroItem} className="body-lg mt-3">
-            Hyper-realistic AI-generated UGC videos for your brand. Scripted with
-            proven direct-response hooks, delivered in 48 hours, ready for
-            TikTok, Meta and YouTube.
+            Hyper-realistic AI-generated video and static ads for your brand.
+            Scripted with proven direct-response hooks, delivered in 72 hours,
+            ready for TikTok, Meta and YouTube.
           </motion.p>
 
           <motion.div
@@ -80,7 +80,7 @@ export default function Hero() {
           </div>
 
           <p className="mono-note mt-4 text-center">
-            output / batch 014 — skincare · 9:16 · 48h
+            output / batch 014 — skincare · 9:16 · 72h
           </p>
         </motion.div>
       </motion.div>

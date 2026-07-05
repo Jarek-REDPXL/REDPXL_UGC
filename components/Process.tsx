@@ -6,18 +6,18 @@ import { ArrowRight } from "lucide-react";
 const STEPS = [
   {
     num: "01",
-    title: "Brief us",
-    body: "A 15-minute call or an async form. Brand, product, audience, offer — that's all we need.",
+    title: "Brief",
+    body: "Send us your product, brand, and current ads. We study what's working and where you're leaving performance on the table.",
   },
   {
     num: "02",
-    title: "We create",
-    body: "Scripts, AI generation, editing, captions. First drafts in your inbox within 48 hours.",
+    title: "Produce",
+    body: "We generate platform-ready statics and videos — fresh hooks, new angles, native formats — built to your brand.",
   },
   {
     num: "03",
-    title: "You scale",
-    body: "Launch the batch. We iterate on the winners with fresh variations every week.",
+    title: "Test",
+    body: "A clean, labeled, ready-to-run batch in 72 hours. Rotate them, find your winners, and we refresh before they fatigue.",
   },
 ];
 
@@ -25,9 +25,9 @@ export default function Process() {
   return (
     <Section
       id="process"
-      idx="03"
+      idx="04"
       name="PROCESS"
-      note="BRIEF → LIVE IN 48H"
+      note="BRIEF → LIVE IN 72H"
       title="Three steps. Zero friction."
       band
     >

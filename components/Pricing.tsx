@@ -5,59 +5,49 @@ import Button from "@/components/ui/Button";
 import { site } from "@/lib/site";
 
 /**
- * DESIGN.md §9 [06] PRICING + §8.9 pricing card.
- * Three plans; Growth is featured (accent border, chip, lifted, primary CTA).
+ * DESIGN.md §8.9 pricing card + §9 [07] PRICING.
+ * Full-width trial card, three plan cards (Growth featured), quiet mono-notes.
  */
 type Plan = {
   name: string;
   price: string;
-  perMonth: boolean;
+  volume: string;
   features: string[];
-  cta: string;
   featured: boolean;
 };
 
+// Every plan starts with these four shared inclusions, in this order.
+const SHARED_INCLUSIONS = [
+  "Mix of image + video ads — you choose the split",
+  "All sizes: 9:16 · 1:1 · 4:5",
+  "1 revision per ad",
+  "Full paid usage rights",
+];
+
 const PLANS: Plan[] = [
   {
-    name: "Starter",
-    price: "£X",
-    perMonth: true,
-    features: [
-      "10 videos per month",
-      "2 AI creators",
-      "1 revision round",
-      "48-hour delivery",
-      "Full usage rights",
-    ],
-    cta: "Book a call",
+    name: "STARTER",
+    price: "£2,000",
+    volume: "15 ads per month",
+    features: [...SHARED_INCLUSIONS],
     featured: false,
   },
   {
-    name: "Growth",
-    price: "£X",
-    perMonth: true,
-    features: [
-      "25 videos per month",
-      "5 AI creators",
-      "Weekly winner iterations",
-      "Priority 48-hour delivery",
-      "Full usage rights",
-      "Private Slack channel",
-    ],
-    cta: "Book a call",
+    name: "GROWTH",
+    price: "£3,500",
+    volume: "30 ads per month",
+    features: [...SHARED_INCLUSIONS, "Monthly performance & angle review"],
     featured: true,
   },
   {
-    name: "Scale",
-    price: "Custom",
-    perMonth: false,
+    name: "SCALE",
+    price: "£6,000",
+    volume: "60 ads per month",
     features: [
-      "Unlimited pipeline",
-      "Dedicated strategist",
-      "Ad account collaboration",
-      "Custom AI creators",
+      ...SHARED_INCLUSIONS,
+      "Dedicated creative lead",
+      "We work inside your ad account",
     ],
-    cta: "Talk to us",
     featured: false,
   },
 ];
@@ -66,12 +56,38 @@ export default function Pricing() {
   return (
     <Section
       id="pricing"
-      idx="06"
+      idx="07"
       name="PRICING"
-      note="NO CONTRACTS"
-      title="Simple plans. Serious output."
+      note="EXCL. VAT · NO CONTRACTS"
+      title="Start with a trial. Scale with a plan."
     >
-      <StaggerGroup className="grid grid-cols-1 gap-5 lg:grid-cols-3">
+      {/* (A) Trial card */}
+      <div className="flex flex-col gap-6 rounded-card border border-accent bg-bg p-8 lg:flex-row lg:items-center lg:justify-between">
+        <div>
+          <span className="mono-note inline-flex rounded-chip bg-accent-soft px-2 py-1 text-accent">
+            TRIAL BATCH
+          </span>
+          <h3 className="title-1 mt-4">See the quality before you commit.</h3>
+          <p className="body-copy mt-2 max-w-[520px]">
+            8 ads, delivered in 72 hours. The full £750 is credited toward month
+            one if you start a plan within 14 days — so trying us is effectively
+            free.
+          </p>
+        </div>
+        <div>
+          <div className="flex items-baseline gap-2">
+            <span className="stat">£750</span>
+            <span className="mono-note">ONE-TIME</span>
+          </div>
+          {/* TODO:STRIPE checkout link */}
+          <Button href="#" external={false} variant="primary" className="mt-4">
+            Start a trial batch
+          </Button>
+        </div>
+      </div>
+
+      {/* (B) Three plan cards */}
+      <StaggerGroup className="mt-5 grid grid-cols-1 gap-5 lg:grid-cols-3">
         {PLANS.map((plan) => (
           <RevealItem key={plan.name} className="h-full">
             <div
@@ -90,10 +106,11 @@ export default function Pricing() {
               <p className="mono-note">{plan.name}</p>
 
               <div className="mt-4 flex items-baseline gap-1">
-                {/* TODO:REAL-DATA */}
                 <span className="stat">{plan.price}</span>
-                {plan.perMonth && <span className="mono-note">/mo</span>}
+                <span className="mono-note">/mo</span>
               </div>
+
+              <p className="body-copy mt-2 text-ink">{plan.volume}</p>
 
               <div className="mt-6 border-t border-line" />
 
@@ -118,16 +135,25 @@ export default function Pricing() {
                 variant={plan.featured ? "primary" : "secondary"}
                 className="mt-8 w-full"
               >
-                {plan.cta}
+                Book a call
               </Button>
             </div>
           </RevealItem>
         ))}
       </StaggerGroup>
 
-      <p className="mono-note mt-8 text-center">
-        Pause or cancel anytime · Every plan includes full usage rights
-      </p>
+      {/* (C) Quiet mono-note lines */}
+      {/* TODO: confirm VAT registration before launch */}
+      <div className="mt-8 space-y-1">
+        <p className="mono-note text-center">
+          Prefer a one-off batch? £150 per ad, 10-ad minimum.
+        </p>
+        <p className="mono-note text-center">
+          Rush 48-hour delivery +25% · Pay 3 months upfront −10% · Pay 12 months
+          −15%
+        </p>
+        <p className="mono-note text-center">All prices excluding VAT</p>
+      </div>
     </Section>
   );
 }

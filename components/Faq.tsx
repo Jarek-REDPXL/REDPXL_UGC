@@ -14,28 +14,28 @@ type Item = { q: string; a: string };
 
 const ITEMS: Item[] = [
   {
-    q: "Do the videos really look human?",
-    a: "Yes. We generate hyper-realistic AI creators that read as authentic UGC to anyone scrolling a feed. On your strategy call we'll show you live examples in your niche so you can judge for yourself before committing.",
+    q: "Does AI-made creative actually convert?",
+    a: "Yes — on paid social, native-feeling creative consistently beats studio gloss, and that's exactly what we make. Most viewers can't tell it's AI, and every ad is built around proven direct-response hooks rather than novelty. You test them like any other batch and keep what wins.",
   },
   {
-    q: "Who owns the videos?",
-    a: "You do — completely and forever. Every plan includes full usage rights across paid and organic, with no creator licensing fees, usage windows or renewal invoices.",
+    q: "Will it match my brand?",
+    a: "Everything is produced to your brand — your product, your positioning, your look and tone. We study your current ads and best performers first, so what we ship feels like you, only faster and in far more volume.",
   },
   {
-    q: "What do you need from us?",
-    a: "Very little. A 15-minute call or a short async form covering your brand, product, audience and offer. If you have brand guidelines or existing assets we'll use them, but they aren't required to start.",
+    q: "Do I keep the rights?",
+    a: "Yes. Every tier includes full paid usage rights to everything we deliver — run it on any platform, for as long as you like, with no per-asset licensing or renewal fees.",
   },
   {
-    q: "How fast is delivery?",
-    a: "First drafts land within 48 hours of your brief. After launch, we ship fresh variations of your winning ads every week so your creative pipeline never runs dry.",
+    q: "How fast can we start?",
+    a: "Brief us today and your first batch lands in 72 hours. There's no lengthy onboarding — a short form or a 15-minute call is enough to get production moving.",
   },
   {
-    q: "What about revisions?",
-    a: "Revisions are included in every plan. We iterate on scripts, hooks, pacing and captions until the ad is ready to run — no per-change reshoot fees like traditional UGC.",
+    q: "What if I don't like them?",
+    a: "Start with a trial batch. If you wouldn't run them, you don't owe us for the batch — the downside is entirely ours. And the £750 is credited toward your first month if you go on to a plan.",
   },
   {
-    q: "Which platforms do they work on?",
-    a: "All of them. Every video is delivered in 9:16, 1:1 and 16:9, optimised for TikTok, Meta, YouTube Shorts and beyond — ready to upload straight into your ad manager.",
+    q: "What's the difference between the trial and a plan?",
+    a: "The trial is a one-time 8-ad batch to prove the quality, credited toward month one if you continue. Plans deliver a fixed volume of ads every month — 15, 30 or 60 — with revisions, reviews and ongoing refreshes as your winners fatigue.",
   },
 ];
 
@@ -45,7 +45,7 @@ export default function Faq() {
   return (
     <Section
       id="faq"
-      idx="07"
+      idx="08"
       name="FAQ"
       note="06 QUESTIONS"
       title="The honest answers."

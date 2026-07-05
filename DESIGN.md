@@ -1,4 +1,4 @@
-# REDPXL UGC — Design Specification v1.0 (FINAL)
+# REDPXL UGC — Design Specification v1.1
 
 This document is the single source of truth for the REDPXL UGC landing page.
 Every colour, size, weight, spacing value and interaction on the page derives
@@ -201,17 +201,18 @@ border-bottom NONE (whitespace only), margin-bottom 20px.
 Left: `[NN] SECTION NAME` — the `[NN]` in `--accent` (`mono-idx`), name in
 `--text-3`, 12px gap between.
 Right: a true fact counterpart in `--text-3`, e.g. `/ HOLD ↔ DRAG`,
-`/ 08 FORMATS`, `/ BRIEF → LIVE IN 48H`, `/ PLACEHOLDER DATA` (Results, until
+`/ 08 FORMATS`, `/ BRIEF → LIVE IN 72H`, `/ PLACEHOLDER DATA` (Results, until
 real numbers exist), `/ NO CONTRACTS`, `/ 06 QUESTIONS`.
 
 Index assignments: 00 HERO (rendered inside hero, above H1, left only),
-01 THE WORK, 02 WHY AI UGC, 03 PROCESS, 04 RESULTS, 05 THE DIFFERENCE,
-06 PRICING, 07 FAQ, 08 START (inside dark CTA band, index stays `--accent`).
+01 THE PROBLEM, 02 THE WORK, 03 WHY AI UGC, 04 PROCESS, 05 RESULTS,
+06 THE DIFFERENCE, 07 PRICING, 08 FAQ, 09 START (inside dark CTA band, index
+stays `--accent`).
 
 ### 6.2 Output-log captions
 
 Under the hero frame and on video chips, mono-note captions read like logs:
-`OUTPUT / BATCH 014 — SKINCARE · 9:16 · 48H`, chip labels like
+`OUTPUT / BATCH 014 — SKINCARE · 9:16 · 72H`, chip labels like
 `SKINCARE · TIKTOK`. Never cute, always factual format: SUBJECT · PLATFORM.
 
 ---
@@ -359,13 +360,13 @@ Pricing `#pricing`, FAQ `#faq`. CTA href: `https://calendly.com/meeting-redpxl`
 ### [00] HERO — lg+: 2-col (7/5), <lg: stacked
 Left col: annotation `[00] AI UGC VIDEO ADS — DONE FOR YOU` (left part only);
 H1 `display-1`: **"UGC ads engineered to convert."**; sub `body-lg` max-w
-560px: "Hyper-realistic AI-generated UGC videos for your brand. Scripted with
-proven direct-response hooks, delivered in 48 hours, ready for TikTok, Meta
-and YouTube."; CTA row (16px gap): Primary "Book a free strategy call" +
-Secondary "See the work →" (`#work`).
+560px: "Hyper-realistic AI-generated video and static ads for your brand.
+Scripted with proven direct-response hooks, delivered in 72 hours, ready for
+TikTok, Meta and YouTube."; CTA row (16px gap): Primary "Book a free strategy
+call" + Secondary "See the work →" (`#work`).
 Right col: hero frame per §5 (16px radius) with 24px inner padding on
 `--bg` — contains the 3-phone cluster (§8.4). Below frame, caption
-`mono-note`: `OUTPUT / BATCH 014 — SKINCARE · 9:16 · 48H`.
+`mono-note`: `OUTPUT / BATCH 014 — SKINCARE · 9:16 · 72H`.
 Mobile: text → CTAs stacked full-width → frame (2 phones only, no rotation).
 
 ### [—] LOGO STRIP
@@ -373,15 +374,22 @@ No annotation (it's connective tissue, not a section). 13px `--text-3` line:
 "Trusted by brands across e-commerce, apps and FMCG", 24px, marquee §8.11.
 py-48px only.
 
-### [01] THE WORK `#work` — note `/ HOLD ↔ DRAG`
-Title: "Made to stop the scroll." Sub: "Every video below was generated,
-scripted and edited by our pipeline." Full-bleed scroll-snap reel: 8
-PhoneFrames, gap 20px, chips: SKINCARE · TIKTOK, SUPPLEMENTS · META,
-FASHION · TIKTOK, MOBILE APP · META, BEAUTY · TIKTOK, FITNESS · REELS,
-FOOD & BEV · TIKTOK, SAAS · YOUTUBE. Progress hairline per §7.6. Edge fade
-masks 48px.
+### [01] THE PROBLEM — note `/ CREATIVE FATIGUE`
+Title: "Your winning ad is already dying." Single-paragraph statement, no
+cards, standard Section shell. Body `body-lg` max-w 720px: "On Meta and
+TikTok, a top creative fatigues in 7–14 days — and most brands ship 2–4 new
+ads a month, nowhere near the 15–20 it takes to keep CPMs down. The bottleneck
+was never budget. It's production. We remove it."
 
-### [02] WHY AI UGC `#why` — note `/ 06 REASONS`
+### [02] THE WORK `#work` — note `/ HOLD ↔ DRAG`
+Title: "Made to stop the scroll." Sub: "See it, then judge it. Most people
+can't tell it's AI — and on paid social, native beats polished." Full-bleed
+scroll-snap reel: 8 PhoneFrames, gap 20px, chips: SKINCARE · TIKTOK,
+SUPPLEMENTS · META, FASHION · TIKTOK, MOBILE APP · META, BEAUTY · TIKTOK,
+FITNESS · REELS, FOOD & BEV · TIKTOK, SAAS · YOUTUBE. Progress hairline per
+§7.6. Edge fade masks 48px.
+
+### [03] WHY AI UGC `#why` — note `/ 06 REASONS`
 Title: "Everything creators do. None of what slows you down." Bento per §4.5:
 - Wide A "Hyper-realistic creators" — micro-label `GENERATION` — "AI-generated
   people indistinguishable from filmed UGC. No casting calls, no shipping
@@ -389,75 +397,95 @@ Title: "Everything creators do. None of what slows you down." Bento per §4.5:
 - Wide B "Hooks that convert" — micro-label `SCRIPTING` — "Every script is
   built from a library of 50+ proven direct-response hook frameworks — not
   guesswork." Contains inline mock: bordered mini-frame (radius 8px, bg
-  `--bg-subtle`) with 3 stacked `mono-note` hook lines: "POV: I FOUND OUT WHY
-  MY SKIN…", "STOP SCROLLING IF YOU…", "3 REASONS YOUR ADS…". Icon: `Zap`.
-- "48h turnaround" — stat variant, numeral 48, unit `HOURS`. Icon `Clock`.
-  Micro-label `DELIVERY`.
-- "Unlimited variations" — "Same ad, ten angles. Test hooks, creators and
-  formats without reshooting." Icon `Layers`. Micro-label `TESTING`.
-- "Every format" — three ratio chips 9:16 / 1:1 / 16:9 (§ chips). Icon
-  `Smartphone`. Micro-label `FORMATS`.
-- "Full usage rights" — "Yours forever. No creator licensing fees, no renewal
-  negotiations." Icon `FileCheck`. Micro-label `RIGHTS`.
+  `--bg-subtle`) with 3 stacked `mono-note` hook lines: "POV: YOU'VE BEEN
+  DOING IT WRONG", "STOP SCROLLING IF YOU…", "3 REASONS YOUR ADS FLOP".
+  Icon: `Zap`.
+- "72h turnaround" — stat variant, numeral 72, unit `HOURS` — "Fresh statics
+  and videos in three days — not the two weeks a creator shoot takes." Icon
+  `Clock`. Micro-label `SPEED`.
+- "The volume you need" — "Most brands ship 2–4 ads a month. Winning on paid
+  social takes 15–20. We produce at that pace." Icon `Layers`. Micro-label
+  `VOLUME`.
+- "A fraction of the cost" — "Creator video runs £150–500 a piece. Our plans
+  work out from around £100 an ad." Icon `PoundSterling`. Micro-label `COST`.
+- "Native, not glossy" — "UGC-style creative built to convert on paid social —
+  not studio gloss that gets scrolled past." Icon `Smartphone`. Micro-label
+  `NATIVE`.
+Formats moved out of Why (now shown in Pricing) — sizes are 9:16 · 1:1 · 4:5.
 
-### [03] PROCESS `#process` — note `/ BRIEF → LIVE IN 48H` — on `--bg-subtle`
+### [04] PROCESS `#process` — note `/ BRIEF → LIVE IN 72H` — on `--bg-subtle`
 Title: "Three steps. Zero friction." 3 white cards (§4.5), each: ghost
 numeral 01/02/03 (`stat` size, `--accent` at 12% opacity, absolute top-right),
 `title-1` + `body`:
-01 **Brief us** — "A 15-minute call or an async form. Brand, product,
-audience, offer — that's all we need."
-02 **We create** — "Scripts, AI generation, editing, captions. First drafts
-in your inbox within 48 hours."
-03 **You scale** — "Launch the batch. We iterate on the winners with fresh
-variations every week."
+01 **Brief** — "Send us your product, brand, and current ads. We study what's
+working and where you're leaving performance on the table."
+02 **Produce** — "We generate platform-ready statics and videos — fresh hooks,
+new angles, native formats — built to your brand."
+03 **Test** — "A clean, labeled, ready-to-run batch in 72 hours. Rotate them,
+find your winners, and we refresh before they fatigue."
 Desktop: 16px `ArrowRight` `--text-3` centered between cards.
 
-### [04] RESULTS — note `/ PLACEHOLDER DATA`
+### [05] RESULTS — note `/ PLACEHOLDER DATA`
 Title: "Built for performance, measured in revenue." 3 stat cards (§8.12):
 `212%` AVG ROAS UPLIFT / `−38%` COST PER ACQUISITION / `10×` CREATIVE OUTPUT.
 Then 2 quote cards (§8.10) with obviously-placeholder names ("Founder,
 DTC skincare brand"). ALL `{/* TODO:REAL-DATA */}`. Note stays
 `/ PLACEHOLDER DATA` until real; then becomes `/ LAST 90 DAYS`.
 
-### [05] THE DIFFERENCE — note `/ OLD WAY VS REDPXL`
+### [06] THE DIFFERENCE — note `/ OLD WAY VS REDPXL`
 Title: "The old way vs the Redpxl way." Table §8.7. Rows:
 | Row              | Creators            | DIY AI tools        | REDPXL UGC              |
-| Cost per video   | £150–£400           | Your time           | From £40 *(TODO price)* |
-| Turnaround       | 2–4 weeks           | Days of trial/error | 48 hours                |
+| Cost per video   | £150–£400           | Your time           | From £100/ad on plans   |
+| Turnaround       | 2–4 weeks           | Days of trial/error | 72 hours                |
 | Consistency      | Varies per creator  | Varies per prompt   | Engineered pipeline     |
 | Usage rights     | Licensed, expiring  | Unclear             | Full, forever           |
 | Hook strategy    | Creator's instinct  | None                | 50+ tested frameworks   |
 | Revisions        | Renegotiated        | Start over          | Included                |
 
-### [06] PRICING `#pricing` — note `/ NO CONTRACTS`
-Title: "Simple plans. Serious output." Cards §8.9:
-STARTER £X/mo — 10 videos /mo · 2 AI creators · 1 revision round · 48h
-delivery · Full usage rights.
-GROWTH (featured) £X/mo — 25 videos /mo · 5 AI creators · Weekly winner
-iterations · Priority 48h delivery · Full usage rights · Slack channel.
-SCALE — Custom — Unlimited pipeline · Dedicated strategist · Ad account
-collaboration · Custom creators.
-Footer line `mono-note` centered: "PAUSE OR CANCEL ANYTIME · EVERY PLAN
-INCLUDES FULL USAGE RIGHTS". Prices `{/* TODO:REAL-DATA */}`.
+### [07] PRICING `#pricing` — note `/ EXCL. VAT · NO CONTRACTS`
+Title: "Start with a trial. Scale with a plan." Trial-first funnel:
 
-### [07] FAQ `#faq` — note `/ 06 QUESTIONS`
+(A) Full-width TRIAL card (§8.9 styling, accent border): chip `TRIAL BATCH`
+(`mono-note`, `--accent`, bg `--accent-soft`); `title-1` "See the quality
+before you commit."; `body` "8 ads, delivered in 72 hours. The full £750 is
+credited toward month one if you start a plan within 14 days — so trying us is
+effectively free."; price `stat` £750 + `mono-note` `ONE-TIME`; primary CTA
+"Start a trial batch" (`{/* TODO:STRIPE checkout link */}`).
+
+(B) Three plan cards §8.9 (Growth featured, chip `Most popular`), each with
+the price `stat` + `/mo`, a volume line, then the shared inclusions:
+- STARTER £2,000/mo — 15 ads per month.
+- GROWTH (featured) £3,500/mo — 30 ads per month · + Monthly performance &
+  angle review.
+- SCALE £6,000/mo — 60 ads per month · + Dedicated creative lead · + We work
+  inside your ad account.
+Shared inclusions on every plan: "Mix of image + video ads — you choose the
+split", "All sizes: 9:16 · 1:1 · 4:5", "1 revision per ad", "Full paid usage
+rights". Plan CTA "Book a call" (secondary; primary on Growth).
+
+(C) Three centered `mono-note` lines: "Prefer a one-off batch? £150 per ad,
+10-ad minimum." · "Rush 48-hour delivery +25% · Pay 3 months upfront −10% ·
+Pay 12 months −15%" · "All prices excluding VAT". (The rush line is the only
+place 48h still appears.)
+
+### [08] FAQ `#faq` — note `/ 06 QUESTIONS`
 Title: "The honest answers." Items (write answers confident, 2–3 sentences,
 first-person plural):
-1. Do the videos really look human?
-2. Who owns the videos?
-3. What do you need from us?
-4. How fast is delivery?
-5. What about revisions?
-6. Which platforms do they work on?
+1. Does AI-made creative actually convert?
+2. Will it match my brand?
+3. Do I keep the rights?
+4. How fast can we start?
+5. What if I don't like them? (risk reversal)
+6. What's the difference between the trial and a plan?
 
-### [08] START — dark band
-Full-width `--ink` bg, py-112px, container inside. Annotation `[08] START`
+### [09] START — dark band
+Full-width `--ink` bg, py-112px, container inside. Annotation `[09] START`
 (index `--accent`, name `rgb(255 255 255 / .5)`), right note `/ 15 MIN CALL`.
-Title `display-2` white: "The next era of ad creative runs on AI." Sub
-`body-lg` `rgb(255 255 255 / .65)`: "Book a free strategy call. We'll show
-you live examples for your niche and map your first batch." CTAs: Inverted
-"Book a free strategy call" + ghost link `hello@redpxl.uk` (white/70, hover
-white). No other decoration — flat ink, typography only.
+Title `display-2` white: "Stop running tired ads." Sub `body-lg`
+`rgb(255 255 255 / .65)`: "Get your first batch this week and give your paid
+social the creative volume it's been missing." CTAs: Inverted "Book a free
+strategy call" + ghost link `hello@redpxl.uk` (white/70, hover white). No
+other decoration — flat ink, typography only.
 
 ### [FOOTER]
 White, 1px `--line` top. Row 1: wordmark + red square; right: anchor links
@@ -487,3 +515,5 @@ Terms · Privacy (# placeholders). py-48px.
 - `npm run build` must pass with zero errors/warnings before any handoff.
 
 *End of specification. v1.0 — changes require a version bump and changelog line here.*
+
+*v1.1 — 72h standard delivery (48h now a rush add-on); image+video mix; formats 9:16·1:1·4:5; new THE PROBLEM section (sections renumbered); trial-first pricing funnel with real prices; copy overhaul.*
