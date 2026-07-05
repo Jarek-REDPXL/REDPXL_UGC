@@ -48,15 +48,15 @@ export default function Footer() {
   return (
     <footer className="relative overflow-hidden bg-ink text-white">
       <div className="relative isolate mx-auto max-w-[1152px] px-6 pb-12 pt-24 md:px-8 lg:px-10">
-        {/* giant watermark — full wordmark, behind the lower-right, red dot as "."
-            Constrained to the container width (text-right, inset) so it never
-            clips at the edge. */}
-        <span
-          aria-hidden
-          className="pointer-events-none absolute inset-x-6 bottom-2 z-0 select-none text-right text-[clamp(3rem,12vw,9rem)] font-semibold leading-none tracking-tight text-white/[0.05]"
-        >
-          REDPXL<span className="text-accent/[0.15]">.</span>
-        </span>
+        {/* giant watermark — the real logo asset (light), faint, bottom-right,
+            constrained to the container so it never clips. */}
+        <Logo
+          variant="light"
+          alt=""
+          priority={false}
+          sizes="760px"
+          className="pointer-events-none absolute bottom-2 right-6 z-0 h-auto w-[720px] max-w-[80%] select-none opacity-[0.06] md:right-8 lg:right-10"
+        />
 
         {/* annotation */}
         <p className="relative z-10 flex items-center gap-2 mono-note text-text-3-dark">
@@ -119,7 +119,7 @@ export default function Footer() {
           <span className="mono-note text-text-3-dark">© 2026 REDPXL LIMITED</span>
           <div className="flex items-center gap-6">
             <a href="#top" aria-label="REDPXL home" className="flex items-center">
-              <Logo className="h-[18px] w-auto brightness-0 invert" />
+              <Logo variant="light" className="h-[18px] w-auto" />
             </a>
             <a href="#" className="mono-note text-text-3-dark transition-colors hover:text-white">Terms</a>
             <a href="#" className="mono-note text-text-3-dark transition-colors hover:text-white">Privacy</a>
