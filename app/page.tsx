@@ -11,6 +11,7 @@ import Results from "@/components/Results";
 import Comparison from "@/components/Comparison";
 import Pricing from "@/components/Pricing";
 import Guarantee from "@/components/Guarantee";
+import MeetTheTeam from "@/components/MeetTheTeam";
 import Faq from "@/components/Faq";
 import FinalCta from "@/components/FinalCta";
 import Footer from "@/components/Footer";
@@ -23,7 +24,7 @@ export default function Home() {
         {/* 00 */}
         <Hero />
         <LogoStrip />
-        {/* 01–12 — Clay-desaturated section canvases */}
+        {/* 01–13 — Clay-desaturated section canvases */}
         <Problem />
         <Work />
         <Why />
@@ -34,6 +35,7 @@ export default function Home() {
         <Comparison />
         <Pricing />
         <Guarantee />
+        <MeetTheTeam />
         <Faq />
         <FinalCta />
       </main>

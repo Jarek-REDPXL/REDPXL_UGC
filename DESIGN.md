@@ -1,4 +1,4 @@
-# REDPXL UGC — Design Specification v2.4
+# REDPXL UGC — Design Specification v2.5
 
 This document is the single source of truth for the REDPXL UGC landing page.
 Every colour, size, weight, spacing value and interaction on the page derives
@@ -585,7 +585,19 @@ build to a standard you'd actually put spend behind. If the first batch isn't
 something you'd run, you don't pay for it — no arguments." One CTA row
 (Inverted "Start a trial batch"). No cards — typography + grain only.
 
-### [11] FAQ `#faq` — canvas `white-border` — note `/ 06 QUESTIONS`
+### [11] MEET THE TEAM `#team` — canvas `mist` — note `/ THE PEOPLE BEHIND THE WORK`
+Annotation-only canvas (no big title). A 12-col bento (gap 16, radius 16, 1px
+`--line`): an **intro** tile (col-span-5: overline `REDPXL UGC · STUDIO`, ~28px
+title "The people behind the work.", body, bottom mono `CANARY WHARF, LONDON ·
+EST. 2024`), a tall **click-to-play social video** tile (col-span-3, row-span-2:
+`TeamVideoPoster` — sand duotone + play circle + `ON SOCIAL · @REDPXL`;
+`team-social.mp4`), and **5 member portrait** tiles (`TeamPhoto`: `--bg-inset` +
+lucide User placeholder, accepting `member-0X.jpg` with zero code change; white
+name/role footer chip). DOM order intro → video → members is the mobile stack;
+lg uses explicit placement. Responsive: 12-col ≥1024, 2-col 768–1023, single
+column < 768. All placeholders read as intentional.
+
+### [12] FAQ `#faq` — canvas `white-border` — note `/ 06 QUESTIONS`
 Title: "The honest answers." Items (write answers confident, 2–3 sentences,
 first-person plural):
 1. Does AI-made creative actually convert?
@@ -595,9 +607,9 @@ first-person plural):
 5. What if I don't like them? (risk reversal)
 6. What's the difference between the trial and a plan?
 
-### [12] START — canvas `ink` + grain, footer row inside — note `/ 15 MIN CALL`
-Full ink canvas (grain on). Annotation `[12] START` (index `--accent`, name
-`white/50`), right note `/ 15 MIN CALL`. Title `display-2` white: "Stop
+### [13] START — canvas `ink` + grain, centered — note `/ 15 MIN CALL`
+Full flat-ink canvas (subtle even grain). Centered: annotation `[13] START`
+(index `--accent-dark`, name `white/50`), right note `/ 15 MIN CALL`. Title `display-2` white: "Stop
 running tired ads." Sub `body-lg` white/65: "Get your first batch this week and
 give your paid social the creative volume it's been missing." CTAs: Inverted
 "Book a free strategy call" + ghost link `hello@redpxl.uk` (white/70, hover
@@ -796,3 +808,5 @@ PhoneFrame reel — note reads `/ 10 NICHES · LOOPING`.
 *v2.3 — Hero redesign to "Centered Monument" (§9 [00]): open white, centered annotation/H1/sub/CTAs, then a full-bleed 5-phone editorial arc (center largest + highest, stepped down and edge-cropped outward, bottoms bleeding), staggered `phone-rise` load. New `EditorialPoster` (soft niche duotone + one blurred SVG texture per variant: leaf/smear/sphere/ripple/gel + 4% grain + two-chip hook/meta caption; center phone cycles via `CyclingChips`), wired through `VideoSlot`/`PhoneFrame` (suppresses the niche chip). Zero horizontal overflow 320→1920 (band clips; section `overflow-x: clip`). Everything else unchanged. (The output-log `BatchCaption` line and the nav `UGC` chip were later removed; nav uses the full REDPXL wordmark.)*
 
 *v2.4 — Alignment + Problem rebuild. Nav and the full-bleed Work heading use a new `.content-x` container (max-w 1472, 80/32px padding) so the nav logo, `[02] THE WORK`, and every section annotation share one left guide. Correct favicon via `app/icon.png` + `app/apple-icon.png` (from the ЯP. mark). Hero annotation is now a clean outlined pill. §9 [01] THE PROBLEM rebuilt as a bento (2-col header + `DyingAdCard` + `VolumeGap` + three cost tiles + footer strip); Canvas `title` made optional for caller-supplied headers; standalone `FatigueCurve` retired. Zero horizontal overflow 320→1920.*
+
+*v2.5 — Real videos wired: hero 5 phones play Main Hero (1-5).mp4 (muted autoplay loop, EditorialPoster onError fallback, caption chips overlaid); Work marquee plays AI_UGC1-10.mp4 viewport-gated (ReelGate IntersectionObserver) and its vertical clip is fixed (overflow-x-clip band). Hero annotation is a pill; nav/Work heading aligned to the section content column (.content-x); correct ЯP. favicon (app/icon.png). Process ghost numerals removed. Guarantee + START centered (Canvas centered prop); START on flat even ink (noise regenerated uniform). New section [11] MEET THE TEAM bento (FAQ->[12], START->[13]).*

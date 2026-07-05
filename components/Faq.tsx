@@ -43,7 +43,7 @@ export default function Faq() {
   return (
     <Canvas
       id="faq"
-      idx="11"
+      idx="12"
       name="FAQ"
       note="06 QUESTIONS"
       tint="white-border"

@@ -62,10 +62,23 @@ Falls back to the blank screen on error. Files: **MP4 H.264, 9:16, 1080×1920.**
 > The Work reel duplicates its 10 phones for the seamless marquee; one file per
 > slot covers both passes.
 
-**How to wire the hero:** add `src="/videos/hero-0X.mp4"` to each entry of the
-`PHONES` array in [Hero.tsx](components/Hero.tsx). **The Work reel is already
-wired** ([Work.tsx](components/Work.tsx) `SLOTS`): just add the `work-0X.mp4`
-files. The annotation note reads `/ WORK IN PROGRESS · LOOPING` until they land.
+Both the hero (Main Hero 1-5) and the Work reel (AI_UGC1-10) are wired and
+filled — see the ✅ tables above.
+
+---
+
+## 1b · Meet the Team [11] — placeholder slots
+
+All read as intentional placeholders (User icon + Name/role chip) until filled.
+Drop the files in with zero code change ([MeetTheTeam.tsx](components/MeetTheTeam.tsx)).
+
+| Slot | File | Spec |
+|------|------|------|
+| 5 member portraits | `public/images/team/member-01.jpg` … `member-05.jpg` | ~800×1000, 4:5, object-cover |
+| Social video tile | `public/videos/team-social.mp4` | 1080×1920, 9:16, click-to-play |
+
+> Roles are placeholders (Founder / Creative Lead / AI Video Specialist /
+> Strategist / Editor); every name is literal "Name" — swap in real names.
 
 ---
 

@@ -13,7 +13,7 @@ export default function FinalCta() {
   return (
     <Canvas
       id="cta"
-      idx="12"
+      idx="13"
       name="START"
       note="15 MIN CALL"
       tint="ink"
