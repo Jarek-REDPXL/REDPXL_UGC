@@ -59,13 +59,10 @@ export default function Footer() {
         />
 
         {/* annotation */}
-        <p className="relative z-10 flex items-center gap-2 mono-note text-text-3-dark">
-          <span className="h-1.5 w-1.5 bg-accent" aria-hidden />
-          LET&apos;S TALK
-        </p>
+        <p className="relative z-10 mono-note text-text-3-dark">LET&apos;S TALK</p>
 
         {/* main — left statement block + right link columns */}
-        <div className="relative z-10 mt-10 grid gap-x-10 gap-y-14 lg:grid-cols-[1.15fr_1fr]">
+        <div className="relative z-10 mt-6 grid gap-x-10 gap-y-14 lg:grid-cols-[1.15fr_1fr]">
           <div>
             <h2 className="display-2 text-white">Ready to stop running tired ads?</h2>
             <p className="body-lg mt-4 text-text-2-dark">
