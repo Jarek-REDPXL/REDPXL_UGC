@@ -77,7 +77,11 @@ Drop the files in with zero code change ([MeetTheTeam.tsx](components/MeetTheTea
 | Slot | File | Spec |
 |------|------|------|
 | 5 member portraits | `public/images/team/member-01.jpg` … `member-05.jpg` | ~900×1200, 3:4, object-cover |
-| Social video tile | `public/videos/team-social.mp4` | 1080×1920, 9:16, click-to-play |
+| Social video tile | `public/videos/socialmedia.mp4` ✅ | 9:16, muted autoplay loop, viewport-gated (sand poster fallback) |
+
+> ⚠️ **`socialmedia.mp4` is ~326 MB** — far too large for web. Even viewport-gated
+> it will cripple load once the section nears the viewport. Compress to a short
+> 9:16 loop at **~2–5 MB** (H.264, 1080×1920) before launch.
 
 > Roles are placeholders (Founder / Creative Lead / AI Video Specialist /
 > Strategist / Editor); every name is literal "Name" — swap in real names.

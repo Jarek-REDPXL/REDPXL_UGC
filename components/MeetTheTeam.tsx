@@ -1,6 +1,6 @@
 import Canvas from "@/components/ui/Canvas";
 import TeamPhoto from "@/components/ui/TeamPhoto";
-import TeamVideoPoster from "@/components/ui/TeamVideoPoster";
+import TeamSocialVideo from "@/components/ui/TeamSocialVideo";
 
 /**
  * DESIGN.md §9 [11] MEET THE TEAM — a mist-canvas bento with real size
@@ -51,7 +51,7 @@ export default function MeetTheTeam() {
 
         {/* Tall social-video tile — anchors the right, spans both portrait rows */}
         <div className="relative aspect-[9/16] overflow-hidden rounded-frame border border-line bg-bg-inset md:aspect-[3/4] lg:col-span-2 lg:col-start-9 lg:row-span-2 lg:row-start-1 lg:aspect-auto">
-          <TeamVideoPoster />
+          <TeamSocialVideo />
         </div>
 
         {/* Five equal medium portraits: 3:4 photo + name/role beneath */}
