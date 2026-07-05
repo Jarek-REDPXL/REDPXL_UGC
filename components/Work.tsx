@@ -147,6 +147,7 @@ export default function Work() {
           1152px container edge on large screens. */}
       <div
         ref={scrollRef}
+        data-lenis-prevent
         onScroll={updateProgress}
         onPointerDown={onPointerDown}
         onPointerMove={onPointerMove}

@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
+import { baseTransition } from "@/lib/motion";
 
 /**
  * DESIGN.md §12 — PosterCanvas.
@@ -117,7 +118,7 @@ export default function PosterCanvas({
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
-                transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+                transition={baseTransition}
                 className="mono-note rounded-[4px] bg-black/35 px-1.5 py-0.5 text-[10px]! leading-tight text-white"
               >
                 {topLine}

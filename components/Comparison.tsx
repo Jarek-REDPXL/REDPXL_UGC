@@ -117,7 +117,7 @@ export default function Comparison() {
               {ROWS.map((row) => (
                 <tr
                   key={row.label}
-                  className="border-t border-line hover:bg-bg-subtle transition-colors duration-[120ms]"
+                  className="border-t border-line hover:bg-bg-subtle transition-colors duration-[120ms] ease-[var(--ease-out)]"
                 >
                   <td className="label p-5 align-top">{row.label}</td>
                   {row.cells.map((cell, i) => {

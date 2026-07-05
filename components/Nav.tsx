@@ -54,7 +54,7 @@ export default function Nav() {
 
   return (
     <header
-      className={`sticky top-0 z-50 transition-[background-color,border-color,backdrop-filter] duration-[180ms] ${
+      className={`sticky top-0 z-50 transition-[background-color,border-color,backdrop-filter] duration-[180ms] ease-[var(--ease-out)] ${
         scrolled
           ? "border-b border-line bg-white/85 backdrop-blur-[12px]"
           : "border-b border-transparent bg-transparent"
@@ -81,7 +81,7 @@ export default function Nav() {
                   {/* §4 active-section dot — fades between links (180ms) */}
                   <span
                     aria-hidden="true"
-                    className={`h-1 w-1 rounded-full bg-accent transition-opacity duration-[180ms] ease-out motion-reduce:transition-none ${
+                    className={`h-1 w-1 rounded-full bg-accent transition-opacity duration-[180ms] ease-[var(--ease-out)] motion-reduce:transition-none ${
                       isActive ? "opacity-100" : "opacity-0"
                     }`}
                   />

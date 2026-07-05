@@ -19,7 +19,7 @@ function BentoCard({
   children: ReactNode;
 }) {
   return (
-    <div className="h-full rounded-card border border-line bg-bg p-7 transition-[transform,border-color] duration-[180ms] hover:-translate-y-0.5 hover:border-line-hover">
+    <div className="h-full rounded-card border border-line bg-bg p-7 transition-[transform,border-color] duration-[180ms] ease-[var(--ease-out)] hover:-translate-y-0.5 hover:border-line-hover">
       <div className="flex items-center gap-3">
         <span className="grid h-7 w-7 place-items-center rounded-chip bg-accent-soft">
           <Icon className="h-4 w-4 text-accent" />

@@ -4,7 +4,7 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { Plus } from "lucide-react";
 import Section from "@/components/ui/Section";
-import { accordionTransition } from "@/lib/motion";
+import { accordionTransition, fastTransition } from "@/lib/motion";
 
 /**
  * DESIGN.md §9 [07] FAQ + §8.8 accordion.
@@ -64,7 +64,7 @@ export default function Faq() {
                 <span className="title-1">{item.q}</span>
                 <motion.span
                   animate={{ rotate: isOpen ? 45 : 0 }}
-                  transition={{ duration: 0.18, ease: [0.16, 1, 0.3, 1] }}
+                  transition={fastTransition}
                   className={isOpen ? "text-accent" : "text-text-3"}
                 >
                   <Plus className="h-[18px] w-[18px]" />

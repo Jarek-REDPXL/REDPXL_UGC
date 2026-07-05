@@ -43,7 +43,7 @@ export default function VideoSlot({
       )}
 
       {/* 1px inner hairline → line-hover on hover */}
-      <div className="pointer-events-none absolute inset-0 z-10 rounded-[inherit] border border-line transition-colors duration-[180ms] group-hover:border-line-hover" />
+      <div className="pointer-events-none absolute inset-0 z-10 rounded-[inherit] border border-line transition-colors duration-[180ms] ease-[var(--ease-out)] group-hover:border-line-hover" />
 
       {/* centred play button (poster state) — scales + inverts on hover */}
       {!src && (
