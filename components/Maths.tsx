@@ -17,8 +17,9 @@ export default function Maths() {
       tint="sage"
       title="Ten times the creative. "
       titleDeep="A fraction of the spend."
+      contentClassName="!mt-8"
     >
-      <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-2">
+      <div className="grid grid-cols-1 items-start gap-x-12 gap-y-8 lg:grid-cols-2">
         <p className="body-lg max-w-[480px]!">
           A single UGC creator video runs £150 to £500. Our Growth plan lands 30
           ads a month at £117 each. Statics and video, delivered in one batch.
