@@ -1,0 +1,113 @@
+import Section from "@/components/ui/Section";
+import { StaggerGroup, RevealItem } from "@/components/Stagger";
+import Reveal from "@/components/Reveal";
+
+/**
+ * DESIGN.md §9 [04] RESULTS — stat cards (§8.12) + quote cards (§8.10).
+ * All figures and testimonials are illustrative placeholders; the note stays
+ * "/ PLACEHOLDER DATA" until real, attributable data replaces them.
+ */
+
+type Tone = "ink" | "accent";
+
+const STATS: { parts: { t: string; tone: Tone }[]; desc: string }[] = [
+  {
+    // §8.12 — numeral in ink, sign/unit in accent
+    parts: [
+      { t: "212", tone: "ink" },
+      { t: "%", tone: "accent" },
+    ],
+    desc: "Average ROAS uplift.",
+  },
+  {
+    parts: [
+      { t: "−", tone: "accent" },
+      { t: "38", tone: "ink" },
+      { t: "%", tone: "accent" },
+    ],
+    desc: "Cost per acquisition.",
+  },
+  {
+    parts: [
+      { t: "10", tone: "ink" },
+      { t: "×", tone: "accent" },
+    ],
+    desc: "Creative output.",
+  },
+];
+
+const QUOTES = [
+  {
+    quote:
+      "We stopped waiting weeks for creator footage. Fresh, on-brand ads now land in our ad account every few days.",
+    initials: "PN",
+    name: "Placeholder name",
+    role: "Founder, DTC skincare brand",
+  },
+  {
+    quote:
+      "The hooks are the difference. Every batch is built to test angles, and our winners keep beating our old creator UGC.",
+    initials: "PN",
+    name: "Placeholder name",
+    role: "Head of growth, mobile app",
+  },
+];
+
+export default function Results() {
+  return (
+    <Section
+      idx="04"
+      name="RESULTS"
+      note="PLACEHOLDER DATA"
+      title="Built for performance, measured in revenue."
+    >
+      {/* Stat cards (§8.12) */}
+      <StaggerGroup className="grid grid-cols-1 gap-4 sm:grid-cols-3">
+        {STATS.map((s) => (
+          <RevealItem
+            key={s.desc}
+            className="rounded-card border border-line bg-bg p-7"
+          >
+            {/* TODO:REAL-DATA */}
+            <div>
+              {s.parts.map((p, i) => (
+                <span
+                  key={i}
+                  className={`stat ${p.tone === "accent" ? "text-accent" : "text-ink"}`}
+                >
+                  {p.t}
+                </span>
+              ))}
+            </div>
+            <p className="body-copy mt-4">{s.desc}</p>
+            <p className="mono-note text-text-3 mt-6">
+              Source: campaign data — pending
+            </p>
+          </RevealItem>
+        ))}
+      </StaggerGroup>
+
+      {/* Quote cards (§8.10) */}
+      <div className="mt-4 grid grid-cols-1 gap-4 md:grid-cols-2">
+        {QUOTES.map((q) => (
+          <Reveal
+            key={q.quote}
+            className="rounded-card border border-line bg-bg p-7"
+          >
+            {/* TODO:REAL-DATA */}
+            <p className="quote">“{q.quote}”</p>
+            <div className="mt-5 flex items-center gap-3">
+              <div className="grid h-8 w-8 place-items-center rounded-full bg-bg-inset">
+                <span className="mono-note text-text-2">{q.initials}</span>
+              </div>
+              <div>
+                <p className="title-2">{q.name}</p>
+                <p className="mono-note">{q.role}</p>
+              </div>
+            </div>
+          </Reveal>
+        ))}
+      </div>
+    </Section>
+  );
+}
