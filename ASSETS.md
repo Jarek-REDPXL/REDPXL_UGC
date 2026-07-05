@@ -76,7 +76,7 @@ Drop the files in with zero code change ([MeetTheTeam.tsx](components/MeetTheTea
 
 | Slot | File | Spec |
 |------|------|------|
-| 5 member portraits | `public/images/team/member-01.jpg` … `member-05.jpg` | ~900×1200, 3:4, object-cover |
+| 5 member portraits | `public/images/team/{zain,hendrix,reis,maya,jarek}.png` ✅ | 3:4, next/image fill object-cover |
 | Social video tile | `public/videos/socialmedia.mp4` ✅ | 9:16, muted autoplay loop, viewport-gated (sand poster fallback) |
 
 > ⚠️ **`socialmedia.mp4` is ~326 MB** — far too large for web. Even viewport-gated

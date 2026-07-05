@@ -1,30 +1,18 @@
-"use client";
-
-import { useState } from "react";
-import { User } from "lucide-react";
+import Image from "next/image";
 
 /**
- * A member portrait: shows /public/images/team/member-0X.jpg (object-cover) if
- * it exists, otherwise a quiet --bg-inset placeholder with a centered User icon
- * so it reads "photo goes here", never broken. Drop the file in with zero code
- * change. The image fades in on load, so a missing file leaves the placeholder.
+ * A member portrait rendered with next/image (fill + object-cover) so it fills
+ * the 3:4 tile with no layout shift and is served optimised. The tile's
+ * --bg-inset shows underneath while the image loads.
  */
-export default function TeamPhoto({ src }: { src: string }) {
-  const [loaded, setLoaded] = useState(false);
+export default function TeamPhoto({ src, alt }: { src: string; alt: string }) {
   return (
-    <div className="absolute inset-0">
-      <div className="grid h-full w-full place-items-center bg-bg-inset">
-        <User className="h-7 w-7 text-text-3" aria-hidden />
-      </div>
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img
-        src={src}
-        alt=""
-        onLoad={() => setLoaded(true)}
-        className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-300 ${
-          loaded ? "opacity-100" : "opacity-0"
-        }`}
-      />
-    </div>
+    <Image
+      src={src}
+      alt={alt}
+      fill
+      sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 22vw"
+      className="object-cover"
+    />
   );
 }

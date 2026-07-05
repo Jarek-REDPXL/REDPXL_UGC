@@ -15,13 +15,13 @@ import TeamSocialVideo from "@/components/ui/TeamSocialVideo";
  * 3:4 tiles); base is a single column.
  */
 
-// TODO:REAL-DATA member photo + name + role (names kept literal "Name")
+// Real team, prominent-first (Zain leads the top row beside the intro).
 const MEMBERS = [
-  { role: "Founder", img: "/images/team/member-01.jpg", place: "lg:col-start-7 lg:row-start-1" },
-  { role: "Creative Lead", img: "/images/team/member-02.jpg", place: "lg:col-start-1 lg:row-start-2" },
-  { role: "AI Video Specialist", img: "/images/team/member-03.jpg", place: "lg:col-start-3 lg:row-start-2" },
-  { role: "Strategist", img: "/images/team/member-04.jpg", place: "lg:col-start-5 lg:row-start-2" },
-  { role: "Editor", img: "/images/team/member-05.jpg", place: "lg:col-start-7 lg:row-start-2" },
+  { name: "Zain", role: "Director", img: "/images/team/zain.png", place: "lg:col-start-7 lg:row-start-1" },
+  { name: "Hendrix", role: "Creative Director", img: "/images/team/hendrix.png", place: "lg:col-start-1 lg:row-start-2" },
+  { name: "Reis Williams", role: "Project Manager", img: "/images/team/reis.png", place: "lg:col-start-3 lg:row-start-2" },
+  { name: "Maya", role: "Story Teller", img: "/images/team/maya.png", place: "lg:col-start-5 lg:row-start-2" },
+  { name: "Jarek", role: "Tool Developer", img: "/images/team/jarek.png", place: "lg:col-start-7 lg:row-start-2" },
 ];
 
 export default function MeetTheTeam() {
@@ -62,11 +62,11 @@ export default function MeetTheTeam() {
           >
             <div className="relative aspect-[3/4] overflow-hidden bg-bg-inset">
               <div className="absolute inset-0 transition-transform duration-[180ms] ease-[var(--ease-out)] group-hover:scale-[1.03]">
-                <TeamPhoto src={m.img} />
+                <TeamPhoto src={m.img} alt={`${m.name}, ${m.role} at REDPXL`} />
               </div>
             </div>
             <div className="px-3.5 py-3">
-              <div className="title-2 leading-tight text-ink">Name</div>
+              <div className="title-2 leading-tight text-ink">{m.name}</div>
               <div className="mono-note mt-0.5 text-text-2">{m.role}</div>
             </div>
           </div>
