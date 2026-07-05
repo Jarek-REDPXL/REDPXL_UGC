@@ -1,4 +1,4 @@
-import { MessageCircle } from "lucide-react";
+import WhatsAppIcon from "./WhatsAppIcon";
 import Button from "./Button";
 import { WHATSAPP_URL } from "@/lib/config";
 
@@ -7,8 +7,8 @@ type Variant = "primary" | "secondary" | "invert" | "ghost";
 /**
  * The site's primary conversion CTA: "WhatsApp us", opening a WhatsApp chat
  * (WHATSAPP_URL) in a new tab. Reuses the standard Button styles/variants; the
- * MessageCircle icon renders in currentColor (no coloured logo). Change the
- * number in lib/config.ts to update every CTA at once.
+ * WhatsApp glyph renders in currentColor (white on dark, ink on light — no
+ * coloured logo). Change the number in lib/config.ts to update every CTA.
  */
 export default function WhatsAppButton({
   variant = "primary",
@@ -19,7 +19,7 @@ export default function WhatsAppButton({
 }) {
   return (
     <Button href={WHATSAPP_URL} external variant={variant} className={className}>
-      <MessageCircle className="h-[18px] w-[18px]" aria-hidden />
+      <WhatsAppIcon className="h-[18px] w-[18px]" />
       WhatsApp us
     </Button>
   );
