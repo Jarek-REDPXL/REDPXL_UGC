@@ -9,31 +9,31 @@ import CountUp from "@/components/ui/CountUp";
  * "/ PLACEHOLDER DATA" until real, attributable data replaces them.
  */
 
-type Tone = "ink" | "accent";
+type Tone = "ink" | "pos";
 // §4 motion — numeric part counts up from 0; sign/unit parts stay static.
 type Part = { value: number; tone: Tone } | { t: string; tone: Tone };
 
 const STATS: { parts: Part[]; desc: string }[] = [
   {
-    // §8.12 — numeral in ink, sign/unit in accent
+    // §8.12 — numeral in ink, sign/unit in positive green (growth, not red)
     parts: [
       { value: 212, tone: "ink" },
-      { t: "%", tone: "accent" },
+      { t: "%", tone: "pos" },
     ],
     desc: "Average ROAS uplift.",
   },
   {
     parts: [
-      { t: "-", tone: "accent" },
+      { t: "-", tone: "pos" },
       { value: 38, tone: "ink" },
-      { t: "%", tone: "accent" },
+      { t: "%", tone: "pos" },
     ],
     desc: "Cost per acquisition.",
   },
   {
     parts: [
       { value: 10, tone: "ink" },
-      { t: "x", tone: "accent" },
+      { t: "x", tone: "pos" },
     ],
     desc: "Creative output.",
   },
@@ -87,7 +87,7 @@ export default function Results() {
               {s.parts.map((p, i) => (
                 <span
                   key={i}
-                  className={`stat ${p.tone === "accent" ? "text-accent" : "text-ink"}`}
+                  className={`stat ${p.tone === "pos" ? "text-pos" : "text-ink"}`}
                 >
                   {"value" in p ? <CountUp value={p.value} /> : p.t}
                 </span>
