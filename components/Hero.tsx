@@ -76,16 +76,16 @@ export default function Hero() {
   return (
     <section id="top" aria-labelledby="hero-title" className="relative overflow-x-clip pt-12">
       <div className="container-x flex flex-col items-center text-center">
-        {/* annotation */}
-        <div
-          className="hero-rise flex items-center justify-center gap-2.5"
+        {/* annotation pill */}
+        <span
+          className="hero-rise inline-flex items-center gap-2.5 rounded-full border border-line bg-bg-subtle py-1.5 pl-3.5 pr-4"
           style={{ animationDelay: "0.05s" }}
         >
           <span className="h-1.5 w-1.5 bg-accent" aria-hidden />
           <span className="mono-note">
             <span className="text-accent-dark">[00]</span> AI UGC VIDEO ADS · DONE FOR YOU
           </span>
-        </div>
+        </span>
 
         {/* H1 — one line at >=1280, balances to two below */}
         <h1
