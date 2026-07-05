@@ -46,23 +46,26 @@ function LinkCol({ title, children }: { title: string; children: React.ReactNode
  */
 export default function Footer() {
   return (
-    <footer className="relative overflow-hidden bg-ink text-white">
-      {/* giant watermark — behind, lower band, red dot as the "." */}
-      <span
-        aria-hidden
-        className="pointer-events-none absolute -bottom-[0.28em] right-2 select-none text-[22vw] font-semibold leading-none tracking-tight text-white/[0.05] lg:text-[15rem]"
-      >
-        REDPXL<span className="text-accent/[0.14]">.</span>
-      </span>
+    <footer className="relative mt-4 overflow-hidden bg-ink text-white">
+      <div className="container-x relative isolate pb-12 pt-24">
+        {/* giant watermark — full wordmark, behind the lower-right, red dot as "."
+            Constrained to the container width (text-right, inset) so it never
+            clips at the edge. */}
+        <span
+          aria-hidden
+          className="pointer-events-none absolute inset-x-6 bottom-2 z-0 select-none text-right text-[clamp(3rem,12vw,9rem)] font-semibold leading-none tracking-tight text-white/[0.05]"
+        >
+          REDPXL<span className="text-accent/[0.15]">.</span>
+        </span>
 
-      <div className="relative mx-auto max-w-[1152px] px-6 pb-12 pt-24">
         {/* annotation */}
-        <p className="mono-note text-text-3-dark">
-          <span className="text-accent">[—]</span> LET&apos;S TALK
+        <p className="relative z-10 flex items-center gap-2 mono-note text-text-3-dark">
+          <span className="h-1.5 w-1.5 bg-accent" aria-hidden />
+          LET&apos;S TALK
         </p>
 
         {/* main — left statement block + right link columns */}
-        <div className="mt-10 grid gap-x-10 gap-y-14 lg:grid-cols-[1.15fr_1fr]">
+        <div className="relative z-10 mt-10 grid gap-x-10 gap-y-14 lg:grid-cols-[1.15fr_1fr]">
           <div>
             <h2 className="display-2 text-white">Ready to stop running tired ads?</h2>
             <p className="body-lg mt-4 text-text-2-dark">
@@ -112,7 +115,7 @@ export default function Footer() {
         </div>
 
         {/* meta row on a hairline */}
-        <div className="mt-20 flex flex-col gap-4 border-t border-white/10 pt-6 sm:flex-row sm:items-center sm:justify-between">
+        <div className="relative z-10 mt-20 flex flex-col gap-4 border-t border-white/10 pt-6 sm:flex-row sm:items-center sm:justify-between">
           <span className="mono-note text-text-3-dark">© 2026 REDPXL LIMITED</span>
           <div className="flex items-center gap-6">
             <a href="#top" aria-label="REDPXL home" className="flex items-center">
