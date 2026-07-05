@@ -5,6 +5,7 @@ import EditorialPoster, {
   type PosterVariant,
 } from "./EditorialPoster";
 import EditorialVideo from "./EditorialVideo";
+import MarqueeVideoScreen from "./MarqueeVideoScreen";
 
 type Ratio = "9:16" | "1:1" | "16:9";
 
@@ -66,24 +67,14 @@ export default function VideoSlot({
     );
   }
 
-  // marquee: a clean blank screen; a work-0X.mp4 autoplays over it if present.
+  // marquee: a blank --bg-inset screen; a video plays over it when a src loads
+  // (viewport-gated by ReelGate), falling back to the blank screen on error.
   if (blank) {
     return (
       <div
         className={`relative w-full overflow-hidden bg-bg-inset ${ratioClass[ratio]} ${rounded}`}
       >
-        {src && (
-          <video
-            className="absolute inset-0 h-full w-full object-cover"
-            src={src}
-            autoPlay
-            muted
-            loop
-            playsInline
-            preload="metadata"
-            aria-hidden
-          />
-        )}
+        {src && <MarqueeVideoScreen src={src} />}
         <div className="pointer-events-none absolute inset-0 z-10 rounded-[inherit] border border-line" />
       </div>
     );

@@ -36,23 +36,26 @@ blurred SVG texture + a two-chip hook/meta caption) and reel slots render a
 > Referenced with encoded spaces, e.g. `/videos/Main%20Hero%20(1).mp4`. Below
 > 1024 the hero drops slots 1 & 5 (shows 2/3/4); below 768 same three, cropped.
 
-**Work reel — 10 blank slots.** The marquee phones are blank `--bg-inset`
-screens by default. Each is already wired to a file path (below): **drop the MP4
-in and it autoplays (muted, looped, `playsInline`) with zero code changes.** No
-file → the blank screen stays. Files: **MP4 H.264, 9:16, 1080×1920, ≤8MB each.**
+**Work reel — 10 slots · FILLED** (left → right). Each blank `--bg-inset` phone
+plays its real video (muted, looped, object-cover), **viewport-gated** by
+`ReelGate` so the 10 clips only decode while the marquee is near the viewport.
+Falls back to the blank screen on error. Files: **MP4 H.264, 9:16, 1080×1920.**
 
-| # | File |
-|---|------|
-| 6 | `public/videos/work-01.mp4` |
-| 7 | `public/videos/work-02.mp4` |
-| 8 | `public/videos/work-03.mp4` |
-| 9 | `public/videos/work-04.mp4` |
-| 10 | `public/videos/work-05.mp4` |
-| 11 | `public/videos/work-06.mp4` |
-| 12 | `public/videos/work-07.mp4` |
-| 13 | `public/videos/work-08.mp4` |
-| 14 | `public/videos/work-09.mp4` |
-| 15 | `public/videos/work-10.mp4` |
+| # | File · FILLED |
+|---|--------------|
+| 6 | `public/videos/AI_UGC1.mp4` ✅ |
+| 7 | `public/videos/AI_UGC2.mp4` ✅ |
+| 8 | `public/videos/AI_UGC3.mp4` ✅ |
+| 9 | `public/videos/AI_UGC4.mp4` ✅ |
+| 10 | `public/videos/AI_UGC5.mp4` ✅ |
+| 11 | `public/videos/AI_UGC6.mp4` ✅ |
+| 12 | `public/videos/AI_UGC7.mp4` ✅ |
+| 13 | `public/videos/AI_UGC8.mp4` ✅ |
+| 14 | `public/videos/AI_UGC9.mp4` ✅ |
+| 15 | `public/videos/AI_UGC10.mp4` ✅ |
+
+> Several are ~5.5MB (AI_UGC1/7/8/9/10). Consider compressing to ~2MB each
+> (short 9:16 loops) to lighten mobile — total is ~36MB across the ten.
 
 > Below 1024 the hero drops its outer pair (slots 1 & 5); below 768 it shows
 > slots 2–4 with the neighbours cropped at the edges — no extra files.

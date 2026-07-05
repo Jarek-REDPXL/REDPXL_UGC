@@ -1,12 +1,10 @@
 import PhoneFrame from "@/components/ui/PhoneFrame";
 import Reveal from "@/components/Reveal";
+import ReelGate from "@/components/ui/ReelGate";
 
-// 10 marquee slots. Each blank phone plays /public/videos/work-0X.mp4 if the
-// file exists, otherwise shows a clean --bg-inset screen. TODO:REAL-DATA.
-const SLOTS = Array.from(
-  { length: 10 },
-  (_, i) => `/videos/work-${String(i + 1).padStart(2, "0")}.mp4`
-);
+// 10 marquee slots, left→right: AI_UGC1…10.mp4. Each plays in its blank phone
+// (viewport-gated by ReelGate), falling back to the --bg-inset screen on error.
+const SLOTS = Array.from({ length: 10 }, (_, i) => `/videos/AI_UGC${i + 1}.mp4`);
 
 // shared width + arc stagger for every marquee phone (bigger than v1: ~260 desktop)
 const PHONE = "shrink-0 w-[200px] md:w-[230px] lg:w-[260px] mx-2.5";
@@ -35,7 +33,7 @@ export default function Work() {
             </span>
             <span className="h-px flex-1 self-center bg-line" aria-hidden />
             <span className="mono-note hidden whitespace-nowrap min-[380px]:inline">
-              / WORK IN PROGRESS · LOOPING
+              / 10 NICHES · LOOPING
             </span>
           </div>
         </Reveal>
@@ -55,9 +53,11 @@ export default function Work() {
       </div>
 
       {/* §15 full-bleed infinite reel — track rendered twice for a seamless
-          left→right loop; motion is pure CSS (.reel-track). Blank screens await
-          real video (work-01…10.mp4). */}
-      <div className="reel-viewport mask-fade-x overflow-hidden mt-12">
+          left→right loop; motion is pure CSS (.reel-track). Videos AI_UGC1…10
+          play viewport-gated (ReelGate). Clips horizontally only (overflow-x)
+          with py breathing room so frames + shadows + the translateY offset are
+          never sliced top/bottom. */}
+      <ReelGate className="reel-viewport mask-fade-x mt-12 overflow-x-clip py-8">
         <div className="reel-track">
           {SLOTS.map((src, i) => (
             <div key={`a-${i}`} className={`${PHONE} ${i % 2 === 1 ? "translate-y-3" : ""}`}>
@@ -74,7 +74,7 @@ export default function Work() {
             </div>
           ))}
         </div>
-      </div>
+      </ReelGate>
     </section>
   );
 }
