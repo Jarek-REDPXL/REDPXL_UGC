@@ -3,10 +3,9 @@ import Canvas from "@/components/ui/Canvas";
 import { StaggerGroup, RevealItem } from "@/components/Stagger";
 import CountUp from "@/components/ui/CountUp";
 import VariationExploder from "@/components/graphics/VariationExploder";
-import FormatMorph from "@/components/graphics/FormatMorph";
+import FormatMorphVideo from "@/components/graphics/FormatMorphVideo";
 import SpeedDelivery from "@/components/graphics/SpeedDelivery";
 import CostDrop from "@/components/graphics/CostDrop";
-import InViewVideo from "@/components/ui/InViewVideo";
 import { Users, Zap, Clock, Layers, PoundSterling, Smartphone } from "lucide-react";
 
 /**
@@ -127,7 +126,8 @@ export default function Why() {
           </BentoCard>
         </RevealItem>
 
-        {/* Native — a real 9:16 video (reuses hero phone 2), FormatMorph fallback */}
+        {/* Native — the real clip (hero phone 2) inside the morphing "every
+            format" frame: 9:16 → 1:1 → 4:5 with a synced ratio label */}
         <RevealItem className="md:col-span-3">
           <BentoCard icon={Smartphone} label="NATIVE">
             <h3 className="title-1 mt-4">Native, not glossy</h3>
@@ -135,19 +135,7 @@ export default function Why() {
               UGC-style creative built to convert on paid social, not studio
               gloss that gets scrolled past.
             </p>
-            <div className="relative mx-auto mt-5 aspect-[9/16] w-[150px] overflow-hidden rounded-[14px] border border-line bg-bg-inset">
-              <InViewVideo
-                src="/videos/Main%20Hero%20(2).mp4"
-                fallback={
-                  <div className="absolute inset-0 grid place-items-center">
-                    <FormatMorph />
-                  </div>
-                }
-              />
-              <span className="mono-note absolute bottom-2 left-2 z-10 rounded-[4px] bg-white/[0.92] px-1.5 py-0.5 text-[10px]! leading-tight text-ink">
-                9:16
-              </span>
-            </div>
+            <FormatMorphVideo src="/videos/Main%20Hero%20(2).mp4" className="mt-5" />
           </BentoCard>
         </RevealItem>
       </StaggerGroup>
