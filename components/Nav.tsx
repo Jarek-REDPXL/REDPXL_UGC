@@ -9,12 +9,40 @@ import Button from "./ui/Button";
 export default function Nav() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const [activeId, setActiveId] = useState("");
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  // §4 nav active-section indicator: observe the sections referenced by
+  // navLinks; the active one is whichever crosses the upper-middle band
+  // (rootMargin accounts for the 64px sticky nav).
+  useEffect(() => {
+    const elements = navLinks
+      .map((link) => document.getElementById(link.href.replace("#", "")))
+      .filter((el): el is HTMLElement => el !== null);
+
+    if (elements.length === 0) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            setActiveId(entry.target.id);
+          }
+        }
+      },
+      { rootMargin: "-45% 0px -50% 0px" }
+    );
+
+    for (const el of elements) {
+      observer.observe(el);
+    }
+    return () => observer.disconnect();
   }, []);
 
   useEffect(() => {
@@ -40,16 +68,27 @@ export default function Nav() {
 
         {/* Center: anchors (lg+) */}
         <ul className="hidden items-center justify-center gap-7 lg:flex">
-          {navLinks.map((link) => (
-            <li key={link.href}>
-              <a
-                href={link.href}
-                className="label text-text-2 transition-colors hover:text-ink"
-              >
-                {link.label}
-              </a>
-            </li>
-          ))}
+          {navLinks.map((link) => {
+            const isActive = activeId === link.href.replace("#", "");
+            return (
+              <li key={link.href}>
+                <a
+                  href={link.href}
+                  aria-current={isActive ? "true" : undefined}
+                  className="label inline-flex items-center gap-1.5 text-text-2 transition-colors hover:text-ink"
+                >
+                  {link.label}
+                  {/* §4 active-section dot — fades between links (180ms) */}
+                  <span
+                    aria-hidden="true"
+                    className={`h-1 w-1 rounded-full bg-accent transition-opacity duration-[180ms] ease-out motion-reduce:transition-none ${
+                      isActive ? "opacity-100" : "opacity-0"
+                    }`}
+                  />
+                </a>
+              </li>
+            );
+          })}
         </ul>
 
         {/* Right: contact + CTA */}

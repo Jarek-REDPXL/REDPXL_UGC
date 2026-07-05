@@ -27,7 +27,7 @@ export default function LogoStrip() {
         <div className="marquee-track">
           {WORDMARKS.map((name) => (
             <div key={`a-${name}`} className="flex h-14 items-center">
-              <span className="title-2 text-text-3 whitespace-nowrap mx-8">
+              <span className="label text-[15px]! text-text-3 opacity-70 whitespace-nowrap mx-7">
                 {name}
               </span>
             </div>
@@ -38,7 +38,7 @@ export default function LogoStrip() {
               aria-hidden={true}
               className="flex h-14 items-center"
             >
-              <span className="title-2 text-text-3 whitespace-nowrap mx-8">
+              <span className="label text-[15px]! text-text-3 opacity-70 whitespace-nowrap mx-7">
                 {name}
               </span>
             </div>

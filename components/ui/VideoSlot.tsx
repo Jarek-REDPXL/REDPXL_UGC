@@ -1,4 +1,5 @@
 import { Play } from "lucide-react";
+import PosterCanvas from "./PosterCanvas";
 
 type Ratio = "9:16" | "1:1" | "16:9";
 
@@ -11,6 +12,8 @@ type VideoSlotProps = {
   ratio?: Ratio;
   /** rounding of the media surface (PhoneFrame inner uses a tighter radius) */
   rounded?: string;
+  /** hero middle phone: cycle the poster's top caption through these hooks */
+  cycleHooks?: string[];
 };
 
 const ratioClass: Record<Ratio, string> = {
@@ -19,26 +22,39 @@ const ratioClass: Record<Ratio, string> = {
   "16:9": "aspect-video",
 };
 
-/** DESIGN.md §8.3 — VideoSlot. */
+/** DESIGN.md §8.3 + §12 — VideoSlot with a designed PosterCanvas placeholder. */
 export default function VideoSlot({
   src,
   poster,
   chip,
   ratio = "9:16",
   rounded = "rounded-card",
+  cycleHooks,
 }: VideoSlotProps) {
   return (
     <div
-      className={`relative w-full overflow-hidden bg-bg-inset ${ratioClass[ratio]} ${rounded}`}
+      className={`group relative w-full overflow-hidden bg-bg-inset ${ratioClass[ratio]} ${rounded}`}
     >
-      {/* poster state: inset base + 1px inner line + centred play circle */}
-      <div className="pointer-events-none absolute inset-0 rounded-[inherit] border border-line" />
-      <div className="absolute inset-0 grid place-items-center">
-        <span className="grid h-11 w-11 place-items-center rounded-full border border-line bg-white">
-          <Play className="h-4 w-4 translate-x-px text-ink" fill="currentColor" />
-        </span>
-      </div>
+      {/* poster inner content — scales 1.03 on card hover (§1) */}
+      {!src && (
+        <div className="absolute inset-0 transition-transform duration-[180ms] ease-[var(--ease-out)] group-hover:scale-[1.03]">
+          <PosterCanvas chip={chip} cycleHooks={cycleHooks} />
+        </div>
+      )}
 
+      {/* 1px inner hairline → line-hover on hover */}
+      <div className="pointer-events-none absolute inset-0 z-10 rounded-[inherit] border border-line transition-colors duration-[180ms] group-hover:border-line-hover" />
+
+      {/* centred play button (poster state) — scales + inverts on hover */}
+      {!src && (
+        <div className="absolute inset-0 z-10 grid place-items-center">
+          <span className="grid h-11 w-11 place-items-center rounded-full border border-line bg-white text-ink transition-[transform,background-color,color] duration-[180ms] ease-[var(--ease-out)] group-hover:scale-[1.08] group-hover:border-ink group-hover:bg-ink group-hover:text-white">
+            <Play className="h-4 w-4 translate-x-px" fill="currentColor" />
+          </span>
+        </div>
+      )}
+
+      {/* real video (renders only when a src is provided) */}
       {src && (
         <video
           className="absolute inset-0 h-full w-full object-cover"
@@ -52,7 +68,8 @@ export default function VideoSlot({
         />
       )}
 
-      <span className="mono-note absolute left-2 top-2 rounded-chip border border-line bg-white/[0.92] px-2 py-[3px] !text-ink">
+      {/* label chip */}
+      <span className="mono-note absolute left-2 top-2 z-20 rounded-chip border border-line bg-white/[0.92] px-2 py-[3px] !text-ink">
         {chip}
       </span>
     </div>

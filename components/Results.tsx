@@ -1,6 +1,7 @@
 import Section from "@/components/ui/Section";
 import { StaggerGroup, RevealItem } from "@/components/Stagger";
 import Reveal from "@/components/Reveal";
+import CountUp from "@/components/ui/CountUp";
 
 /**
  * DESIGN.md §9 [04] RESULTS — stat cards (§8.12) + quote cards (§8.10).
@@ -9,12 +10,14 @@ import Reveal from "@/components/Reveal";
  */
 
 type Tone = "ink" | "accent";
+// §4 motion — numeric part counts up from 0; sign/unit parts stay static.
+type Part = { value: number; tone: Tone } | { t: string; tone: Tone };
 
-const STATS: { parts: { t: string; tone: Tone }[]; desc: string }[] = [
+const STATS: { parts: Part[]; desc: string }[] = [
   {
     // §8.12 — numeral in ink, sign/unit in accent
     parts: [
-      { t: "212", tone: "ink" },
+      { value: 212, tone: "ink" },
       { t: "%", tone: "accent" },
     ],
     desc: "Average ROAS uplift.",
@@ -22,14 +25,14 @@ const STATS: { parts: { t: string; tone: Tone }[]; desc: string }[] = [
   {
     parts: [
       { t: "−", tone: "accent" },
-      { t: "38", tone: "ink" },
+      { value: 38, tone: "ink" },
       { t: "%", tone: "accent" },
     ],
     desc: "Cost per acquisition.",
   },
   {
     parts: [
-      { t: "10", tone: "ink" },
+      { value: 10, tone: "ink" },
       { t: "×", tone: "accent" },
     ],
     desc: "Creative output.",
@@ -75,7 +78,7 @@ export default function Results() {
                   key={i}
                   className={`stat ${p.tone === "accent" ? "text-accent" : "text-ink"}`}
                 >
-                  {p.t}
+                  {"value" in p ? <CountUp value={p.value} /> : p.t}
                 </span>
               ))}
             </div>

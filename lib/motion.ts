@@ -29,15 +29,22 @@ export const heroParent: Variants = {
   show: { transition: { staggerChildren: 0.09, delayChildren: 0.05 } },
 };
 
+// Above the fold, the load sequence animates TRANSFORM ONLY (a staggered
+// rise) and keeps opacity at 1. The hero text therefore paints at full opacity
+// on first render — it is the LCP element and must never be gated behind an
+// opacity fade (Chrome won't count a fading element as painted until the tween
+// completes after hydration, which pushed LCP to ~4.7s under throttling). This
+// also means the hero can never flash invisible. Reveals below the fold still
+// fade; only the hero uses rise-only.
 export const heroItem: Variants = {
-  hidden: { opacity: 0, y: 8 },
-  show: { opacity: 1, y: 0, transition: { duration: DUR.base, ease: easeOut } },
+  hidden: { y: 8 },
+  show: { y: 0, transition: { duration: DUR.base, ease: easeOut } },
 };
 
-// §7.2 the hero frame animates slower, from a slightly larger offset.
+// §7.2 the hero frame rises slower, from a slightly larger offset.
 export const heroFrame: Variants = {
-  hidden: { opacity: 0, y: 12 },
-  show: { opacity: 1, y: 0, transition: { duration: DUR.slow, ease: easeOut } },
+  hidden: { y: 12 },
+  show: { y: 0, transition: { duration: DUR.slow, ease: easeOut } },
 };
 
 // §7.5 Accordion answer.

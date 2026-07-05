@@ -50,6 +50,26 @@
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
   --dur-fast: 180ms;
   --dur-base: 400ms;
+  --dur-slow: 600ms;
+
+  /* §12 PosterCanvas — per-niche duotone stops (quiet, near-neutral).
+     All poster hexes live here so components stay hex-free (§11). */
+  --poster-skincare-1: #efe6de;
+  --poster-skincare-2: #e3d5c9;
+  --poster-fitness-1: #e2e6ea;
+  --poster-fitness-2: #d3d9df;
+  --poster-fashion-1: #eae4e0;
+  --poster-fashion-2: #dcd2cc;
+  --poster-app-1: #e4e7ee;
+  --poster-app-2: #d6dae4;
+  --poster-beauty-1: #efe3e3;
+  --poster-beauty-2: #e2d1d1;
+  --poster-food-1: #eae8df;
+  --poster-food-2: #dbd8c9;
+  --poster-supplements-1: #e3eae6;
+  --poster-supplements-2: #d2ded6;
+  --poster-default-1: #e9eaee;
+  --poster-default-2: #dcdde3;
 }
 
 @theme inline {
@@ -117,7 +137,7 @@ body {
 
 ::selection {
   background: var(--accent-soft);
-  color: var(--accent-dark);
+  color: var(--ink);
 }
 
 /* §10 Accessibility — focus floor for all interactive elements */
@@ -140,6 +160,7 @@ button:focus-visible,
   line-height: 1.04;
   color: var(--ink);
   max-width: 640px;
+  text-wrap: balance;
 }
 .display-2 {
   font-size: clamp(2rem, 4vw, 3rem);
@@ -148,6 +169,7 @@ button:focus-visible,
   line-height: 1.08;
   color: var(--ink);
   max-width: 640px;
+  text-wrap: balance;
 }
 .title-1 {
   font-size: 1.375rem;
@@ -169,6 +191,7 @@ button:focus-visible,
   line-height: 1.6;
   color: var(--text-2);
   max-width: 560px;
+  text-wrap: pretty;
 }
 .body-copy {
   font-size: 0.9375rem;
@@ -188,6 +211,11 @@ button:focus-visible,
   letter-spacing: -0.03em;
   line-height: 1;
   color: var(--ink);
+  font-variant-numeric: tabular-nums;
+}
+/* §5 craft — tabular figures for stats, prices, table numbers, indexes */
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
 }
 .quote {
   font-size: 1.125rem;
@@ -212,6 +240,7 @@ button:focus-visible,
   line-height: 1.4;
   text-transform: uppercase;
   color: var(--accent);
+  font-variant-numeric: tabular-nums;
 }
 
 /* ============================================================
@@ -321,7 +350,7 @@ button:focus-visible,
 .marquee-track {
   display: flex;
   width: max-content;
-  animation: marquee 40s linear infinite;
+  animation: marquee 45s linear infinite;
 }
 .marquee-viewport:hover .marquee-track {
   animation-play-state: paused;
@@ -359,6 +388,24 @@ button:focus-visible,
 /* ============================================================
    §7 / §10 Reduced motion
    ============================================================ */
+/* §7.2 Hero load sequence — CSS (runs at first paint, not hydration) so the
+   above-the-fold LCP text is server-rendered and never gated by JS. Rise-only
+   (opacity stays 1) → the hero can never flash invisible and paints at FCP. */
+@keyframes hero-rise {
+  from {
+    transform: translateY(10px);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+.hero-rise {
+  animation: hero-rise var(--dur-base) var(--ease-out) both;
+}
+.hero-rise-slow {
+  animation: hero-rise var(--dur-slow) var(--ease-out) both;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
@@ -368,5 +415,9 @@ button:focus-visible,
   }
   .btn:hover svg {
     transform: none;
+  }
+  .hero-rise,
+  .hero-rise-slow {
+    animation: none;
   }
 }

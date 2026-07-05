@@ -115,7 +115,10 @@ export default function Comparison() {
             </thead>
             <tbody>
               {ROWS.map((row) => (
-                <tr key={row.label} className="border-t border-line">
+                <tr
+                  key={row.label}
+                  className="border-t border-line hover:bg-bg-subtle transition-colors duration-[120ms]"
+                >
                   <td className="label p-5 align-top">{row.label}</td>
                   {row.cells.map((cell, i) => {
                     const isRedpxl = i === row.cells.length - 1;

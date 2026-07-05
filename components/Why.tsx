@@ -1,6 +1,7 @@
 import type { ComponentType, ReactNode } from "react";
 import Section from "@/components/ui/Section";
 import { StaggerGroup, RevealItem } from "@/components/Stagger";
+import CountUp from "@/components/ui/CountUp";
 import { Users, Zap, Clock, Layers, PoundSterling, Smartphone } from "lucide-react";
 
 /**
@@ -82,15 +83,13 @@ export default function Why() {
         {/* Speed — stat variant */}
         <RevealItem className="md:col-span-3">
           <BentoCard icon={Clock} label="SPEED">
-            <div className="flex items-baseline gap-2">
-              <span className="stat text-ink">72</span>
+            <div className="mt-4 flex items-baseline gap-2">
+              <span className="stat text-ink">
+                <CountUp value={72} />
+              </span>
               <span className="mono-note">HOURS</span>
             </div>
-            <h3 className="title-1 mt-3">72h turnaround</h3>
-            <p className="body-copy mt-2">
-              Fresh statics and videos in three days — not the two weeks a
-              creator shoot takes.
-            </p>
+            <p className="body-copy mt-3">Not two weeks.</p>
           </BentoCard>
         </RevealItem>
 

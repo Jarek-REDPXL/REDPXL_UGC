@@ -1,6 +1,7 @@
 "use client";
 
-import { useRef, useState, type PointerEvent } from "react";
+import { useEffect, useRef, useState, type PointerEvent } from "react";
+import { useReducedMotion } from "motion/react";
 import { Annotation } from "@/components/ui/Section";
 import PhoneFrame from "@/components/ui/PhoneFrame";
 import Reveal from "@/components/Reveal";
@@ -26,7 +27,11 @@ const CHIPS = [
 export default function Work() {
   const scrollRef = useRef<HTMLDivElement>(null);
   const drag = useRef({ down: false, startX: 0, startScroll: 0 });
+  // §4/§7.6 momentum — track pointer velocity (px/ms) between moves.
+  const vel = useRef({ lastX: 0, lastT: 0, velocity: 0 });
+  const rafId = useRef<number | null>(null);
   const [progress, setProgress] = useState(0);
+  const reduced = useReducedMotion();
 
   const updateProgress = () => {
     const el = scrollRef.current;
@@ -36,10 +41,45 @@ export default function Work() {
     setProgress(Math.min(1, Math.max(0, p)));
   };
 
+  const stopMomentum = () => {
+    if (rafId.current !== null) {
+      cancelAnimationFrame(rafId.current);
+      rafId.current = null;
+    }
+  };
+
+  // Exponential-decay inertia after release; each frame nudges scrollLeft by
+  // velocity*frameMs and decays velocity, halting on a bound or when tiny.
+  const startMomentum = () => {
+    let last = performance.now();
+    const step = (now: number) => {
+      const el = scrollRef.current;
+      if (!el) {
+        rafId.current = null;
+        return;
+      }
+      const frameMs = now - last;
+      last = now;
+      el.scrollLeft += vel.current.velocity * frameMs;
+      vel.current.velocity *= 0.94;
+      updateProgress();
+      const max = el.scrollWidth - el.clientWidth;
+      const hitBound = el.scrollLeft <= 0 || el.scrollLeft >= max;
+      if (Math.abs(vel.current.velocity) < 0.02 || hitBound) {
+        rafId.current = null;
+        return;
+      }
+      rafId.current = requestAnimationFrame(step);
+    };
+    rafId.current = requestAnimationFrame(step);
+  };
+
   const onPointerDown = (e: PointerEvent<HTMLDivElement>) => {
     const el = scrollRef.current;
     if (!el) return;
+    stopMomentum();
     drag.current = { down: true, startX: e.clientX, startScroll: el.scrollLeft };
+    vel.current = { lastX: e.clientX, lastT: performance.now(), velocity: 0 };
     el.setPointerCapture(e.pointerId);
   };
 
@@ -47,16 +87,32 @@ export default function Work() {
     const el = scrollRef.current;
     if (!el || !drag.current.down) return;
     el.scrollLeft = drag.current.startScroll - (e.clientX - drag.current.startX);
+    const now = performance.now();
+    const dt = now - vel.current.lastT;
+    if (dt > 0) {
+      // pointer-right shrinks scrollLeft, so scroll velocity is the negative.
+      vel.current.velocity = -(e.clientX - vel.current.lastX) / dt;
+    }
+    vel.current.lastX = e.clientX;
+    vel.current.lastT = now;
     updateProgress();
   };
 
   const endDrag = (e: PointerEvent<HTMLDivElement>) => {
     const el = scrollRef.current;
+    const wasDown = drag.current.down;
     drag.current.down = false;
     if (el && el.hasPointerCapture(e.pointerId)) {
       el.releasePointerCapture(e.pointerId);
     }
+    // Reduced motion → instant stop; otherwise fling if velocity is meaningful.
+    if (wasDown && !reduced && Math.abs(vel.current.velocity) >= 0.02) {
+      startMomentum();
+    }
   };
+
+  // Clean up any in-flight decay loop on unmount.
+  useEffect(() => stopMomentum, []);
 
   return (
     <section

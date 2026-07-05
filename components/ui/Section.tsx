@@ -20,16 +20,21 @@ export function Annotation({
   tone?: "light" | "dark";
 }) {
   const nameColor = tone === "dark" ? "text-white/50" : "text-text-3";
+  const ruleColor = tone === "dark" ? "bg-white/15" : "bg-line";
   return (
     <div
-      className="flex items-baseline justify-between gap-4"
+      className="flex items-baseline gap-4"
       id={labelId ? `${labelId}-idx` : undefined}
     >
-      <span className="flex items-baseline gap-3">
+      <span className="flex items-baseline gap-3 whitespace-nowrap">
         <span className="mono-idx">[{idx}]</span>
         <span className={`mono-note ${nameColor}`}>{name}</span>
       </span>
-      {note && <span className="mono-note text-right">/ {note}</span>}
+      {/* §5 — 1px rule filling the gap between label and note */}
+      <span className={`h-px flex-1 self-center ${ruleColor}`} aria-hidden />
+      {note && (
+        <span className="mono-note whitespace-nowrap">/ {note}</span>
+      )}
     </div>
   );
 }

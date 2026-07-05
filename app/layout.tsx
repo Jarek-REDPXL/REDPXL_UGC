@@ -39,17 +39,29 @@ export const metadata: Metadata = {
     description:
       "Hyper-realistic AI-generated UGC video and static ads for your brand. Proven direct-response hooks, delivered in 72 hours.",
     locale: "en_GB",
+    images: [
+      {
+        url: "/og.png",
+        width: 1200,
+        height: 630,
+        alt: "REDPXL UGC — AI UGC ads engineered to convert.",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "REDPXL UGC — AI UGC Video Ads That Convert",
     description:
       "Hyper-realistic AI-generated UGC video and static ads for your brand. Delivered in 72 hours.",
+    images: ["/og.png"],
   },
   robots: { index: true, follow: true },
   icons: {
-    icon: [{ url: "/favicon.webp", type: "image/webp" }],
-    shortcut: [{ url: "/favicon.webp", type: "image/webp" }],
+    icon: [
+      { url: "/icon.svg", type: "image/svg+xml" },
+      { url: "/favicon.webp", type: "image/webp" },
+    ],
+    shortcut: [{ url: "/icon.svg", type: "image/svg+xml" }],
     apple: [{ url: "/favicon.webp", type: "image/webp" }],
   },
 };

@@ -1,4 +1,4 @@
-# REDPXL UGC — Design Specification v1.1
+# REDPXL UGC — Design Specification v1.2
 
 This document is the single source of truth for the REDPXL UGC landing page.
 Every colour, size, weight, spacing value and interaction on the page derives
@@ -514,6 +514,45 @@ Terms · Privacy (# placeholders). py-48px.
 - No component may hardcode a hex, px shadow, or font weight — tokens only.
 - `npm run build` must pass with zero errors/warnings before any handoff.
 
+---
+
+## 12. PosterCanvas — the placeholder system (v1.2)
+
+Every `VideoSlot` without a `src` renders `components/ui/PosterCanvas.tsx` — a
+designed placeholder that reads as a paused UGC video, never an empty box. The
+reel and hero therefore read as a wall of real, varied content.
+
+Each poster carries:
+- **Per-niche duotone** — a soft two-stop radial gradient, desaturated and
+  quiet, derived from the chip subject (skincare / fitness / fashion /
+  beauty / food / supplements / app·saas / default). All poster hexes live as
+  `--poster-{niche}-1/2` CSS vars in `globals.css` (§11 — components stay
+  hex-free); the component only references the vars.
+- **UGC UI overlay** — two short mono-note caption chips (10px, white on
+  `black/35`, radius 4px) reading like hook text, plus a 2px `white/70`
+  progress bar at a deterministic 30–70% width (hashed from the chip, SSR-safe).
+- **Film grain** — an inline SVG `feTurbulence` layer at 4% opacity,
+  `mix-blend: overlay`.
+- **Hover** (driven by the parent VideoSlot `group`): poster inner content
+  scales 1.03, the border goes `--line-hover`, and the centre play button
+  scales 1.08 with its fill inverting to `--ink` / white icon — all
+  `dur-fast` on `--ease-out`.
+- **Hero cycling** — the hero middle phone passes `cycleHooks`; the top caption
+  crossfades (opacity only, 400ms) through them every 3.5s, pausing on hover.
+  This is the page's one "alive" moment above the fold.
+
+Supporting craft added in v1.2: `CountUp` (§4 count-up stats, tabular-nums,
+in-view once, reduced-motion safe), tabular figures on stats/prices/indexes,
+`text-wrap: balance` on display titles / `pretty` on body-lg subs, the
+annotation rule-fill (label — rule — note), 6px phone bezels, Attio corner
+ticks on the hero frame, nav active-section dot, reel momentum, and the
+32px SVG favicon + 1200×630 `og.png`.
+
+Reduced motion: counters, the hero caption cycler, the batch-number tick, the
+marquee, and the load sequence all degrade to their static end state.
+
 *End of specification. v1.0 — changes require a version bump and changelog line here.*
 
 *v1.1 — 72h standard delivery (48h now a rush add-on); image+video mix; formats 9:16·1:1·4:5; new THE PROBLEM section (sections renumbered); trial-first pricing funnel with real prices; copy overhaul.*
+
+*v1.2 — Ultra polish pass: PosterCanvas placeholder system (§12); count-up stats; hero life (cycling caption, corner ticks, batch tick); motion/craft details (tabular figures, text-wrap, annotation rule-fill, nav active dot, reel momentum, comparison row hover, 6px bezels); 32px SVG favicon + og.png.*
