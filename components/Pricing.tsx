@@ -75,12 +75,9 @@ export default function Pricing() {
             free.
           </p>
         </div>
-        <div>
-          <div className="flex items-baseline gap-2">
-            <span className="stat">£750</span>
-            <span className="mono-note">ONE-TIME</span>
-          </div>
-          <WhatsAppButton className="mt-4" />
+        <div className="flex items-baseline gap-2">
+          <span className="stat">£750</span>
+          <span className="mono-note">ONE-TIME</span>
         </div>
       </div>
 
