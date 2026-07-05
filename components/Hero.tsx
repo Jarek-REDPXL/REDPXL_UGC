@@ -87,9 +87,7 @@ export default function Hero() {
           style={{ animationDelay: "0.05s" }}
         >
           <span className="h-1.5 w-1.5 bg-accent" aria-hidden />
-          <span className="mono-note">
-            <span className="text-accent-dark">[00]</span> AI UGC VIDEO ADS · DONE FOR YOU
-          </span>
+          <span className="mono-note">AI UGC VIDEO ADS · DONE FOR YOU</span>
         </span>
 
         {/* H1 — one line at >=1280, balances to two below */}
