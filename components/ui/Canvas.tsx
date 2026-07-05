@@ -59,7 +59,6 @@ export default function Canvas({
   float,
   titleClassName = "",
   centered = false,
-  flushBottom = false,
 }: {
   id?: string;
   idx: string;
@@ -78,8 +77,6 @@ export default function Canvas({
   titleClassName?: string;
   /** center the annotation, title and sub on one axis (dark CTA bands) */
   centered?: boolean;
-  /** full-bleed edge-to-edge with a square bottom, to merge into the footer */
-  flushBottom?: boolean;
 }) {
   const labelId = id ? `${id}-title` : `sec-${idx}-title`;
   const dark = tint === "ink";
@@ -96,9 +93,9 @@ export default function Canvas({
       id={id}
       aria-labelledby={title ? labelId : undefined}
       aria-label={title ? undefined : name}
-      className={`canvas-wrap ${flushBottom ? "canvas-wrap--flush" : ""}`}
+      className="canvas-wrap"
     >
-      <div className={`canvas canvas--${tint} ${flushBottom ? "rounded-b-none" : ""}`}>
+      <div className={`canvas canvas--${tint}`}>
         {tinted && <Grain />}
         <CanvasTicks dark={dark} />
         {float}

@@ -46,8 +46,8 @@ function LinkCol({ title, children }: { title: string; children: React.ReactNode
  */
 export default function Footer() {
   return (
-    <footer className="relative overflow-hidden bg-ink text-white">
-      <div className="relative isolate mx-auto max-w-[1152px] px-6 pb-12 pt-24 md:px-8 lg:px-10">
+    <footer className="relative mt-4 overflow-hidden bg-ink text-white">
+      <div className="content-x relative isolate pb-12 pt-24">
         {/* giant watermark — the real logo asset (light), faint, bottom-right,
             constrained to the container so it never clips. */}
         <Logo
@@ -55,7 +55,7 @@ export default function Footer() {
           alt=""
           priority={false}
           sizes="760px"
-          className="pointer-events-none absolute bottom-2 right-6 z-0 h-auto w-[720px] max-w-[80%] select-none opacity-[0.06] md:right-8 lg:right-10"
+          className="pointer-events-none absolute bottom-2 right-8 z-0 h-auto w-[720px] max-w-[80%] select-none opacity-[0.06] md:right-20"
         />
 
         {/* annotation */}
