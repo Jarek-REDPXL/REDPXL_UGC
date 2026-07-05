@@ -277,7 +277,8 @@ button:focus-visible,
   letter-spacing: 0.06em;
   line-height: 1.4;
   text-transform: uppercase;
-  color: var(--accent);
+  /* accent-dark (not accent) so the 12px index clears AA on the pill */
+  color: var(--accent-dark);
   font-variant-numeric: tabular-nums;
 }
 }

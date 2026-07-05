@@ -30,7 +30,7 @@ function MarqueePass({ hidden }: { hidden?: boolean }) {
           aria-hidden={hidden ? true : undefined}
           className="flex h-16 items-center"
         >
-          <span className="label text-[15px]! text-text-3 opacity-70 whitespace-nowrap mx-7">
+          <span className="label text-[15px]! text-text-2 whitespace-nowrap mx-7">
             {name}
           </span>
           {CHIPS[name] && (

@@ -38,8 +38,8 @@ export default function BatchDrop({ className = "" }: { className?: string }) {
   return (
     <div className={`w-full ${className}`} aria-hidden>
       <style>{`
-        @keyframes bd-pulse{0%,100%{opacity:.85}50%{opacity:1}}
-        .bd-tile{opacity:.85}
+        @keyframes bd-pulse{0%,100%{opacity:.92}50%{opacity:1}}
+        .bd-tile{opacity:.92}
         @media (prefers-reduced-motion: no-preference){
           .bd-tile{animation:bd-pulse 6s ease-in-out infinite}
         }
@@ -68,7 +68,7 @@ export default function BatchDrop({ className = "" }: { className?: string }) {
                 ) : (
                   <ImageIcon size={16} className="text-text-2" />
                 )}
-                <span className="font-mono text-[8px] uppercase leading-none tracking-wider text-text-3">
+                <span className="font-mono text-[8px] uppercase leading-none tracking-wider text-text-2">
                   {t.label}
                 </span>
               </div>

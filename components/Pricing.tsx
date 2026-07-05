@@ -66,7 +66,7 @@ export default function Pricing() {
       {/* (A) Trial card */}
       <div className="flex flex-col gap-6 rounded-card border border-accent bg-bg p-8 lg:flex-row lg:items-center lg:justify-between">
         <div>
-          <span className="mono-note inline-flex rounded-chip bg-accent-soft px-2 py-1 text-accent">
+          <span className="mono-note inline-flex rounded-chip bg-accent-soft px-2 py-1 text-accent-dark">
             TRIAL BATCH
           </span>
           <h3 className="title-1 mt-4">See the quality before you commit.</h3>
@@ -100,7 +100,7 @@ export default function Pricing() {
               }`}
             >
               {plan.featured && (
-                <span className="absolute right-6 top-8 rounded-chip bg-accent-soft px-2 py-1 mono-note text-accent">
+                <span className="absolute right-6 top-8 rounded-chip bg-accent-soft px-2 py-1 mono-note text-accent-dark">
                   Most popular
                 </span>
               )}
