@@ -63,7 +63,8 @@ export default function Canvas({
   idx: string;
   name: string;
   note?: string;
-  title: string;
+  /** omit to render an annotation-only canvas (caller supplies its own header) */
+  title?: string;
   /** phrase rendered in the canvas's deep companion tone (Clay two-tone) */
   titleDeep?: string;
   sub?: string;
@@ -85,7 +86,12 @@ export default function Canvas({
   const subColor = dark ? "text-white/65" : "";
 
   return (
-    <section id={id} aria-labelledby={labelId} className="canvas-wrap">
+    <section
+      id={id}
+      aria-labelledby={title ? labelId : undefined}
+      aria-label={title ? undefined : name}
+      className="canvas-wrap"
+    >
       <div className={`canvas canvas--${tint}`}>
         {tinted && <Grain />}
         <CanvasTicks dark={dark} />
@@ -108,14 +114,16 @@ export default function Canvas({
             )}
           </div>
 
-          {/* two-tone title */}
-          <h2
-            id={labelId}
-            className={`display-2 mt-5 ${titleColor} ${titleClassName}`}
-          >
-            {title}
-            {titleDeep && <span className="title-deep">{titleDeep}</span>}
-          </h2>
+          {/* two-tone title (omitted when the caller supplies its own header) */}
+          {title && (
+            <h2
+              id={labelId}
+              className={`display-2 mt-5 ${titleColor} ${titleClassName}`}
+            >
+              {title}
+              {titleDeep && <span className="title-deep">{titleDeep}</span>}
+            </h2>
+          )}
 
           {sub && <p className={`body-lg mt-3 ${subColor}`}>{sub}</p>}
 

@@ -1,4 +1,4 @@
-# REDPXL UGC — Design Specification v2.3
+# REDPXL UGC — Design Specification v2.4
 
 This document is the single source of truth for the REDPXL UGC landing page.
 Every colour, size, weight, spacing value and interaction on the page derives
@@ -454,12 +454,20 @@ The nav and footer both use the full REDPXL wordmark (with the red square).
 LogoStrip remains its own section below (unchanged).
 
 ### [01] THE PROBLEM — canvas `sand` (deep `--deep-sand`) — note `/ CREATIVE FATIGUE`
-Title two-tone: "Your winning ad is " + deep "already dying." Two-column
-layout: left, the statement `body-lg` max-w 560px — "On Meta and TikTok, a top
-creative fatigues in 7–14 days — and most brands ship 2–4 new ads a month,
-nowhere near the 15–20 it takes to keep CPMs down. The bottleneck was never
-budget. It's production. We remove it." Right, the **FatigueCurve** graphic
-(§14) — a decaying CTR curve annotated "DAY 7–14 · FATIGUE".
+Bento layout (ElevenLabs structure, desaturated). Annotation-only Canvas (no
+`title` prop); the section supplies its own header. **Header row** (2-col,
+baseline-aligned): left `display-2` two-tone "Your winning ad is " + deep-sand
+"already dying."; right `body-lg` max-w 46ch "The gap between how fast creative
+fatigues and how fast most brands can replace it is where media efficiency
+quietly disappears." **Bento row 1** (gap 16): left ~55% **DyingAdCard**, right
+~45% **VolumeGap** (§14), equal heights. **Bento row 2**: three white tiles
+(TrendingUp "Rising costs" / Factory "Production ceiling" / FlaskConical
+"Testing starvation"), hover lift + `--line-hover`. **Footer strip**: full-width
+white card — "The bottleneck is production. We remove it." + primary
+"See how it works →" (`#process`). All tiles white, 1px `--line`, radius 16px on
+the sand canvas. Responsive: row 1 stacks < lg, row 2 is 3-col at lg / 2-col at
+sm; < 768 single column (headline → paragraph → DyingAdCard → VolumeGap → tiles
+→ strip). Retired the standalone FatigueCurve (superseded by DyingAdCard).
 
 ### [02] THE WORK `#work` — canvas `white` full-bleed band — note `/ 10 NICHES · LOOPING`
 Title: "Made to stop the scroll." Sub: "See it, then judge it. Most people
@@ -729,7 +737,8 @@ SVG component (default export, `{ className?: string }`) in
 
 | Graphic            | Section        | Encodes                                   |
 |--------------------|----------------|-------------------------------------------|
-| `FatigueCurve`     | 01 The Problem | CTR decaying over days 7–14               |
+| `DyingAdCard`      | 01 The Problem | ad going stale: ACTIVE→FATIGUED, decay chart |
+| `VolumeGap`        | 01 The Problem | shipped vs needed ad volume per month     |
 | `VariationExploder`| 03 Why AI UGC  | one seed fanning into many variants       |
 | `FormatMorph`      | 03 Why AI UGC  | one frame morphing 9:16 → 1:1 → 4:5       |
 | `MathsBars`        | 04 The Maths   | creator vs REDPXL cost/volume bars        |
@@ -785,3 +794,5 @@ PhoneFrame reel — note reads `/ 10 NICHES · LOOPING`.
 *v2.2 — Mobile-perf pass: motion JS library removed entirely. Scroll reveals, the FAQ accordion (grid-rows), and the hero caption cycle are now pure CSS / tiny native islands; PosterCanvas is a server component (only the one cycling hero caption hydrates); CountUp uses a native IntersectionObserver; Lenis is desktop-only and dynamically imported so touch devices never load it. Film grain switched from ~29 SVG feTurbulence filters to one cached tiled raster (`public/noise.png`). Off-screen sections use `content-visibility: auto`. Net: motion library and most client hydration gone; real-world mobile is fast (FCP ~0.9s, SI ~0.9s, CLS 0). `lib/motion.ts` removed. A11y contrast: the `[NN]` index uses `--accent-dark` (AA at 12px on the pill) and the LogoStrip wordmarks use `--text-2` (dropped the 0.7 opacity).*
 
 *v2.3 — Hero redesign to "Centered Monument" (§9 [00]): open white, centered annotation/H1/sub/CTAs, then a full-bleed 5-phone editorial arc (center largest + highest, stepped down and edge-cropped outward, bottoms bleeding), staggered `phone-rise` load. New `EditorialPoster` (soft niche duotone + one blurred SVG texture per variant: leaf/smear/sphere/ripple/gel + 4% grain + two-chip hook/meta caption; center phone cycles via `CyclingChips`), wired through `VideoSlot`/`PhoneFrame` (suppresses the niche chip). Zero horizontal overflow 320→1920 (band clips; section `overflow-x: clip`). Everything else unchanged. (The output-log `BatchCaption` line and the nav `UGC` chip were later removed; nav uses the full REDPXL wordmark.)*
+
+*v2.4 — Alignment + Problem rebuild. Nav and the full-bleed Work heading use a new `.content-x` container (max-w 1472, 80/32px padding) so the nav logo, `[02] THE WORK`, and every section annotation share one left guide. Correct favicon via `app/icon.png` + `app/apple-icon.png` (from the ЯP. mark). Hero annotation is now a clean outlined pill. §9 [01] THE PROBLEM rebuilt as a bento (2-col header + `DyingAdCard` + `VolumeGap` + three cost tiles + footer strip); Canvas `title` made optional for caller-supplied headers; standalone `FatigueCurve` retired. Zero horizontal overflow 320→1920.*
