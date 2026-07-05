@@ -1,11 +1,10 @@
 import type { ComponentType, ReactNode } from "react";
 import Canvas from "@/components/ui/Canvas";
 import { StaggerGroup, RevealItem } from "@/components/Stagger";
-import CountUp from "@/components/ui/CountUp";
 import VariationExploder from "@/components/graphics/VariationExploder";
 import FormatMorphVideo from "@/components/graphics/FormatMorphVideo";
-import SpeedDelivery from "@/components/graphics/SpeedDelivery";
-import CostDrop from "@/components/graphics/CostDrop";
+import SpeedDial from "@/components/graphics/SpeedDial";
+import CostLadder from "@/components/graphics/CostLadder";
 import { Users, Zap, Clock, Layers, PoundSterling, Smartphone } from "lucide-react";
 
 /**
@@ -88,17 +87,14 @@ export default function Why() {
           </BentoCard>
         </RevealItem>
 
-        {/* Speed — stat + delivery-speed graphic */}
+        {/* Speed — delivery-speed dial + traditional-wait track */}
         <RevealItem className="md:col-span-3">
           <BentoCard icon={Clock} label="SPEED">
-            <div className="mt-4 flex items-baseline gap-2">
-              <span className="stat text-ink">
-                <CountUp value={72} />
-              </span>
-              <span className="mono-note">HOURS</span>
-            </div>
-            <p className="body-copy mt-2">Not two weeks.</p>
-            <SpeedDelivery className="mt-5" />
+            <h3 className="title-1 mt-4">Not two weeks</h3>
+            <p className="body-copy mt-2">
+              Every batch is briefed, produced and delivered inside three days.
+            </p>
+            <SpeedDial className="mt-5" />
           </BentoCard>
         </RevealItem>
 
@@ -114,7 +110,7 @@ export default function Why() {
           </BentoCard>
         </RevealItem>
 
-        {/* Cost — carries the CostDrop graphic (§14) */}
+        {/* Cost — the descending price ladder (§14) */}
         <RevealItem className="md:col-span-3">
           <BentoCard icon={PoundSterling} label="COST">
             <h3 className="title-1 mt-4">A fraction of the cost</h3>
@@ -122,7 +118,7 @@ export default function Why() {
               Creator video runs £150 to £500 a piece. Our plans work out from
               around £100 an ad.
             </p>
-            <CostDrop className="mt-5" />
+            <CostLadder className="mt-5" />
           </BentoCard>
         </RevealItem>
 
