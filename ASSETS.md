@@ -116,6 +116,8 @@ Primary CTA (WhatsApp) is in [lib/config.ts](lib/config.ts); the rest in
 | Constant | Current value | Action |
 |----------|---------------|--------|
 | `WHATSAPP_URL` (lib/config.ts) | wa.me to **+44 7525 832432** (`447525832432`) | confirm number + prefilled text |
+| `INSTAGRAM_URL` (lib/config.ts) | `instagram.com/redpxl` | confirm (footer social) |
+| `TIKTOK_URL` (lib/config.ts) | `tiktok.com/@redpxl1` | confirm (footer social) |
 | `email` | `hello@redpxl.uk` | confirm |
 | `supportEmail` | `support@redpxl.uk` | confirm |
 | `location` | `Canary Wharf, London` | confirm |
