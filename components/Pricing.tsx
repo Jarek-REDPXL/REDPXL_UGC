@@ -89,19 +89,21 @@ export default function Pricing() {
         {PLANS.map((plan) => (
           <RevealItem key={plan.name} className="h-full">
             <div
-              className={`relative flex h-full flex-col rounded-card border bg-bg p-8 ${
-                plan.featured
-                  ? "border-accent lg:-translate-y-2"
-                  : "border-line"
+              className={`flex h-full flex-col rounded-card border bg-bg p-8 ${
+                plan.featured ? "border-accent" : "border-line"
               }`}
             >
-              {plan.featured && (
-                <span className="absolute right-6 top-8 rounded-chip bg-accent-soft px-2 py-1 mono-note text-accent-dark">
-                  Most popular
-                </span>
-              )}
-
-              <p className="mono-note">{plan.name}</p>
+              {/* Fixed-height header row so the "Most popular" chip sits inline
+                  with the plan name (never adds height) — keeps the price /
+                  volume / feature rows on the same baseline across all 3 cards */}
+              <div className="flex h-7 items-center justify-between gap-2">
+                <p className="mono-note">{plan.name}</p>
+                {plan.featured && (
+                  <span className="rounded-chip bg-accent-soft px-2 py-0.5 mono-note text-accent-dark">
+                    Most popular
+                  </span>
+                )}
+              </div>
 
               <div className="mt-4 flex items-baseline gap-1">
                 <span className="stat">{plan.price}</span>
