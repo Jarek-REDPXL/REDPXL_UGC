@@ -1,134 +1,225 @@
+import { FileText, Sparkles, Target } from "lucide-react";
+import type { ComponentType } from "react";
+
 /**
- * DESIGN.md §13 / §14 — PipelineFlow graphic (Process canvas, mist).
+ * DESIGN.md §14 — PipelineFlow. The Process story as one continuous pipeline:
+ * BRIEF → PRODUCE → TEST with every sub-step on the rail and an iterate loop
+ * back from Test to Produce.
  *
- * A flat horizontal "marble-run": a single gentle S-curve (deep-mist, 1.5px)
- * threads three evenly-spaced nodes — BRIEF -> PRODUCE -> TEST — each a white
- * circle holding a lucide-style icon (document / sparkles / target), with a
- * mono-note label beneath. A 6px accent dot rides the path on an 8s loop
- * (CSS Motion Path).
+ * Three major nodes (white 64px circles, lucide icon, label below) sit on a
+ * 1.5px rail; ten small hollow sub-step nodes carry alternating above/below
+ * mono micro-labels connected by 1px ticks. A dashed --text-3 arc sweeps below
+ * from Test back to Produce ("ITERATE WINNERS ↺" in --accent). A single 6px
+ * --accent dot travels the rail left→right then follows the iterate arc, on a
+ * calm ~8s loop (CSS offset-path). Reduced-motion / no offset-path support park
+ * the dot at Test with a static arc.
  *
- * Pure-CSS server component — no JS, no hydration. Motion is gated by
- * `prefers-reduced-motion: no-preference`; the un-animated base parks the dot
- * at the first node, so reduced-motion users (and any browser without CSS
- * Motion Path) get the correct static render.
- *
- * Fixed 720x140 viewBox + preserveAspectRatio => zero layout shift; the SVG
- * fills its container width and scales down cleanly above the three cards.
+ * ≥md: horizontal. <md: a vertical pipeline (rail top→bottom, labels right,
+ * iterate arc a return curve on the left) so it never overflows. SVG strokes
+ * use non-scaling-stroke to stay crisp; aria-hidden (the 3 cards carry meaning).
  */
 
-const CY = 54;
-const NODES = [
-  { x: 120, label: "BRIEF", kind: 0 as const },
-  { x: 360, label: "PRODUCE", kind: 1 as const },
-  { x: 600, label: "TEST", kind: 2 as const },
+const ICONS: Record<string, ComponentType<{ className?: string }>> = {
+  brief: FileText,
+  produce: Sparkles,
+  test: Target,
+};
+
+type Point = { label: string; major?: "brief" | "produce" | "test" };
+
+const SEQ: Point[] = [
+  { label: "AUDIT ADS" },
+  { label: "STUDY WINNERS" },
+  { label: "BRIEF", major: "brief" },
+  { label: "DEFINE ANGLES" },
+  { label: "SCRIPT HOOKS" },
+  { label: "AI GENERATION" },
+  { label: "PRODUCE", major: "produce" },
+  { label: "EDIT & CAPTION" },
+  { label: "QA CHECK" },
+  { label: "LAUNCH BATCH" },
+  { label: "READ PERFORMANCE" },
+  { label: "REFRESH · FATIGUE" },
+  { label: "TEST", major: "test" },
 ];
 
-/** Single continuous S-path: node1 -> (dip) -> node2 -> (rise) -> node3. */
-const PATH = "M120 54 C195 72 285 72 360 54 C435 36 525 36 600 54";
+/* ---- horizontal geometry ---- */
+const HW = 1180;
+const HH = 360;
+const RAIL_Y = 168;
+const HX0 = 60;
+const HX1 = 1116;
+const hx = (i: number) => HX0 + (i * (HX1 - HX0)) / (SEQ.length - 1);
 
-function NodeIcon({ kind, cx, cy }: { kind: 0 | 1 | 2; cx: number; cy: number }) {
+function Horizontal() {
+  const produceX = hx(6);
+  const testX = hx(12);
+  let subN = -1;
+
+  // dot path: full rail, then the iterate arc back Test → Produce
+  const dotPath = `M${HX0} ${RAIL_Y} H${testX} C${testX} 300 ${produceX} 300 ${produceX} ${RAIL_Y}`;
+  const arcPath = `M${testX} ${RAIL_Y + 22} C${testX} 300 ${produceX} 300 ${produceX} ${RAIL_Y + 22}`;
+
   return (
-    <g
-      transform={`translate(${cx} ${cy}) scale(0.8) translate(-12 -12)`}
-      stroke="var(--ink)"
-      strokeWidth={1.9}
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      fill="none"
-    >
-      {kind === 0 && (
-        <>
-          {/* document (brief) */}
-          <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2Z" />
-          <path d="M14 2v6h6" />
-          <path d="M8 13h8" />
-          <path d="M8 17h8" />
-          <path d="M8 9h2" />
-        </>
-      )}
+    <div className="hidden md:block">
+      <svg viewBox={`0 0 ${HW} ${HH}`} preserveAspectRatio="xMidYMid meet" className="h-auto w-full">
+        <style>{`
+          .pf-dot{offset-path:path('${dotPath}');offset-distance:63%;offset-rotate:0deg}
+          @media (prefers-reduced-motion: no-preference){
+            @supports (offset-path: path('M0 0 L1 1')){
+              .pf-dot{animation:pf-run 8s linear infinite}
+            }
+          }
+          @keyframes pf-run{
+            0%{offset-distance:0%;opacity:0}
+            4%{opacity:1}
+            94%{opacity:1}
+            100%{offset-distance:100%;opacity:0}
+          }
+        `}</style>
 
-      {kind === 1 && (
-        <>
-          {/* sparkles (produce) */}
-          <path d="M12 4 L13.4 9.2 A2 2 0 0 0 14.8 10.6 L20 12 L14.8 13.4 A2 2 0 0 0 13.4 14.8 L12 20 L10.6 14.8 A2 2 0 0 0 9.2 13.4 L4 12 L9.2 10.6 A2 2 0 0 0 10.6 9.2 Z" />
-          <circle cx="18.4" cy="5.6" r="0.9" fill="var(--ink)" stroke="none" />
-          <circle cx="5.8" cy="17.8" r="0.7" fill="var(--ink)" stroke="none" />
-        </>
-      )}
+        {/* rail */}
+        <line x1={HX0} y1={RAIL_Y} x2={HX1} y2={RAIL_Y} stroke="var(--line)" strokeWidth="1.5" vectorEffect="non-scaling-stroke" />
 
-      {kind === 2 && (
-        <>
-          {/* target (test) */}
-          <circle cx="12" cy="12" r="9" />
-          <circle cx="12" cy="12" r="5.5" />
-          <circle cx="12" cy="12" r="2" fill="var(--ink)" stroke="none" />
-        </>
-      )}
-    </g>
+        {/* iterate arc + label */}
+        <path d={arcPath} fill="none" stroke="var(--text-3)" strokeWidth="1.5" strokeDasharray="5 4" vectorEffect="non-scaling-stroke" opacity="0.7" />
+        <foreignObject x={(produceX + testX) / 2 - 90} y={290} width="180" height="22">
+          <div className="flex h-full w-full items-center justify-center">
+            <span className="mono-note text-[10px]! text-accent-dark">ITERATE WINNERS ↺</span>
+          </div>
+        </foreignObject>
+
+        {/* sub-steps: ticks + alternating labels */}
+        {SEQ.map((p, i) => {
+          if (p.major) return null;
+          subN += 1;
+          const x = hx(i);
+          const above = subN % 2 === 0;
+          const labelY = above ? 96 : 214;
+          const tickY1 = above ? RAIL_Y - 6 : RAIL_Y + 6;
+          const tickY2 = above ? 122 : 200;
+          return (
+            <g key={p.label}>
+              <line x1={x} y1={tickY1} x2={x} y2={tickY2} stroke="var(--line)" strokeWidth="1" vectorEffect="non-scaling-stroke" />
+              <circle cx={x} cy={RAIL_Y} r="4" fill="var(--bg)" stroke="var(--line)" strokeWidth="1.25" vectorEffect="non-scaling-stroke" />
+              <foreignObject x={x - 80} y={labelY} width="160" height="16">
+                <div className="flex h-full w-full items-center justify-center">
+                  <span className="mono-note whitespace-nowrap text-[10px]! leading-none text-text-3">{p.label}</span>
+                </div>
+              </foreignObject>
+            </g>
+          );
+        })}
+
+        {/* major nodes + labels */}
+        {SEQ.map((p, i) => {
+          if (!p.major) return null;
+          const x = hx(i);
+          const Icon = ICONS[p.major];
+          return (
+            <g key={p.label}>
+              <circle cx={x} cy={RAIL_Y} r="30" fill="var(--bg)" stroke="var(--line)" strokeWidth="1.25" vectorEffect="non-scaling-stroke" style={{ filter: "drop-shadow(var(--shadow-node))" }} />
+              <foreignObject x={x - 22} y={RAIL_Y - 22} width="44" height="44">
+                <div className="grid h-full w-full place-items-center">
+                  <Icon className="h-[22px] w-[22px] text-ink" />
+                </div>
+              </foreignObject>
+              <foreignObject x={x - 70} y={RAIL_Y + 38} width="140" height="18">
+                <div className="flex h-full w-full items-center justify-center">
+                  <span className="mono-note text-[11px]! font-medium tracking-wide text-ink">{p.label}</span>
+                </div>
+              </foreignObject>
+            </g>
+          );
+        })}
+
+        {/* travelling accent dot */}
+        <circle className="pf-dot" r="5" fill="var(--accent)" />
+      </svg>
+    </div>
+  );
+}
+
+/* ---- vertical geometry (mobile) ---- */
+const VW = 340;
+const RAIL_X = 40;
+const VY0 = 34;
+const VSTEP = 58;
+const vy = (i: number) => VY0 + i * VSTEP;
+const VH = vy(SEQ.length - 1) + 34;
+
+function Vertical() {
+  const produceY = vy(6);
+  const testY = vy(12);
+  const dotPath = `M${RAIL_X} ${VY0} V${testY} C${RAIL_X - 26} ${testY} ${RAIL_X - 26} ${produceY} ${RAIL_X} ${produceY}`;
+  const arcPath = `M${RAIL_X - 22} ${testY} C${RAIL_X - 30} ${testY} ${RAIL_X - 30} ${produceY} ${RAIL_X - 22} ${produceY}`;
+
+  return (
+    <div className="md:hidden">
+      <svg viewBox={`0 0 ${VW} ${VH}`} preserveAspectRatio="xMidYMid meet" className="mx-auto h-auto w-full max-w-[340px]">
+        <style>{`
+          .pfv-dot{offset-path:path('${dotPath}');offset-distance:63%}
+          @media (prefers-reduced-motion: no-preference){
+            @supports (offset-path: path('M0 0 L1 1')){
+              .pfv-dot{animation:pfv-run 8s linear infinite}
+            }
+          }
+          @keyframes pfv-run{0%{offset-distance:0%;opacity:0}4%{opacity:1}94%{opacity:1}100%{offset-distance:100%;opacity:0}}
+        `}</style>
+
+        <line x1={RAIL_X} y1={VY0} x2={RAIL_X} y2={vy(SEQ.length - 1)} stroke="var(--line)" strokeWidth="1.5" vectorEffect="non-scaling-stroke" />
+
+        {/* iterate return arc on the left */}
+        <path d={arcPath} fill="none" stroke="var(--text-3)" strokeWidth="1.5" strokeDasharray="5 4" vectorEffect="non-scaling-stroke" opacity="0.7" />
+        <foreignObject x={0} y={(produceY + testY) / 2 - 14} width="34" height="30">
+          <div className="flex h-full w-full items-center justify-center text-center">
+            <span className="mono-note text-[8px]! leading-tight text-accent-dark">ITER ↺</span>
+          </div>
+        </foreignObject>
+
+        {SEQ.map((p, i) => {
+          const y = vy(i);
+          if (p.major) {
+            const Icon = ICONS[p.major];
+            return (
+              <g key={p.label}>
+                <circle cx={RAIL_X} cy={y} r="20" fill="var(--bg)" stroke="var(--line)" strokeWidth="1.25" vectorEffect="non-scaling-stroke" style={{ filter: "drop-shadow(var(--shadow-node))" }} />
+                <foreignObject x={RAIL_X - 14} y={y - 14} width="28" height="28">
+                  <div className="grid h-full w-full place-items-center">
+                    <Icon className="h-[16px] w-[16px] text-ink" />
+                  </div>
+                </foreignObject>
+                <foreignObject x={RAIL_X + 34} y={y - 12} width={VW - RAIL_X - 40} height="24">
+                  <div className="flex h-full items-center">
+                    <span className="mono-note text-[12px]! font-medium tracking-wide text-ink">{p.label}</span>
+                  </div>
+                </foreignObject>
+              </g>
+            );
+          }
+          return (
+            <g key={p.label}>
+              <circle cx={RAIL_X} cy={y} r="4" fill="var(--bg)" stroke="var(--line)" strokeWidth="1.25" vectorEffect="non-scaling-stroke" />
+              <foreignObject x={RAIL_X + 22} y={y - 9} width={VW - RAIL_X - 28} height="18">
+                <div className="flex h-full items-center">
+                  <span className="mono-note text-[10px]! leading-none text-text-3">{p.label}</span>
+                </div>
+              </foreignObject>
+            </g>
+          );
+        })}
+
+        <circle className="pfv-dot" r="5" fill="var(--accent)" />
+      </svg>
+    </div>
   );
 }
 
 export default function PipelineFlow({ className = "" }: { className?: string }) {
   return (
-    <div aria-hidden className={`relative w-full ${className}`}>
-      <style>{`
-        .pf-dot{
-          offset-path:path("${PATH}");
-          offset-rotate:0deg;
-          offset-distance:0%;
-        }
-        @media (prefers-reduced-motion: no-preference){
-          .pf-dot{animation:pf-ride 8s linear infinite}
-        }
-        @keyframes pf-ride{from{offset-distance:0%}to{offset-distance:100%}}
-      `}</style>
-
-      <svg
-        viewBox="0 0 720 140"
-        preserveAspectRatio="xMidYMid meet"
-        className="h-auto w-full"
-        fill="none"
-      >
-        {/* connecting S-path (marble-run track) */}
-        <path
-          d={PATH}
-          stroke="var(--deep-mist)"
-          strokeWidth={1.5}
-          strokeLinecap="round"
-        />
-
-        {/* nodes — white circles with hairline border + icon, drawn over the path */}
-        {NODES.map((n) => (
-          <g key={n.label}>
-            <circle
-              cx={n.x}
-              cy={CY}
-              r={22}
-              fill="var(--bg)"
-              stroke="var(--line)"
-              strokeWidth={1}
-            />
-            <NodeIcon kind={n.kind} cx={n.x} cy={CY} />
-          </g>
-        ))}
-
-        {/* travelling accent dot (halo + core) — rides the path via CSS Motion Path */}
-        <g className="pf-dot">
-          <circle r={6} fill="var(--accent)" opacity={0.16} />
-          <circle r={3} fill="var(--accent)" />
-        </g>
-      </svg>
-
-      {/* mono-note labels — crisp overlaid HTML, positioned under each node */}
-      {NODES.map((n) => (
-        <span
-          key={n.label}
-          className="mono-note absolute -translate-x-1/2 whitespace-nowrap"
-          style={{ left: `${(n.x / 720) * 100}%`, top: "60%" }}
-        >
-          {n.label}
-        </span>
-      ))}
+    <div className={className} aria-hidden>
+      <Horizontal />
+      <Vertical />
     </div>
   );
 }

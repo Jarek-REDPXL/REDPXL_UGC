@@ -41,6 +41,7 @@
   /* §5 Elevation — only three shadows exist on the page */
   --shadow-frame: 0 1px 2px rgb(0 0 0 / 0.04), 0 12px 32px rgb(0 0 0 / 0.06);
   --shadow-phone: 0 8px 28px rgb(0 0 0 / 0.1);
+  --shadow-node: 0 4px 10px rgb(23 24 26 / 0.08); /* soft SVG node lift (PipelineFlow) */
 
   /* §5 Radius */
   --radius-btn: 8px;
