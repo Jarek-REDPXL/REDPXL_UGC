@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { Plus } from "lucide-react";
-import Section from "@/components/ui/Section";
+import Canvas from "@/components/ui/Canvas";
 import { accordionTransition, fastTransition } from "@/lib/motion";
 
 /**
@@ -43,11 +43,12 @@ export default function Faq() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   return (
-    <Section
+    <Canvas
       id="faq"
-      idx="08"
+      idx="11"
       name="FAQ"
       note="06 QUESTIONS"
+      tint="white-border"
       title="The honest answers."
     >
       <div className="border-t border-line">
@@ -88,6 +89,6 @@ export default function Faq() {
           );
         })}
       </div>
-    </Section>
+    </Canvas>
   );
 }

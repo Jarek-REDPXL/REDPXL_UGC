@@ -1,0 +1,40 @@
+import Canvas from "@/components/ui/Canvas";
+import Button from "@/components/ui/Button";
+import Reveal from "@/components/Reveal";
+import { site } from "@/lib/site";
+
+/**
+ * DESIGN.md §9 [10] THE GUARANTEE — the risk-reversal hammer.
+ * A compact dark ink mini-canvas placed right after pricing: short centered
+ * copy plus one invert CTA. Reads smaller than the full sections by design.
+ */
+export default function Guarantee() {
+  return (
+    <Canvas
+      id="guarantee"
+      idx="10"
+      name="THE GUARANTEE"
+      note="ZERO RISK"
+      tint="ink"
+      title="If you wouldn't run them, you don't pay."
+      contentClassName="text-center"
+    >
+      <Reveal className="mx-auto max-w-[640px] text-center">
+        {/* TODO:REAL-DATA trial terms */}
+        <p className="body-lg text-white/70">
+          Start with a £750 trial batch of 8 ads. If the quality isn&apos;t
+          there, the batch is on us — and if you continue, the £750 comes off
+          month one.
+        </p>
+        <Button
+          href={site.bookingUrl}
+          external
+          variant="invert"
+          className="mt-6"
+        >
+          Start a trial batch
+        </Button>
+      </Reveal>
+    </Canvas>
+  );
+}

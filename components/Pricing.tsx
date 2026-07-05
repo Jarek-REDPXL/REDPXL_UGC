@@ -1,11 +1,11 @@
 import { Check } from "lucide-react";
-import Section from "@/components/ui/Section";
+import Canvas from "@/components/ui/Canvas";
 import { StaggerGroup, RevealItem } from "@/components/Stagger";
 import Button from "@/components/ui/Button";
 import { site } from "@/lib/site";
 
 /**
- * DESIGN.md §8.9 pricing card + §9 [07] PRICING.
+ * DESIGN.md §8.9 pricing card + §9 [09] PRICING.
  * Full-width trial card, three plan cards (Growth featured), quiet mono-notes.
  */
 type Plan = {
@@ -54,12 +54,14 @@ const PLANS: Plan[] = [
 
 export default function Pricing() {
   return (
-    <Section
+    <Canvas
       id="pricing"
-      idx="07"
+      idx="09"
       name="PRICING"
       note="EXCL. VAT · NO CONTRACTS"
-      title="Start with a trial. Scale with a plan."
+      tint="blush"
+      title="Start with a trial. "
+      titleDeep="Scale with a plan."
     >
       {/* (A) Trial card */}
       <div className="flex flex-col gap-6 rounded-card border border-accent bg-bg p-8 lg:flex-row lg:items-center lg:justify-between">
@@ -154,6 +156,6 @@ export default function Pricing() {
         </p>
         <p className="mono-note text-center">All prices excluding VAT</p>
       </div>
-    </Section>
+    </Canvas>
   );
 }

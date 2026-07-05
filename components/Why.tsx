@@ -1,7 +1,9 @@
 import type { ComponentType, ReactNode } from "react";
-import Section from "@/components/ui/Section";
+import Canvas from "@/components/ui/Canvas";
 import { StaggerGroup, RevealItem } from "@/components/Stagger";
 import CountUp from "@/components/ui/CountUp";
+import VariationExploder from "@/components/graphics/VariationExploder";
+import FormatMorph from "@/components/graphics/FormatMorph";
 import { Users, Zap, Clock, Layers, PoundSterling, Smartphone } from "lucide-react";
 
 /**
@@ -31,16 +33,20 @@ function BentoCard({
   );
 }
 
-/** §9 [03] WHY AI UGC — 12-col bento (§4.5), two wide cards + four thirds. */
+/**
+ * §9/§13 [03] WHY AI UGC — white-border Section Canvas holding the 12-col bento
+ * (§4.5). Two tiles carry bespoke §14 graphics: Volume → VariationExploder,
+ * Native → FormatMorph. White canvas stays single-tone ink (no titleDeep).
+ */
 export default function Why() {
   return (
-    <Section
+    <Canvas
       id="why"
       idx="03"
       name="WHY AI UGC"
       note="06 REASONS"
+      tint="white-border"
       title="Everything creators do. None of what slows you down."
-      dividerTop
     >
       <StaggerGroup className="grid grid-cols-1 gap-4 md:grid-cols-12">
         {/* Wide A — Generation */}
@@ -93,7 +99,7 @@ export default function Why() {
           </BentoCard>
         </RevealItem>
 
-        {/* Volume */}
+        {/* Volume — carries the VariationExploder graphic (§14) */}
         <RevealItem className="md:col-span-3">
           <BentoCard icon={Layers} label="VOLUME">
             <h3 className="title-1 mt-4">The volume you need</h3>
@@ -101,6 +107,7 @@ export default function Why() {
               Most brands ship 2–4 ads a month. Winning on paid social takes
               15–20. We produce at that pace.
             </p>
+            <VariationExploder className="w-full mt-4" />
           </BentoCard>
         </RevealItem>
 
@@ -115,7 +122,7 @@ export default function Why() {
           </BentoCard>
         </RevealItem>
 
-        {/* Native */}
+        {/* Native — carries the FormatMorph graphic (§14) */}
         <RevealItem className="md:col-span-3">
           <BentoCard icon={Smartphone} label="NATIVE">
             <h3 className="title-1 mt-4">Native, not glossy</h3>
@@ -123,9 +130,10 @@ export default function Why() {
               UGC-style creative built to convert on paid social — not studio
               gloss that gets scrolled past.
             </p>
+            <FormatMorph className="mx-auto mt-3" />
           </BentoCard>
         </RevealItem>
       </StaggerGroup>
-    </Section>
+    </Canvas>
   );
 }

@@ -85,9 +85,15 @@ export default function Hero() {
 
         {/* Right column — hero frame */}
         <div
-          className="w-full hero-rise-slow"
+          className="relative w-full hero-rise-slow"
           style={{ animationDelay: "0.41s" }}
         >
+          {/* warmth wash so the cluster sits on light, not void (§00) */}
+          <div
+            aria-hidden
+            className="hero-blob pointer-events-none absolute -inset-6 -z-10 rounded-[48px]"
+          />
+
           <div className="relative rounded-frame border border-line bg-bg p-6 shadow-[var(--shadow-frame)]">
             {CORNERS.map((c) => (
               <CornerTick key={c} className={c} />

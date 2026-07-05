@@ -1,8 +1,8 @@
-import Section from "@/components/ui/Section";
+import Canvas from "@/components/ui/Canvas";
+import PipelineFlow from "@/components/graphics/PipelineFlow";
 import { StaggerGroup, RevealItem } from "@/components/Stagger";
-import { ArrowRight } from "lucide-react";
 
-/** §9 [03] PROCESS — 3 equal cols (§4.5), ghost numerals, on --bg-subtle band. */
+/** §9 [05] PROCESS — mist canvas, PipelineFlow over 3 equal cols (§4.5), ghost numerals. */
 const STEPS = [
   {
     num: "01",
@@ -23,17 +23,20 @@ const STEPS = [
 
 export default function Process() {
   return (
-    <Section
+    <Canvas
       id="process"
-      idx="04"
+      idx="05"
       name="PROCESS"
       note="BRIEF → LIVE IN 72H"
-      title="Three steps. Zero friction."
-      band
+      tint="mist"
+      title="Three steps. "
+      titleDeep="Zero friction."
     >
-      <StaggerGroup className="relative grid grid-cols-1 gap-5 md:grid-cols-3">
-        {STEPS.map((step, i) => (
-          <RevealItem key={step.num} className="relative">
+      <PipelineFlow className="w-full mb-10" />
+
+      <StaggerGroup className="grid grid-cols-1 gap-5 md:grid-cols-3">
+        {STEPS.map((step) => (
+          <RevealItem key={step.num}>
             <div className="relative h-full overflow-hidden rounded-card border border-line bg-bg p-7">
               <span
                 className="stat absolute right-5 top-4 select-none text-accent"
@@ -47,17 +50,9 @@ export default function Process() {
                 <p className="body-copy mt-2">{step.body}</p>
               </div>
             </div>
-
-            {i < STEPS.length - 1 && (
-              <span className="absolute -right-[10px] top-1/2 z-10 hidden -translate-y-1/2 md:block">
-                <span className="grid h-5 w-5 place-items-center rounded-full border border-line bg-bg">
-                  <ArrowRight className="h-3 w-3 text-text-3" />
-                </span>
-              </span>
-            )}
           </RevealItem>
         ))}
       </StaggerGroup>
-    </Section>
+    </Canvas>
   );
 }

@@ -1,5 +1,5 @@
 import { Check, X, Minus } from "lucide-react";
-import Section from "@/components/ui/Section";
+import Canvas from "@/components/ui/Canvas";
 import Reveal from "@/components/Reveal";
 
 /**
@@ -82,12 +82,12 @@ const MOBILE_ORDER = [2, 0, 1] as const;
 
 export default function Comparison() {
   return (
-    <Section
-      idx="06"
+    <Canvas
+      idx="08"
       name="THE DIFFERENCE"
       note="OLD WAY VS REDPXL"
+      tint="white-border"
       title="The old way vs the Redpxl way."
-      dividerTop
     >
       {/* TODO:REAL-DATA figures */}
 
@@ -174,6 +174,6 @@ export default function Comparison() {
           );
         })}
       </div>
-    </Section>
+    </Canvas>
   );
 }

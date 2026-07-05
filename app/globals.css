@@ -70,6 +70,27 @@
   --poster-supplements-2: #d2ded6;
   --poster-default-1: #e9eaee;
   --poster-default-2: #dcdde3;
+  --poster-pet-1: #e7ebe4;
+  --poster-pet-2: #d8dfd3;
+  --poster-home-1: #efeae2;
+  --poster-home-2: #e0d8cb;
+
+  /* ==== v2.0 §2 Canvas tints (muted, warm — never candy) ==== */
+  --canvas-sand: #f5f1ea;
+  --canvas-sage: #edf1ec;
+  --canvas-blush: #f6efed;
+  --canvas-mist: #eef0f4;
+  --canvas-cream: #faf7f1;
+
+  /* deep companion tones for two-tone headlines */
+  --deep-sand: #8a7a5f;
+  --deep-sage: #5f7561;
+  --deep-blush: #96625c;
+  --deep-mist: #5c6880;
+
+  /* v2.0 §5 canvas radii */
+  --radius-canvas: 32px;
+  --radius-canvas-mobile: 24px;
 }
 
 @theme inline {
@@ -92,6 +113,17 @@
   --color-pos: var(--pos);
   --color-neg: var(--neg);
   --color-neutral: var(--neutral);
+
+  /* v2.0 canvas tints + deep tones */
+  --color-canvas-sand: var(--canvas-sand);
+  --color-canvas-sage: var(--canvas-sage);
+  --color-canvas-blush: var(--canvas-blush);
+  --color-canvas-mist: var(--canvas-mist);
+  --color-canvas-cream: var(--canvas-cream);
+  --color-deep-sand: var(--deep-sand);
+  --color-deep-sage: var(--deep-sage);
+  --color-deep-blush: var(--deep-blush);
+  --color-deep-mist: var(--deep-mist);
 
   --radius-btn: var(--radius-btn);
   --radius-card: var(--radius-card);
@@ -280,6 +312,98 @@ button:focus-visible,
 }
 
 /* ============================================================
+   v2.0 §13 Section Canvas system (Clay stacked-card rhythm)
+   ============================================================ */
+.canvas-wrap {
+  width: 100%;
+  max-width: 1472px; /* 1440 canvas + 2×16 margin */
+  margin-inline: auto;
+  padding-inline: 16px;
+}
+.canvas-wrap + .canvas-wrap {
+  margin-top: 16px;
+}
+.canvas {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius-canvas);
+  padding: 64px;
+  --deep: var(--ink);
+}
+@media (max-width: 767px) {
+  .canvas-wrap {
+    padding-inline: 8px;
+  }
+  .canvas {
+    border-radius: var(--radius-canvas-mobile);
+    padding: 24px;
+  }
+}
+
+.canvas--white {
+  background: var(--bg);
+}
+.canvas--white-border {
+  background: var(--bg);
+  border: 1px solid var(--line);
+}
+.canvas--sand {
+  background: var(--canvas-sand);
+  --deep: var(--deep-sand);
+}
+.canvas--sage {
+  background: var(--canvas-sage);
+  --deep: var(--deep-sage);
+}
+.canvas--blush {
+  background: var(--canvas-blush);
+  --deep: var(--deep-blush);
+}
+.canvas--mist {
+  background: var(--canvas-mist);
+  --deep: var(--deep-mist);
+}
+.canvas--cream {
+  background: var(--canvas-cream);
+  --deep: var(--deep-sand);
+}
+.canvas--ink {
+  background: var(--ink);
+  color: #fff;
+  --deep: #fff;
+}
+
+/* two-tone headline phrase — inherits the canvas's deep tone */
+.title-deep {
+  color: var(--deep);
+}
+
+/* annotation index pill (hybrid of our system + Clay eyebrow pill) */
+.anno-pill {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 6px;
+  border: 1px solid var(--line);
+  background: rgb(255 255 255 / 0.6);
+  padding: 2px 7px;
+}
+.canvas--ink .anno-pill {
+  border-color: rgb(255 255 255 / 0.18);
+  background: rgb(255 255 255 / 0.08);
+}
+
+/* stat chip (Clay-style, on logo strip + graphics) */
+.stat-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: var(--bg);
+  padding: 4px 10px;
+}
+
+/* ============================================================
    §8.1 Buttons
    ============================================================ */
 .btn {
@@ -356,6 +480,34 @@ button:focus-visible,
 }
 .marquee-viewport:hover .marquee-track {
   animation-play-state: paused;
+}
+
+/* v2.0 §15 — The Work infinite reel (moves left → right, seamless, 55s) */
+@keyframes reel-rtl {
+  from {
+    transform: translateX(-50%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+.reel-track {
+  display: flex;
+  width: max-content;
+  animation: reel-rtl 55s linear infinite;
+  will-change: transform;
+}
+.reel-viewport:hover .reel-track {
+  animation-play-state: paused;
+}
+
+/* v2.0 §13 — hero warmth blob behind the phone cluster */
+.hero-blob {
+  background: radial-gradient(
+    60% 60% at 50% 45%,
+    color-mix(in srgb, var(--canvas-cream) 60%, transparent),
+    transparent 70%
+  );
 }
 .mask-fade-x {
   -webkit-mask-image: linear-gradient(

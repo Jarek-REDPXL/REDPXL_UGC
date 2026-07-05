@@ -1,4 +1,4 @@
-import Section from "@/components/ui/Section";
+import Canvas from "@/components/ui/Canvas";
 import { StaggerGroup, RevealItem } from "@/components/Stagger";
 import Reveal from "@/components/Reveal";
 import CountUp from "@/components/ui/CountUp";
@@ -39,6 +39,15 @@ const STATS: { parts: Part[]; desc: string }[] = [
   },
 ];
 
+// §9 [07] — each stat card gets a 3px top border in a different deep tone,
+// tying the section back to the v2.0 clay canvas palette. Colours resolve from
+// CSS vars (no hardcoded hex), applied via arbitrary border-colour utilities.
+const STAT_DEEP_BORDER = [
+  "border-t-[color:var(--deep-sand)]",
+  "border-t-[color:var(--deep-sage)]",
+  "border-t-[color:var(--deep-mist)]",
+];
+
 const QUOTES = [
   {
     quote:
@@ -58,18 +67,19 @@ const QUOTES = [
 
 export default function Results() {
   return (
-    <Section
-      idx="05"
+    <Canvas
+      idx="07"
       name="RESULTS"
       note="PLACEHOLDER DATA"
+      tint="white-border"
       title="Built for performance, measured in revenue."
     >
       {/* Stat cards (§8.12) */}
       <StaggerGroup className="grid grid-cols-1 gap-4 sm:grid-cols-3">
-        {STATS.map((s) => (
+        {STATS.map((s, i) => (
           <RevealItem
             key={s.desc}
-            className="rounded-card border border-line bg-bg p-7"
+            className={`rounded-card border border-line bg-bg p-7 border-t-[3px] ${STAT_DEEP_BORDER[i]}`}
           >
             {/* TODO:REAL-DATA */}
             <div>
@@ -111,6 +121,6 @@ export default function Results() {
           </Reveal>
         ))}
       </div>
-    </Section>
+    </Canvas>
   );
 }

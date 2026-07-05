@@ -1,4 +1,4 @@
-# REDPXL UGC — Design Specification v1.2
+# REDPXL UGC — Design Specification v2.0
 
 This document is the single source of truth for the REDPXL UGC landing page.
 Every colour, size, weight, spacing value and interaction on the page derives
@@ -79,6 +79,40 @@ mapped into the Tailwind theme. No raw hex anywhere in components.
 Per viewport, approximately: 88% white/neutral surfaces, 8% ink (text, one
 button), 3% subtle tints, **≤1% red**. If red exceeds ~1% of a screen, remove
 an instance.
+
+### 2.5 Canvas tints & deep tones (v2.0 — Clay-desaturated)
+
+v2.0 wraps each section in a rounded canvas (§13). Most canvases stay white;
+a handful carry a muted, warm wash — never candy, never saturated. Each tinted
+canvas also declares a **deep companion tone** used for the second phrase of a
+two-tone headline (and nowhere else).
+
+| Token           | Hex       | Usage                                                |
+|-----------------|-----------|------------------------------------------------------|
+| `--canvas-sand` | `#F5F1EA` | The Problem canvas wash                              |
+| `--canvas-sage` | `#EDF1EC` | The Maths canvas wash                               |
+| `--canvas-blush`| `#F6EFED` | Pricing canvas wash                                 |
+| `--canvas-mist` | `#EEF0F4` | Process canvas wash                                 |
+| `--canvas-cream`| `#FAF7F1` | What You Get canvas wash (deep tone borrows sand)   |
+| `--deep-sand`   | `#8A7A5F` | Two-tone headline phrase on sand / cream            |
+| `--deep-sage`   | `#5F7561` | Two-tone headline phrase on sage                    |
+| `--deep-blush`  | `#96625C` | Two-tone headline phrase on blush                   |
+| `--deep-mist`   | `#5C6880` | Two-tone headline phrase on mist                    |
+
+Deep tones are exposed as `text-deep-{sand,sage,blush,mist}` and, on a canvas,
+as the local `--deep` custom property (`.title-deep` reads it). White and
+`white-border` canvases keep `--deep` = `--ink`, so their headlines stay
+single-tone ink.
+
+> Red is unchanged and stays reserved for **indexes, icons and the CTA** only.
+> The canvas washes are backgrounds — never text, never borders, never a
+> headline tone. Adding a tint never adds red.
+
+### 2.6 Poster niches (v2.0 additions)
+
+Two niches join the PosterCanvas duotone set (§12): **pet** and **home**.
+Their stops live in `globals.css` as `--poster-pet-1/2` and `--poster-home-1/2`,
+keeping the reel's ten frames on ten distinct subjects.
 
 ---
 
@@ -180,9 +214,24 @@ Base unit 4px. Allowed steps only: 4, 8, 12, 16, 20, 24, 32, 40, 48, 64, 80,
 | Phone frames           | 28px   | none (bezel)     | `0 8px 28px rgb(0 0 0 / .10)`                 |
 | Chips                  | 6px    | 1px `--line`     | none                                          |
 | Inputs (if any)        | 8px    | 1px `--line`     | focus: 1px `--accent` + 3px `--accent-soft` ring |
+| Section canvas (§13)   | 32px / 24px mobile | tint fill; `white-border`/`ink` variants add 1px `--line` | none — canvases sit flat, structure from radius + tint |
 
 Only three shadows exist on the whole page: hero frame, phone frames, sticky
 nav's border-appearance. Nothing else elevates.
+
+### 5.1 Canvas geometry (v2.0)
+
+The section-canvas shell (§13) has its own fixed geometry, tokenised as
+`--radius-canvas` / `--radius-canvas-mobile`:
+
+- **Radius:** 32px desktop, 24px mobile (`--radius-canvas` / `--radius-canvas-mobile`).
+- **Viewport margin:** 16px each side (`.canvas-wrap` padding-inline; 8px on
+  the smallest screens) — the canvas never touches the viewport edge.
+- **Stacked gap:** 16px between consecutive canvases (`.canvas-wrap + .canvas-wrap`),
+  giving the page its stacked-card rhythm.
+- **Inner padding:** 64px desktop, 28px mobile.
+
+Canvases carry no box-shadow — the three-shadow budget above is untouched.
 
 ---
 
@@ -199,7 +248,10 @@ Layout: flex row, space-between, baseline aligned, `mono-note` style,
 border-bottom NONE (whitespace only), margin-bottom 20px.
 
 Left: `[NN] SECTION NAME` — the `[NN]` in `--accent` (`mono-idx`), name in
-`--text-3`, 12px gap between.
+`--text-3`, 12px gap between. In v2.0 the `[NN]` index now sits inside a small
+pill (`.anno-pill`): radius 6px, 1px `--line`, `white/60` fill on tinted
+canvases (`white/8` + `white/18` border on the ink canvas). The index colour
+stays `--accent` everywhere.
 Right: a true fact counterpart in `--text-3`, e.g. `/ HOLD ↔ DRAG`,
 `/ 08 FORMATS`, `/ BRIEF → LIVE IN 72H`, `/ PLACEHOLDER DATA` (Results, until
 real numbers exist), `/ NO CONTRACTS`, `/ 06 QUESTIONS`.
@@ -350,56 +402,65 @@ PENDING` until real. Honest by design.
 
 ---
 
-## 9. Section-by-section blueprint (final)
+## 9. Section-by-section blueprint (final — v2.0 order)
+
+v2.0 renumbers the page 00–12 and wraps each section in a Section Canvas (§13).
+Every canvas opens with the annotation row (index pill — name — rule — note)
+and, on tinted canvases, a two-tone headline (deep phrase in the canvas deep
+tone). Tint assignments and graphics are noted per section. NAV persists above
+the stack; the footer folds into 12 START.
 
 ### [NAV]
 Per §8.2. Anchors: Work `#work`, Why AI UGC `#why`, Process `#process`,
 Pricing `#pricing`, FAQ `#faq`. CTA href: `https://calendly.com/meeting-redpxl`
-(target _blank).
+(target _blank). Sits above the canvas stack, outside the 16px viewport margin.
 
-### [00] HERO — lg+: 2-col (7/5), <lg: stacked
-Left col: annotation `[00] AI UGC VIDEO ADS — DONE FOR YOU` (left part only);
-H1 `display-1`: **"UGC ads engineered to convert."**; sub `body-lg` max-w
-560px: "Hyper-realistic AI-generated video and static ads for your brand.
-Scripted with proven direct-response hooks, delivered in 72 hours, ready for
-TikTok, Meta and YouTube."; CTA row (16px gap): Primary "Book a free strategy
-call" + Secondary "See the work →" (`#work`).
-Right col: hero frame per §5 (16px radius) with 24px inner padding on
-`--bg` — contains the 3-phone cluster (§8.4). Below frame, caption
-`mono-note`: `OUTPUT / BATCH 014 — SKINCARE · 9:16 · 72H`.
-Mobile: text → CTAs stacked full-width → frame (2 phones only, no rotation).
+### [00] HERO — canvas `white` (open, no border) — lg+: 2-col (7/5), <lg: stacked
+Left col: annotation `[00] AI UGC VIDEO ADS — DONE FOR YOU`; H1 `display-1`:
+**"UGC ads engineered to convert."** (white canvas → single-tone `--ink`, no
+deep phrase); sub `body-lg` max-w 560px: "Hyper-realistic AI-generated video
+and static ads for your brand. Scripted with proven direct-response hooks,
+delivered in 72 hours, ready for TikTok, Meta and YouTube."; CTA row (16px
+gap): Primary "Book a free strategy call" + Secondary "See the work →"
+(`#work`).
+Right col: hero frame per §5 (16px radius) with 24px inner padding on `--bg`,
+sitting over the `.hero-blob` warmth wash — contains the 3-phone cluster
+(§8.4). Below frame, caption `mono-note`: `OUTPUT / BATCH 014 — SKINCARE ·
+9:16 · 72H`.
+**+ Logos:** a `mono-note` line "Trusted by brands across e-commerce, apps and
+FMCG" + the logo marquee (§8.11) render inside the hero canvas as connective
+tissue — no separate section, no annotation.
+Mobile: text → CTAs stacked full-width → frame (2 phones only, no rotation) →
+logos.
 
-### [—] LOGO STRIP
-No annotation (it's connective tissue, not a section). 13px `--text-3` line:
-"Trusted by brands across e-commerce, apps and FMCG", 24px, marquee §8.11.
-py-48px only.
+### [01] THE PROBLEM — canvas `sand` (deep `--deep-sand`) — note `/ CREATIVE FATIGUE`
+Title two-tone: "Your winning ad is " + deep "already dying." Two-column
+layout: left, the statement `body-lg` max-w 560px — "On Meta and TikTok, a top
+creative fatigues in 7–14 days — and most brands ship 2–4 new ads a month,
+nowhere near the 15–20 it takes to keep CPMs down. The bottleneck was never
+budget. It's production. We remove it." Right, the **FatigueCurve** graphic
+(§14) — a decaying CTR curve annotated "DAY 7–14 · FATIGUE".
 
-### [01] THE PROBLEM — note `/ CREATIVE FATIGUE`
-Title: "Your winning ad is already dying." Single-paragraph statement, no
-cards, standard Section shell. Body `body-lg` max-w 720px: "On Meta and
-TikTok, a top creative fatigues in 7–14 days — and most brands ship 2–4 new
-ads a month, nowhere near the 15–20 it takes to keep CPMs down. The bottleneck
-was never budget. It's production. We remove it."
-
-### [02] THE WORK `#work` — note `/ HOLD ↔ DRAG`
+### [02] THE WORK `#work` — canvas `white` full-bleed band — note `/ 10 NICHES · LOOPING`
 Title: "Made to stop the scroll." Sub: "See it, then judge it. Most people
 can't tell it's AI — and on paid social, native beats polished." Full-bleed
-scroll-snap reel: 8 PhoneFrames, gap 20px, chips: SKINCARE · TIKTOK,
-SUPPLEMENTS · META, FASHION · TIKTOK, MOBILE APP · META, BEAUTY · TIKTOK,
-FITNESS · REELS, FOOD & BEV · TIKTOK, SAAS · YOUTUBE. Progress hairline per
-§7.6. Edge fade masks 48px.
+white band holding the **infinite marquee reel** (§15): 10 PhoneFrames, chips
+across ten niches (SKINCARE · TIKTOK, SUPPLEMENTS · META, FASHION · TIKTOK,
+MOBILE APP · META, BEAUTY · TIKTOK, FITNESS · REELS, FOOD & BEV · TIKTOK,
+SAAS · YOUTUBE, PET · TIKTOK, HOME · META). Duplicated track, seamless loop,
+pause on hover, edge-fade masks 48px.
 
-### [03] WHY AI UGC `#why` — note `/ 06 REASONS`
-Title: "Everything creators do. None of what slows you down." Bento per §4.5:
+### [03] WHY AI UGC `#why` — canvas `white-border` — note `/ 06 REASONS`
+Title: "Everything creators do. None of what slows you down." Bento per §4.5,
+with two cards carrying inline graphics:
 - Wide A "Hyper-realistic creators" — micro-label `GENERATION` — "AI-generated
   people indistinguishable from filmed UGC. No casting calls, no shipping
-  products, no chasing creators for reshoots." Icon: `Users`.
-- Wide B "Hooks that convert" — micro-label `SCRIPTING` — "Every script is
-  built from a library of 50+ proven direct-response hook frameworks — not
-  guesswork." Contains inline mock: bordered mini-frame (radius 8px, bg
-  `--bg-subtle`) with 3 stacked `mono-note` hook lines: "POV: YOU'VE BEEN
-  DOING IT WRONG", "STOP SCROLLING IF YOU…", "3 REASONS YOUR ADS FLOP".
-  Icon: `Zap`.
+  products, no chasing creators for reshoots." Icon: `Users`. Holds the
+  **VariationExploder** graphic (§14) — one seed fanning into many variants.
+- Wide B "Every native format" — micro-label `FORMATS` — "One brief, every
+  aspect ratio: 9:16, 1:1, 4:5 — cut for TikTok, Reels, Meta and YouTube."
+  Icon: `Zap`. Holds the **FormatMorph** graphic (§14) — a frame morphing
+  9:16 → 1:1 → 4:5.
 - "72h turnaround" — stat variant, numeral 72, unit `HOURS` — "Fresh statics
   and videos in three days — not the two weeks a creator shoot takes." Icon
   `Clock`. Micro-label `SPEED`.
@@ -411,28 +472,47 @@ Title: "Everything creators do. None of what slows you down." Bento per §4.5:
 - "Native, not glossy" — "UGC-style creative built to convert on paid social —
   not studio gloss that gets scrolled past." Icon `Smartphone`. Micro-label
   `NATIVE`.
-Formats moved out of Why (now shown in Pricing) — sizes are 9:16 · 1:1 · 4:5.
 
-### [04] PROCESS `#process` — note `/ BRIEF → LIVE IN 72H` — on `--bg-subtle`
-Title: "Three steps. Zero friction." 3 white cards (§4.5), each: ghost
-numeral 01/02/03 (`stat` size, `--accent` at 12% opacity, absolute top-right),
-`title-1` + `body`:
+### [04] THE MATHS — canvas `sage` (deep `--deep-sage`) — NEW — note `/ THE MATHS`
+Title two-tone: "Ten times the creative. " + deep "A fraction of the spend."
+The unit-economics section: a short `body-lg` frames the comparison — "One
+creator video runs £150–500. On a plan, our ads work out from around £100 —
+and you get the volume paid social actually needs." Beside/below it the
+**MathsBars** graphic (§14) contrasts creator-shoot cost/volume against REDPXL
+cost/volume in flat bars (deep-sage + ink + white). Optional floating stat
+chips ("~£100 / AD", "15–20 ADS / MO").
+
+### [05] PROCESS `#process` — canvas `mist` (deep `--deep-mist`) — note `/ BRIEF → LIVE IN 72H`
+Title two-tone: "Three steps. " + deep "Zero friction." The **PipelineFlow**
+graphic (§14) runs the three stages as a connected flow (Brief → Produce →
+Test), 3 white cards beneath/alongside, each: ghost numeral 01/02/03 (`stat`
+size, `--accent` at low opacity), `title-1` + `body`:
 01 **Brief** — "Send us your product, brand, and current ads. We study what's
 working and where you're leaving performance on the table."
 02 **Produce** — "We generate platform-ready statics and videos — fresh hooks,
 new angles, native formats — built to your brand."
 03 **Test** — "A clean, labeled, ready-to-run batch in 72 hours. Rotate them,
 find your winners, and we refresh before they fatigue."
-Desktop: 16px `ArrowRight` `--text-3` centered between cards.
 
-### [05] RESULTS — note `/ PLACEHOLDER DATA`
-Title: "Built for performance, measured in revenue." 3 stat cards (§8.12):
-`212%` AVG ROAS UPLIFT / `−38%` COST PER ACQUISITION / `10×` CREATIVE OUTPUT.
-Then 2 quote cards (§8.10) with obviously-placeholder names ("Founder,
-DTC skincare brand"). ALL `{/* TODO:REAL-DATA */}`. Note stays
-`/ PLACEHOLDER DATA` until real; then becomes `/ LAST 90 DAYS`.
+### [06] WHAT YOU GET — canvas `cream` (deep `--deep-sand`) — NEW — note `/ 01 BRIEF IN · 01 BATCH OUT`
+Title two-tone: "One brief in. " + deep "A ready-to-run batch out." A
+deliverables checklist (lucide `Check` 14px `--pos` + `body`): "Mix of image +
+video ads — you choose the split", "All sizes: 9:16 · 1:1 · 4:5", "Native cuts
+for TikTok, Reels, Meta & YouTube", "Clean, labelled, ready-to-run files",
+"1 revision per ad", "Full paid usage rights — yours forever". Beside it the
+**BatchDrop** graphic (§14) — a single brief resolving into a stacked, labelled
+batch of deliverables.
 
-### [06] THE DIFFERENCE — note `/ OLD WAY VS REDPXL`
+### [07] RESULTS — canvas `white-border` — note `/ PLACEHOLDER DATA`
+Title: "Built for performance, measured in revenue." 3 stat cards (§8.12), each
+with a **deep-tone top border** (rotating through the deep tones to tie the
+section to the canvas palette): `212%` AVG ROAS UPLIFT / `−38%` COST PER
+ACQUISITION / `10×` CREATIVE OUTPUT. Then 2 quote cards (§8.10) with
+obviously-placeholder names ("Founder, DTC skincare brand"). ALL
+`{/* TODO:REAL-DATA */}`. Note stays `/ PLACEHOLDER DATA` until real; then
+becomes `/ LAST 90 DAYS`.
+
+### [08] THE DIFFERENCE — canvas `white-border` — note `/ OLD WAY VS REDPXL`
 Title: "The old way vs the Redpxl way." Table §8.7. Rows:
 | Row              | Creators            | DIY AI tools        | REDPXL UGC              |
 | Cost per video   | £150–£400           | Your time           | From £100/ad on plans   |
@@ -442,8 +522,9 @@ Title: "The old way vs the Redpxl way." Table §8.7. Rows:
 | Hook strategy    | Creator's instinct  | None                | 50+ tested frameworks   |
 | Revisions        | Renegotiated        | Start over          | Included                |
 
-### [07] PRICING `#pricing` — note `/ EXCL. VAT · NO CONTRACTS`
-Title: "Start with a trial. Scale with a plan." Trial-first funnel:
+### [09] PRICING `#pricing` — canvas `blush` (deep `--deep-blush`) — note `/ EXCL. VAT · NO CONTRACTS`
+Title two-tone: "Start with a trial. " + deep "Scale with a plan." Trial-first
+funnel:
 
 (A) Full-width TRIAL card (§8.9 styling, accent border): chip `TRIAL BATCH`
 (`mono-note`, `--accent`, bg `--accent-soft`); `title-1` "See the quality
@@ -468,7 +549,15 @@ rights". Plan CTA "Book a call" (secondary; primary on Growth).
 Pay 12 months −15%" · "All prices excluding VAT". (The rush line is the only
 place 48h still appears.)
 
-### [08] FAQ `#faq` — note `/ 06 QUESTIONS`
+### [10] THE GUARANTEE — canvas `ink` mini-canvas — NEW — note `/ RISK REVERSAL`
+A short, dark mini-canvas (ink tint → white text, `--deep` = white, grain
+allowed). Title `display-2` white, two-tone reads single-tone on ink:
+**"If you wouldn't run them, you don't pay."** Sub `body-lg` white/65: "We
+build to a standard you'd actually put spend behind. If the first batch isn't
+something you'd run, you don't pay for it — no arguments." One CTA row
+(Inverted "Start a trial batch"). No cards — typography + grain only.
+
+### [11] FAQ `#faq` — canvas `white-border` — note `/ 06 QUESTIONS`
 Title: "The honest answers." Items (write answers confident, 2–3 sentences,
 first-person plural):
 1. Does AI-made creative actually convert?
@@ -478,20 +567,17 @@ first-person plural):
 5. What if I don't like them? (risk reversal)
 6. What's the difference between the trial and a plan?
 
-### [09] START — dark band
-Full-width `--ink` bg, py-112px, container inside. Annotation `[09] START`
-(index `--accent`, name `rgb(255 255 255 / .5)`), right note `/ 15 MIN CALL`.
-Title `display-2` white: "Stop running tired ads." Sub `body-lg`
-`rgb(255 255 255 / .65)`: "Get your first batch this week and give your paid
-social the creative volume it's been missing." CTAs: Inverted "Book a free
-strategy call" + ghost link `hello@redpxl.uk` (white/70, hover white). No
-other decoration — flat ink, typography only.
-
-### [FOOTER]
-White, 1px `--line` top. Row 1: wordmark + red square; right: anchor links
-`label` `--text-2`. Row 2 (`mono-note` `--text-3`): "A REDPXL COMPANY —
-CANARY WHARF, LONDON" · `SUPPORT@REDPXL.UK` · "© 2026 REDPXL LIMITED" ·
-Terms · Privacy (# placeholders). py-48px.
+### [12] START — canvas `ink` + grain, footer row inside — note `/ 15 MIN CALL`
+Full ink canvas (grain on). Annotation `[12] START` (index `--accent`, name
+`white/50`), right note `/ 15 MIN CALL`. Title `display-2` white: "Stop
+running tired ads." Sub `body-lg` white/65: "Get your first batch this week and
+give your paid social the creative volume it's been missing." CTAs: Inverted
+"Book a free strategy call" + ghost link `hello@redpxl.uk` (white/70, hover
+white).
+**Footer row** (inside the same ink canvas, divided by a `white/15` hairline):
+wordmark + red square left; anchor links `label` white/70 right; then a
+`mono-note` white/40 line: "A REDPXL COMPANY — CANARY WHARF, LONDON" ·
+`SUPPORT@REDPXL.UK` · "© 2026 REDPXL LIMITED" · Terms · Privacy (# placeholders).
 
 ---
 
@@ -551,8 +637,120 @@ ticks on the hero frame, nav active-section dot, reel momentum, and the
 Reduced motion: counters, the hero caption cycler, the batch-number tick, the
 marquee, and the load sequence all degrade to their static end state.
 
+---
+
+## 13. Section Canvas system (v2.0 signature)
+
+v2.0 rebuilds the page as a **stack of rounded canvases**. Every section is a
+full-width rounded card (`components/ui/Canvas.tsx`) rather than a flat band.
+The stacked-card rhythm — clay-desaturated washes separated by 16px gaps on a
+white page — is the v2.0 signature, carrying the production-index annotation
+system (§6) inside each card.
+
+### 13.1 Architecture
+
+- **Shell:** `Canvas` renders `.canvas-wrap` (16px viewport margin, 16px
+  stacked gap) → `.canvas.canvas--{tint}` (radius 32/24px, padding 64/28px,
+  `overflow: hidden`). Geometry is tokenised (§5.1); no per-section overrides.
+- **Contents, in order:** the annotation row (`[NN]` pill — name — hairline
+  rule — `/ note`), the two-tone `display-2` title, an optional `body-lg` sub,
+  then `children` 48px (`mt-12`) below.
+- **Props:** `{ id?, idx, name, note?, title, titleDeep?, sub?, tint?,
+  contentClassName?, float?, titleClassName?, children }`.
+
+### 13.2 Tint assignments
+
+| # | Section        | Tint            | Deep tone      |
+|---|----------------|-----------------|----------------|
+| 00| Hero           | `white` (open)  | — (ink)        |
+| 01| The Problem    | `sand`          | `--deep-sand`  |
+| 02| The Work       | `white` (full-bleed band) | — (ink) |
+| 03| Why AI UGC     | `white-border`  | — (ink)        |
+| 04| The Maths      | `sage`          | `--deep-sage`  |
+| 05| Process        | `mist`          | `--deep-mist`  |
+| 06| What You Get   | `cream`         | `--deep-sand`  |
+| 07| Results        | `white-border`  | — (ink)        |
+| 08| The Difference | `white-border`  | — (ink)        |
+| 09| Pricing        | `blush`         | `--deep-blush` |
+| 10| The Guarantee  | `ink`           | white          |
+| 11| FAQ            | `white-border`  | — (ink)        |
+| 12| Start          | `ink`           | white          |
+
+### 13.3 Two-tone headline rule
+
+The title splits into a lead phrase (`title`) + a coloured phrase
+(`titleDeep`, rendered `.title-deep` → the canvas's local `--deep`). The deep
+phrase only appears on **tinted** canvases (sand/sage/blush/mist/cream); on
+`white` and `white-border` canvases `--deep` resolves to `--ink`, so headlines
+stay single-tone ink. Ink canvases render white text throughout.
+
+### 13.4 Surface craft
+
+- **3% grain** on every tinted canvas (and the ink canvases) via `Grain` — a
+  reused SVG turbulence layer; white/`white-border` canvases stay clean.
+- **2–3 corner ticks** — small `+` marks scattered in the corners
+  (`CanvasTicks`), `text-text-3/70` on light, `white/20` on ink.
+- **Optional floating primitive** — the `float` prop drops a small
+  absolutely-positioned element (a stat chip, a graphic) into the canvas
+  behind the content (`z-0`), positioned by the caller.
+
+---
+
+## 14. Graphics system (v2.0)
+
+v2.0 replaces stock imagery with **six bespoke diagram-objects**, each a flat
+SVG component (default export, `{ className?: string }`) in
+`components/graphics/`:
+
+| Graphic            | Section        | Encodes                                   |
+|--------------------|----------------|-------------------------------------------|
+| `FatigueCurve`     | 01 The Problem | CTR decaying over days 7–14               |
+| `VariationExploder`| 03 Why AI UGC  | one seed fanning into many variants       |
+| `FormatMorph`      | 03 Why AI UGC  | one frame morphing 9:16 → 1:1 → 4:5       |
+| `MathsBars`        | 04 The Maths   | creator vs REDPXL cost/volume bars        |
+| `PipelineFlow`     | 05 Process     | Brief → Produce → Test as a flow          |
+| `BatchDrop`        | 06 What You Get| one brief resolving into a labelled batch |
+
+Rules for all six:
+
+- **Flat, bespoke SVG** — no raster images, no Lottie, no external assets.
+- **1.5px strokes**, palette limited to the canvas **deep tones + `--ink` +
+  white** (plus red only where it's an index/icon). No gradients beyond the
+  quiet canvas wash behind them.
+- **Fixed `viewBox`** and intrinsic sizing so they never cause layout shift;
+  they scale with their container via `className`.
+- **Subtle 6–10s loops** — slow, transform/opacity-only ambient motion.
+- **`aria-hidden`** — decorative; all information they encode is stated in the
+  adjacent copy.
+- **Reduced motion:** `prefers-reduced-motion: reduce` freezes each to a
+  static, legible end state.
+
+---
+
+## 15. Marquee reel (v2.0 — The Work)
+
+02 The Work is now a **full-bleed white band** carrying an infinite
+PhoneFrame reel — note reads `/ 10 NICHES · LOOPING`.
+
+- **10 PhoneFrames**, one per niche (skincare, supplements, fashion, app,
+  beauty, fitness, food & bev, saas, pet, home), each a `PosterCanvas` behind
+  its chip.
+- **Duplicated track** (`.reel-track`, the ten frames rendered twice) animated
+  `translateX(-50%) → 0` (`@keyframes reel-rtl`), **55s linear infinite** — a
+  seamless loop with no visible seam or jump.
+- **Pause on hover** (`.reel-viewport:hover`).
+- **Alternating 12px vertical offset** — even/odd frames nudge up/down 12px for
+  a hand-stacked rhythm.
+- **Transform-only, 60fps** — `will-change: transform`, no layout/paint churn.
+- **Reduced motion:** the animation is disabled and the track renders static
+  (first row visible, overflow hidden).
+
+---
+
 *End of specification. v1.0 — changes require a version bump and changelog line here.*
 
 *v1.1 — 72h standard delivery (48h now a rush add-on); image+video mix; formats 9:16·1:1·4:5; new THE PROBLEM section (sections renumbered); trial-first pricing funnel with real prices; copy overhaul.*
 
 *v1.2 — Ultra polish pass: PosterCanvas placeholder system (§12); count-up stats; hero life (cycling caption, corner ticks, batch tick); motion/craft details (tabular figures, text-wrap, annotation rule-fill, nav active dot, reel momentum, comparison row hover, 6px bezels); 32px SVG favicon + og.png.*
+
+*v2.0 — Clay-desaturated section-canvas architecture; bespoke SVG graphics system; infinite marquee reel; 3 new sections (The Maths, What You Get, The Guarantee); sections renumbered 00–12.*

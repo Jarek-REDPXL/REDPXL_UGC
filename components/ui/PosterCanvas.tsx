@@ -20,6 +20,8 @@ type Niche =
   | "food"
   | "supplements"
   | "app"
+  | "pet"
+  | "home"
   | "default";
 
 function nicheFromChip(chip: string): Niche {
@@ -30,6 +32,8 @@ function nicheFromChip(chip: string): Niche {
   if (subject.includes("beauty")) return "beauty";
   if (subject.includes("food")) return "food";
   if (subject.includes("supplement")) return "supplements";
+  if (subject.includes("pet")) return "pet";
+  if (subject.includes("home")) return "home";
   if (subject.includes("app") || subject.includes("saas")) return "app";
   return "default";
 }
@@ -42,6 +46,8 @@ const CAPTIONS: Record<Niche, [string, string]> = {
   food: ["the 10-minute version", "save this for later"],
   supplements: ["I stopped feeling tired", "what moved the needle"],
   app: ["I automated the boring part", "watch how fast this is"],
+  pet: ["my dog is obsessed", "the one thing that worked"],
+  home: ["this changed my space", "before vs after"],
   default: ["POV: you found the one", "wait for the results"],
 };
 
