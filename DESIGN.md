@@ -450,8 +450,7 @@ cropped; 768–1023 three (outer pair dropped); <768 three (center ~200px, inner
 pair cropped at edges) — still a monument. Zero page-level horizontal scroll at
 every width (band `overflow: hidden`; section `overflow-x: clip`).
 
-The nav wordmark here uses the "REDPXL" mark with the trailing red square cropped
-off, followed by a small bordered `UGC` chip (§8.2); the footer keeps the square.
+The nav and footer both use the full REDPXL wordmark (with the red square).
 LogoStrip remains its own section below (unchanged).
 
 ### [01] THE PROBLEM — canvas `sand` (deep `--deep-sand`) — note `/ CREATIVE FATIGUE`
@@ -785,4 +784,4 @@ PhoneFrame reel — note reads `/ 10 NICHES · LOOPING`.
 
 *v2.2 — Mobile-perf pass: motion JS library removed entirely. Scroll reveals, the FAQ accordion (grid-rows), and the hero caption cycle are now pure CSS / tiny native islands; PosterCanvas is a server component (only the one cycling hero caption hydrates); CountUp uses a native IntersectionObserver; Lenis is desktop-only and dynamically imported so touch devices never load it. Film grain switched from ~29 SVG feTurbulence filters to one cached tiled raster (`public/noise.png`). Off-screen sections use `content-visibility: auto`. Net: motion library and most client hydration gone; real-world mobile is fast (FCP ~0.9s, SI ~0.9s, CLS 0). `lib/motion.ts` removed. A11y contrast: the `[NN]` index uses `--accent-dark` (AA at 12px on the pill) and the LogoStrip wordmarks use `--text-2` (dropped the 0.7 opacity).*
 
-*v2.3 — Hero redesign to "Centered Monument" (§9 [00]): open white, centered annotation/H1/sub/CTAs, then a full-bleed 5-phone editorial arc (center largest + highest, stepped down and edge-cropped outward, bottoms bleeding), staggered `phone-rise` load. New `EditorialPoster` (soft niche duotone + one blurred SVG texture per variant: leaf/smear/sphere/ripple/gel + 4% grain + two-chip hook/meta caption; center phone cycles via `CyclingChips`), wired through `VideoSlot`/`PhoneFrame` (suppresses the niche chip). Nav wordmark = REDPXL with the red square cropped + a bordered `UGC` chip; footer keeps the square. Zero horizontal overflow 320→1920 (band clips; section `overflow-x: clip`). Everything else unchanged. (The output-log `BatchCaption` line was later removed from the hero.)*
+*v2.3 — Hero redesign to "Centered Monument" (§9 [00]): open white, centered annotation/H1/sub/CTAs, then a full-bleed 5-phone editorial arc (center largest + highest, stepped down and edge-cropped outward, bottoms bleeding), staggered `phone-rise` load. New `EditorialPoster` (soft niche duotone + one blurred SVG texture per variant: leaf/smear/sphere/ripple/gel + 4% grain + two-chip hook/meta caption; center phone cycles via `CyclingChips`), wired through `VideoSlot`/`PhoneFrame` (suppresses the niche chip). Zero horizontal overflow 320→1920 (band clips; section `overflow-x: clip`). Everything else unchanged. (The output-log `BatchCaption` line and the nav `UGC` chip were later removed; nav uses the full REDPXL wordmark.)*

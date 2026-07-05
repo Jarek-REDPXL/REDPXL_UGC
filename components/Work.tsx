@@ -29,7 +29,7 @@ export default function Work() {
       aria-labelledby="work-title"
       className="section-y [content-visibility:auto] [contain-intrinsic-size:auto_720px]"
     >
-      <div className="container-x">
+      <div className="content-x">
         <Reveal>
           {/* §6.1 annotation row — [02] pill matches the canvas pill style */}
           <div className="flex items-baseline gap-4">

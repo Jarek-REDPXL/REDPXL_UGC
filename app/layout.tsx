@@ -58,14 +58,8 @@ export const metadata: Metadata = {
     images: ["/og.png"],
   },
   robots: { index: true, follow: true },
-  icons: {
-    icon: [
-      { url: "/icon.svg", type: "image/svg+xml" },
-      { url: "/favicon.webp", type: "image/webp" },
-    ],
-    shortcut: [{ url: "/icon.svg", type: "image/svg+xml" }],
-    apple: [{ url: "/favicon.webp", type: "image/webp" }],
-  },
+  // favicon + apple-touch icon are provided by app/icon.png and
+  // app/apple-icon.png (Next file convention), generated from favicon.webp.
 };
 
 export default function RootLayout({

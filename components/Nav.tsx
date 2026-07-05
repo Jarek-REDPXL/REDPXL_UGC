@@ -60,10 +60,10 @@ export default function Nav() {
           : "border-b border-transparent bg-transparent"
       }`}
     >
-      <nav className="container-x grid h-16 grid-cols-[auto_1fr_auto] items-center">
+      <nav className="content-x grid h-16 grid-cols-[auto_1fr_auto] items-center">
         {/* Left: wordmark */}
-        <a href="#top" aria-label="REDPXL UGC home" className="flex items-center">
-          <Logo variant="ugc" />
+        <a href="#top" aria-label="REDPXL home" className="flex items-center">
+          <Logo className="h-[22px] w-auto" />
         </a>
 
         {/* Center: anchors (lg+) */}
@@ -119,7 +119,7 @@ export default function Nav() {
       {/* Mobile dropdown */}
       {open && (
         <div className="border-t border-line bg-white lg:hidden">
-          <ul className="container-x flex flex-col py-1">
+          <ul className="content-x flex flex-col py-1">
             {navLinks.map((link) => (
               <li
                 key={link.href}
@@ -135,7 +135,7 @@ export default function Nav() {
               </li>
             ))}
           </ul>
-          <div className="container-x flex flex-col gap-3 pb-5 pt-3">
+          <div className="content-x flex flex-col gap-3 pb-5 pt-3">
             <a
               href={`mailto:${site.email}`}
               className="mono-note text-text-3"

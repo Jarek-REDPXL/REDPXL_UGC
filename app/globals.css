@@ -292,6 +292,21 @@ button:focus-visible,
   margin-inline: auto;
   padding-inline: 24px;
 }
+/* content-aligned container — lines a block up with the CONTENT column inside a
+   canvas card (canvas-wrap 16px + card 64px = 80px inset; 8px + 24px = 32px on
+   mobile). Used by the nav and the full-bleed Work heading so their text shares
+   the same left/right guide as every section title. No content-visibility. */
+.content-x {
+  width: 100%;
+  max-width: 1472px;
+  margin-inline: auto;
+  padding-inline: 80px;
+}
+@media (max-width: 767px) {
+  .content-x {
+    padding-inline: 32px;
+  }
+}
 @media (min-width: 768px) {
   .container-x {
     padding-inline: 32px;
