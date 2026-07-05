@@ -1,15 +1,15 @@
-"use client";
-
-import { useEffect, useState } from "react";
-import { AnimatePresence, motion, useReducedMotion } from "motion/react";
-import { baseTransition } from "@/lib/motion";
+import CyclingCaption from "./CyclingCaption";
 
 /**
  * DESIGN.md §12 — PosterCanvas.
  * A designed placeholder for a src-less VideoSlot: a quiet per-niche duotone,
  * a UGC caption/progress overlay, and a faint film-grain layer. Makes the reel
  * and hero read as a wall of real, varied content rather than empty boxes.
- * All poster hexes are CSS vars in globals.css (§11 — components stay hex-free).
+ *
+ * Pure server component (no hydration): the ~24 posters across the reel + hero
+ * render as static markup. Only when `cycleHooks` is passed (the single hero
+ * middle phone) does a tiny CyclingCaption client island mount for the cycling
+ * top line. All poster hexes are CSS vars in globals.css (§11 — hex-free).
  */
 
 type Niche =
@@ -58,6 +58,9 @@ function hash(s: string): number {
   return h;
 }
 
+const capClass =
+  "mono-note rounded-[4px] bg-black/35 px-1.5 py-0.5 text-[10px]! leading-tight";
+
 export default function PosterCanvas({
   chip,
   cycleHooks,
@@ -66,33 +69,13 @@ export default function PosterCanvas({
   /** if provided (hero middle phone), the top caption crossfades through these */
   cycleHooks?: string[];
 }) {
-  const reduced = useReducedMotion();
   const niche = nicheFromChip(chip);
   const [line1, line2] = CAPTIONS[niche];
   const progress = 30 + (hash(chip) % 41);
-
-  const [idx, setIdx] = useState(0);
-  const [paused, setPaused] = useState(false);
-  const cycling = !!cycleHooks && cycleHooks.length > 1 && !reduced;
-
-  useEffect(() => {
-    if (!cycling || paused) return;
-    const id = setInterval(
-      () => setIdx((i) => (i + 1) % cycleHooks!.length),
-      3500
-    );
-    return () => clearInterval(id);
-  }, [cycling, paused, cycleHooks]);
-
-  const topLine = cycleHooks ? cycleHooks[idx] : line1;
+  const cycling = !!cycleHooks && cycleHooks.length > 1;
 
   return (
-    <div
-      className="absolute inset-0 overflow-hidden"
-      onMouseEnter={() => setPaused(true)}
-      onMouseLeave={() => setPaused(false)}
-      aria-hidden
-    >
+    <div className="absolute inset-0 overflow-hidden" aria-hidden>
       {/* per-niche duotone */}
       <div
         className="absolute inset-0"
@@ -101,45 +84,20 @@ export default function PosterCanvas({
         }}
       />
 
-      {/* film grain */}
-      <svg className="pointer-events-none absolute inset-0 h-full w-full opacity-[0.04] mix-blend-overlay">
-        <filter id="poster-grain">
-          <feTurbulence
-            type="fractalNoise"
-            baseFrequency="0.9"
-            numOctaves="2"
-            stitchTiles="stitch"
-          />
-        </filter>
-        <rect width="100%" height="100%" filter="url(#poster-grain)" />
-      </svg>
+      {/* film grain — cheap cached tiled raster (see globals .grain-tex) */}
+      <div className="grain-tex absolute inset-0 opacity-[0.05]" />
 
       {/* UGC caption overlay */}
       <div className="absolute inset-x-0 bottom-0 flex flex-col gap-1 p-3">
         <div className="flex">
           {cycling ? (
-            <AnimatePresence mode="wait">
-              <motion.span
-                key={idx}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={baseTransition}
-                className="mono-note rounded-[4px] bg-black/35 px-1.5 py-0.5 text-[10px]! leading-tight text-white"
-              >
-                {topLine}
-              </motion.span>
-            </AnimatePresence>
+            <CyclingCaption hooks={cycleHooks!} className={`${capClass} text-white`} />
           ) : (
-            <span className="mono-note rounded-[4px] bg-black/35 px-1.5 py-0.5 text-[10px]! leading-tight text-white">
-              {topLine}
-            </span>
+            <span className={`${capClass} text-white`}>{line1}</span>
           )}
         </div>
         <div className="flex">
-          <span className="mono-note rounded-[4px] bg-black/35 px-1.5 py-0.5 text-[10px]! leading-tight text-white/90">
-            {line2}
-          </span>
+          <span className={`${capClass} text-white/90`}>{line2}</span>
         </div>
 
         {/* progress bar */}

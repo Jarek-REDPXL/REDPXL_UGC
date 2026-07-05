@@ -1,10 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { motion, AnimatePresence } from "motion/react";
 import { Plus } from "lucide-react";
 import Canvas from "@/components/ui/Canvas";
-import { accordionTransition, fastTransition } from "@/lib/motion";
 
 /**
  * DESIGN.md §9 [07] FAQ + §8.8 accordion.
@@ -63,28 +61,25 @@ export default function Faq() {
                 className="flex w-full items-center justify-between gap-6 py-6 text-left"
               >
                 <span className="title-1">{item.q}</span>
-                <motion.span
-                  animate={{ rotate: isOpen ? 45 : 0 }}
-                  transition={fastTransition}
-                  className={isOpen ? "text-accent" : "text-text-3"}
+                <span
+                  className={`shrink-0 transition-[transform,color] duration-[180ms] ease-[var(--ease-out)] ${
+                    isOpen ? "rotate-45 text-accent" : "text-text-3"
+                  }`}
                 >
                   <Plus className="h-[18px] w-[18px]" />
-                </motion.span>
+                </span>
               </button>
 
-              <AnimatePresence initial={false}>
-                {isOpen && (
-                  <motion.div
-                    initial={{ height: 0, opacity: 0 }}
-                    animate={{ height: "auto", opacity: 1 }}
-                    exit={{ height: 0, opacity: 0 }}
-                    transition={accordionTransition}
-                    className="overflow-hidden"
-                  >
-                    <p className="body-copy max-w-[640px] pb-6">{item.a}</p>
-                  </motion.div>
-                )}
-              </AnimatePresence>
+              {/* pure-CSS accordion: grid-rows 0fr → 1fr animates height, no JS */}
+              <div
+                className={`grid transition-[grid-template-rows,opacity] duration-[300ms] ease-[var(--ease-out)] ${
+                  isOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
+                }`}
+              >
+                <div className="overflow-hidden">
+                  <p className="body-copy max-w-[640px] pb-6">{item.a}</p>
+                </div>
+              </div>
             </div>
           );
         })}

@@ -1,8 +1,4 @@
-"use client";
-
-import { motion, useReducedMotion } from "motion/react";
 import type { ReactNode } from "react";
-import { reveal, viewportOnce } from "@/lib/motion";
 
 type RevealProps = {
   children: ReactNode;
@@ -11,31 +7,15 @@ type RevealProps = {
 };
 
 /**
- * DESIGN.md §7.1 — fade + 8px rise, dur-base, whileInView once.
- * Under prefers-reduced-motion the content renders visible immediately.
+ * DESIGN.md §7.1 — fade + 8px rise as the element scrolls into view, once.
+ * Pure-CSS server component: the `.reveal` class (globals.css) drives a
+ * scroll-driven animation where supported, and shows content immediately under
+ * reduced motion or on browsers without scroll-timeline. No JS, no hydration.
  */
 export default function Reveal({
   children,
-  className,
-  as = "div",
+  className = "",
+  as: Tag = "div",
 }: RevealProps) {
-  const reduced = useReducedMotion();
-  const MotionTag = motion[as];
-
-  if (reduced) {
-    const Tag = as;
-    return <Tag className={className}>{children}</Tag>;
-  }
-
-  return (
-    <MotionTag
-      className={className}
-      variants={reveal}
-      initial="hidden"
-      whileInView="show"
-      viewport={viewportOnce}
-    >
-      {children}
-    </MotionTag>
-  );
+  return <Tag className={`reveal ${className}`.trim()}>{children}</Tag>;
 }

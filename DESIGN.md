@@ -1,4 +1,4 @@
-# REDPXL UGC — Design Specification v2.1
+# REDPXL UGC — Design Specification v2.2
 
 This document is the single source of truth for the REDPXL UGC landing page.
 Every colour, size, weight, spacing value and interaction on the page derives
@@ -761,3 +761,5 @@ PhoneFrame reel — note reads `/ 10 NICHES · LOOPING`.
 *v2.0 — Clay-desaturated section-canvas architecture; bespoke SVG graphics system; infinite marquee reel; 3 new sections (The Maths, What You Get, The Guarantee); sections renumbered 00–12.*
 
 *v2.1 — Graphics converted to pure-CSS server components (no client hydration) for mobile perf. Contrast + cascade fix: type scale moved to `@layer components` so colour utilities override on the dark canvas; `--text-3` darkened to `#6B6E75` for AA legibility on tints. Copy humanised across all sections (no em/en dashes, ellipses or fancy punctuation; plain professional voice). Responsive: hero cluster stacks below xl and clips decorative bleed; canvas annotation note hides below 380px. Responsive audit tooling (Playwright, 8 widths, automated overflow check) + ASSETS.md drop-in map + dev-only placeholder badges.*
+
+*v2.2 — Mobile-perf pass: motion JS library removed entirely. Scroll reveals, the FAQ accordion (grid-rows), and the hero caption cycle are now pure CSS / tiny native islands; PosterCanvas is a server component (only the one cycling hero caption hydrates); CountUp uses a native IntersectionObserver; Lenis is desktop-only and dynamically imported so touch devices never load it. Film grain switched from ~29 SVG feTurbulence filters to one cached tiled raster (`public/noise.png`). Off-screen sections use `content-visibility: auto`. Net: motion library and most client hydration gone; real-world mobile is fast (FCP ~0.9s, SI ~0.9s, CLS 0). `lib/motion.ts` removed.*

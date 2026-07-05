@@ -1,55 +1,31 @@
-"use client";
-
-import { motion, useReducedMotion } from "motion/react";
 import type { ReactNode } from "react";
-import { reveal, staggerParent, viewportOnce } from "@/lib/motion";
 
 /**
- * §7.1 — parent that reveals its RevealItem children with a 60ms stagger.
+ * §7.1 — a group whose children reveal on scroll. Pure-CSS server components:
+ * StaggerGroup is a plain layout wrapper; each RevealItem carries the `.reveal`
+ * class (globals.css) and reveals as it enters view. Items lower on the page
+ * enter slightly later, which reads as a natural stagger. No JS, no hydration.
  */
 export function StaggerGroup({
   children,
   className,
-  stagger = 0.06,
 }: {
   children: ReactNode;
   className?: string;
+  /** kept for call-site compatibility; stagger is now positional (scroll-driven) */
   stagger?: number;
 }) {
-  const reduced = useReducedMotion();
-  if (reduced) return <div className={className}>{children}</div>;
-
-  return (
-    <motion.div
-      className={className}
-      variants={staggerParent(stagger)}
-      initial="hidden"
-      whileInView="show"
-      viewport={viewportOnce}
-    >
-      {children}
-    </motion.div>
-  );
+  return <div className={className}>{children}</div>;
 }
 
 export function RevealItem({
   children,
-  className,
-  as = "div",
+  className = "",
+  as: Tag = "div",
 }: {
   children: ReactNode;
   className?: string;
   as?: "div" | "li";
 }) {
-  const reduced = useReducedMotion();
-  const MotionTag = motion[as];
-  if (reduced) {
-    const Tag = as;
-    return <Tag className={className}>{children}</Tag>;
-  }
-  return (
-    <MotionTag className={className} variants={reveal}>
-      {children}
-    </MotionTag>
-  );
+  return <Tag className={`reveal ${className}`.trim()}>{children}</Tag>;
 }

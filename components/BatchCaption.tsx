@@ -1,19 +1,18 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useReducedMotion } from "motion/react";
 
 /**
  * Tiny client island: the hero output-log caption whose batch number ticks
- * 012 → 013 → 014 once on load (§2). Isolated so the hero's LCP text can stay
- * server-rendered. Reduced motion → 014 immediately.
+ * 012 to 013 to 014 once on load (§2). Isolated so the hero's LCP text can stay
+ * server-rendered. Reduced motion (checked via matchMedia, no motion library)
+ * jumps straight to 014.
  */
 export default function BatchCaption() {
-  const reduced = useReducedMotion();
   const [batch, setBatch] = useState(12);
 
   useEffect(() => {
-    if (reduced) {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
       setBatch(14);
       return;
     }
@@ -23,7 +22,7 @@ export default function BatchCaption() {
       clearTimeout(t1);
       clearTimeout(t2);
     };
-  }, [reduced]);
+  }, []);
 
   return (
     <p className="mono-note mt-4 text-center">

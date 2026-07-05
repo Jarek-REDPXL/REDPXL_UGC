@@ -24,7 +24,11 @@ const CHIPS = [
  */
 export default function Work() {
   return (
-    <section id="work" aria-labelledby="work-title" className="section-y">
+    <section
+      id="work"
+      aria-labelledby="work-title"
+      className="section-y [content-visibility:auto] [contain-intrinsic-size:auto_720px]"
+    >
       <div className="container-x">
         <Reveal>
           {/* §6.1 annotation row — [02] pill matches the canvas pill style */}

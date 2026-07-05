@@ -29,7 +29,10 @@ red. The signature device is the production-index annotation system
   `Reveal` / `Stagger` motion wrappers and `Logo`.
 - `components/ui/` — shared primitives: `Section` (+ `Annotation`), `Button`,
   `VideoSlot`, `PhoneFrame`, `Chip`.
-- `lib/motion.ts` — the single shared motion variants source (DESIGN.md §7).
+- Motion is pure CSS (no JS motion library): `.reveal` scroll-reveal, `hero-rise`,
+  graphic keyframes + CSS Motion Path, all in `globals.css` (DESIGN.md §7). Only
+  tiny client islands remain (Nav, Faq toggle, CountUp, BatchCaption, cycling
+  caption, desktop-only Lenis).
 - `lib/site.ts` — links / contact constants.
 - `public/fonts/InterVariable.woff2` — self-hosted display+body face (opsz).
 - `public/videos/` — drop real MP4s here (see VideoSlot `TODO:REAL-DATA`).
