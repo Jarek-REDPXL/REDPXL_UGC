@@ -4,6 +4,7 @@ import EditorialPoster, {
   type PosterPalette,
   type PosterVariant,
 } from "./EditorialPoster";
+import EditorialVideo from "./EditorialVideo";
 
 type Ratio = "9:16" | "1:1" | "16:9";
 
@@ -51,6 +52,20 @@ export default function VideoSlot({
   editorial,
   blank,
 }: VideoSlotProps) {
+  // hero: a live video with the editorial two-chip caption overlaid, falling
+  // back to the EditorialPoster if the video can't load. Keeps the hairline; no
+  // play button, no niche chip.
+  if (editorial && src) {
+    return (
+      <div
+        className={`relative w-full overflow-hidden bg-bg-inset ${ratioClass[ratio]} ${rounded}`}
+      >
+        <EditorialVideo src={src} {...editorial} />
+        <div className="pointer-events-none absolute inset-0 z-10 rounded-[inherit] border border-line" />
+      </div>
+    );
+  }
+
   // marquee: a clean blank screen; a work-0X.mp4 autoplays over it if present.
   if (blank) {
     return (

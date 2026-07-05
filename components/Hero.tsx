@@ -20,7 +20,8 @@ type HeroPhone = {
 };
 
 // left → right; variants a–e, palettes sand/mist/cream/blush/sage.
-// TODO:REAL-DATA drop hero-01…05 MP4s in /public/videos and pass `src`.
+// Each phone plays /public/videos/Main Hero (1…5).mp4; the editorial poster is
+// the fallback if a video fails to load.
 const PHONES: HeroPhone[] = [
   {
     chip: "Skincare editorial ad",
@@ -129,7 +130,12 @@ export default function Hero() {
               className={`phone-rise -mx-1.5 shrink-0 ${p.wrap}`}
               style={{ zIndex: p.z, animationDelay: p.delay }}
             >
-              <PhoneFrame chip={p.chip} editorial={p.editorial} />
+              {/* real videos: Main Hero (1)…(5), left → right (spaces encoded) */}
+              <PhoneFrame
+                chip={p.chip}
+                editorial={p.editorial}
+                src={`/videos/Main%20Hero%20(${i + 1}).mp4`}
+              />
             </div>
           ))}
         </div>

@@ -21,17 +21,20 @@ is set, hero slots render an **`EditorialPoster`** (soft niche duotone + a
 blurred SVG texture + a two-chip hook/meta caption) and reel slots render a
 `PosterCanvas` (per-niche duotone). Both show a play button.
 
-**Hero arc — 5 editorial slots** (left → right; `EditorialPoster` is the interim
-placeholder until real stills/clips land). Set `src` on each `<PhoneFrame>` in
-[Hero.tsx](components/Hero.tsx) `PHONES`:
+**Hero arc — 5 slots · FILLED** (left → right). Each phone plays its real video
+(muted, looped, autoplay), with the editorial two-chip caption overlaid and the
+`EditorialPoster` as an onError fallback. Files live in `public/videos/`.
 
-| # | Variant · palette | Hook / meta caption | Suggested file |
-|---|-------------------|---------------------|----------------|
-| 1 | leaf · sand | `HYDRATION THAT LASTS` / `30S · HOOK: PROBLEM` | `hero-01.mp4` |
-| 2 | smear · mist | `12 WEEKS, NO GYM` / `25S · HOOK: TRANSFORMATION` | `hero-02.mp4` |
-| 3 | sphere · cream (center, cycles) | `THE £40 AD THAT SOLD OUT` / `30S · HOOK: BENEFIT STACK` (+2 more) | `hero-03.mp4` |
-| 4 | ripple · blush | `CLEAN SKIN, NO COMPROMISES` / `27S · HOOK: OBJECTION` | `hero-04.mp4` |
-| 5 | gel · sage | `DAILY CARE, REAL RESULTS` / `20S · HOOK: REMINDER` | `hero-05.mp4` |
+| # | Palette | Caption (hook / meta) | File · FILLED |
+|---|---------|------------------------|--------------|
+| 1 | sand | `HYDRATION THAT LASTS` / `30S · HOOK: PROBLEM` | `Main Hero (1).mp4` ✅ |
+| 2 | mist | `12 WEEKS, NO GYM` / `25S · HOOK: TRANSFORMATION` | `Main Hero (2).mp4` ✅ |
+| 3 | cream (center, cycles) | `THE £40 AD THAT SOLD OUT` (+2 more) | `Main Hero (3).mp4` ✅ |
+| 4 | blush | `CLEAN SKIN, NO COMPROMISES` / `27S · HOOK: OBJECTION` | `Main Hero (4).mp4` ✅ |
+| 5 | sage | `DAILY CARE, REAL RESULTS` / `20S · HOOK: REMINDER` | `Main Hero (5).mp4` ✅ |
+
+> Referenced with encoded spaces, e.g. `/videos/Main%20Hero%20(1).mp4`. Below
+> 1024 the hero drops slots 1 & 5 (shows 2/3/4); below 768 same three, cropped.
 
 **Work reel — 10 blank slots.** The marquee phones are blank `--bg-inset`
 screens by default. Each is already wired to a file path (below): **drop the MP4
