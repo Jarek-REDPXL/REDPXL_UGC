@@ -22,14 +22,14 @@ function BentoCard({
   children: ReactNode;
 }) {
   return (
-    <div className="h-full rounded-card border border-line bg-bg p-7 transition-[transform,border-color] duration-[180ms] ease-[var(--ease-out)] hover:-translate-y-0.5 hover:border-line-hover">
+    <div className="flex h-full flex-col rounded-card border border-line bg-bg p-7 transition-[transform,border-color] duration-[180ms] ease-[var(--ease-out)] hover:-translate-y-0.5 hover:border-line-hover">
       <div className="flex items-center gap-3">
         <span className="grid h-7 w-7 place-items-center rounded-chip bg-accent-soft">
           <Icon className="h-4 w-4 text-accent" />
         </span>
         <span className="mono-note">{label}</span>
       </div>
-      <div className="mt-4">{children}</div>
+      <div className="mt-4 flex flex-1 flex-col">{children}</div>
     </div>
   );
 }
@@ -131,7 +131,7 @@ export default function Why() {
               UGC-style creative built to convert on paid social, not studio
               gloss that gets scrolled past.
             </p>
-            <FormatMorphVideo src="/videos/Main%20Hero%20(2).mp4" className="mt-5" />
+            <FormatMorphVideo src="/videos/Main%20Hero%20(2).mp4" className="mt-5 flex-1" />
           </BentoCard>
         </RevealItem>
       </StaggerGroup>
