@@ -83,10 +83,9 @@ export default function Hero() {
       <div className="container-x flex flex-col items-center text-center">
         {/* annotation pill */}
         <span
-          className="hero-rise inline-flex items-center gap-2.5 rounded-full border border-line bg-bg-subtle py-1.5 pl-3.5 pr-4"
+          className="hero-rise inline-flex items-center rounded-full border border-line bg-bg-subtle px-4 py-1.5"
           style={{ animationDelay: "0.05s" }}
         >
-          <span className="h-1.5 w-1.5 bg-accent" aria-hidden />
           <span className="mono-note">AI UGC VIDEO ADS · DONE FOR YOU</span>
         </span>
 
