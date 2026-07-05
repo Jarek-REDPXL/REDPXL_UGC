@@ -64,6 +64,25 @@ classes (`.display-1`, `.title-1`, `.body-copy`, `.stat`, `.mono-note`,
 5. **Hairlines over shadows; one dark moment (Final CTA); red is a scalpel
    (≤1% per screen).** (DESIGN.md §1).
 6. `npm run build` must pass with zero errors/warnings before any handoff.
+7. **No visual change is complete until screenshots have been captured and
+   reviewed across the responsive range.** Run `npm run audit:shots` (dev
+   server up) — it screens all 8 widths (320→1920), captures per-section +
+   interaction states into `/audit`, and runs an automated horizontal-overflow
+   check. **Zero overflow at every width is a hard gate**; the script exits
+   non-zero on any breach. Review the shots before calling work done.
+
+---
+
+## Responsive & audit
+
+- **Envelope:** 320, 390, 430, 768, 1024, 1280, 1440, 1920. No horizontal
+  scroll at any width — `document.scrollWidth <= innerWidth` everywhere.
+- **Capture:** `npm run audit:shots` → `/audit` (gitignored). Full-page per
+  width, per-section at 390/768/1280/1920, FAQ-open + nav-scrolled states, and
+  `audit/overflow-report.json`.
+- **Drop-in assets:** see [ASSETS.md](./ASSETS.md) for the video-slot / image /
+  `TODO:REAL-DATA` registry. Dev-only placeholder badges mark every unfilled
+  slot (`NODE_ENV=development`).
 
 ---
 

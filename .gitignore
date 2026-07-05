@@ -42,3 +42,7 @@ next-env.d.ts
 
 # claude code local settings (personal, not shared)
 .claude/settings.local.json
+
+# responsive audit output (screenshots + reports, regenerated on demand)
+/audit
+
