@@ -58,6 +58,7 @@ export default function Canvas({
   contentClassName = "",
   float,
   titleClassName = "",
+  centered = false,
 }: {
   id?: string;
   idx: string;
@@ -74,6 +75,8 @@ export default function Canvas({
   /** optional small floating primitive, absolutely positioned by the caller */
   float?: ReactNode;
   titleClassName?: string;
+  /** center the annotation, title and sub on one axis (dark CTA bands) */
+  centered?: boolean;
 }) {
   const labelId = id ? `${id}-title` : `sec-${idx}-title`;
   const dark = tint === "ink";
@@ -98,36 +101,58 @@ export default function Canvas({
         {float}
 
         <div className="relative z-10">
-          {/* annotation row: [NN] pill — name — rule — note */}
-          <div className="flex items-baseline gap-4">
-            <span className="flex items-center gap-2.5 whitespace-nowrap">
-              <span className="anno-pill mono-idx">[{idx}]</span>
-              <span className={`mono-note ${nameColor}`}>{name}</span>
-            </span>
-            <span className={`h-px flex-1 self-center ${ruleColor}`} aria-hidden />
-            {note && (
-              <span
-                className={`mono-note hidden whitespace-nowrap min-[380px]:inline ${noteColor}`}
-              >
-                / {note}
+          {/* annotation row: [NN] pill — name — rule — note (or centered) */}
+          {centered ? (
+            <div className="flex items-center justify-center gap-3">
+              <span className="flex items-center gap-2.5 whitespace-nowrap">
+                <span className="anno-pill mono-idx">[{idx}]</span>
+                <span className={`mono-note ${nameColor}`}>{name}</span>
               </span>
-            )}
-          </div>
+              {note && (
+                <span className={`mono-note whitespace-nowrap ${noteColor}`}>
+                  · {note}
+                </span>
+              )}
+            </div>
+          ) : (
+            <div className="flex items-baseline gap-4">
+              <span className="flex items-center gap-2.5 whitespace-nowrap">
+                <span className="anno-pill mono-idx">[{idx}]</span>
+                <span className={`mono-note ${nameColor}`}>{name}</span>
+              </span>
+              <span className={`h-px flex-1 self-center ${ruleColor}`} aria-hidden />
+              {note && (
+                <span
+                  className={`mono-note hidden whitespace-nowrap min-[380px]:inline ${noteColor}`}
+                >
+                  / {note}
+                </span>
+              )}
+            </div>
+          )}
 
           {/* two-tone title (omitted when the caller supplies its own header) */}
           {title && (
             <h2
               id={labelId}
-              className={`display-2 mt-5 ${titleColor} ${titleClassName}`}
+              className={`display-2 mt-6 ${centered ? "mx-auto text-center text-balance" : ""} ${titleColor} ${titleClassName}`}
             >
               {title}
               {titleDeep && <span className="title-deep">{titleDeep}</span>}
             </h2>
           )}
 
-          {sub && <p className={`body-lg mt-3 ${subColor}`}>{sub}</p>}
+          {sub && (
+            <p
+              className={`body-lg mt-4 ${centered ? "mx-auto text-center" : ""} ${subColor}`}
+            >
+              {sub}
+            </p>
+          )}
 
-          <div className={`mt-12 ${contentClassName}`}>{children}</div>
+          <div className={`${centered ? "mt-8 text-center" : "mt-12"} ${contentClassName}`}>
+            {children}
+          </div>
         </div>
       </div>
     </section>

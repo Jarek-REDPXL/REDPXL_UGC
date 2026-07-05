@@ -17,9 +17,9 @@ export default function Guarantee() {
       note="ZERO RISK"
       tint="ink"
       title="If you wouldn't run them, you don't pay."
-      contentClassName="text-center"
+      centered
     >
-      <Reveal className="mx-auto max-w-[640px] text-center">
+      <Reveal className="mx-auto max-w-[560px]">
         {/* TODO:REAL-DATA trial terms */}
         <p className="body-lg text-white/70">
           Start with a £750 trial batch of 8 ads. If the quality isn&apos;t
