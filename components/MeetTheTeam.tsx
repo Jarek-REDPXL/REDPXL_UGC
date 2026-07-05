@@ -60,7 +60,7 @@ export default function MeetTheTeam() {
             key={i}
             className={`group flex flex-col overflow-hidden rounded-frame border border-line bg-bg transition-colors duration-[180ms] ease-[var(--ease-out)] hover:border-line-hover lg:col-span-2 ${m.place}`}
           >
-            <div className="relative aspect-[3/4] overflow-hidden bg-bg-inset">
+            <div className="relative aspect-square overflow-hidden bg-bg-inset">
               <div className="absolute inset-0 transition-transform duration-[180ms] ease-[var(--ease-out)] group-hover:scale-[1.03]">
                 <TeamPhoto src={m.img} alt={`${m.name}, ${m.role} at REDPXL`} />
               </div>
