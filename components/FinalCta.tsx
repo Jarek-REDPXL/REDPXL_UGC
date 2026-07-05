@@ -21,6 +21,7 @@ export default function FinalCta() {
       title="Stop running tired ads."
       sub="Get your first batch this week and give your paid social the creative volume it's been missing."
       centered
+      flushBottom
     >
       <Grain opacity={0.025} />
 

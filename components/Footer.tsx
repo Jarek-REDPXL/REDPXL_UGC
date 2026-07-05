@@ -46,8 +46,8 @@ function LinkCol({ title, children }: { title: string; children: React.ReactNode
  */
 export default function Footer() {
   return (
-    <footer className="relative mt-4 overflow-hidden bg-ink text-white">
-      <div className="container-x relative isolate pb-12 pt-24">
+    <footer className="relative overflow-hidden bg-ink text-white">
+      <div className="relative isolate mx-auto max-w-[1152px] px-6 pb-12 pt-24 md:px-8 lg:px-10">
         {/* giant watermark — full wordmark, behind the lower-right, red dot as "."
             Constrained to the container width (text-right, inset) so it never
             clips at the edge. */}

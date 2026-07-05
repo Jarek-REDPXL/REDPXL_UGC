@@ -361,6 +361,15 @@ button:focus-visible,
 .canvas-wrap + .canvas-wrap {
   margin-top: 16px;
 }
+/* full-bleed canvas that merges into the footer: edge-to-edge, no side inset,
+   square bottom (see Canvas flushBottom). Double-class to beat the mobile
+   .canvas-wrap padding at every width. */
+.canvas-wrap.canvas-wrap--flush {
+  max-width: none;
+  padding-inline: 0;
+  content-visibility: visible;
+  contain-intrinsic-size: auto;
+}
 .canvas {
   position: relative;
   overflow: hidden;
