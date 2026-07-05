@@ -1,7 +1,7 @@
 import type { ComponentType, ReactNode } from "react";
 import Canvas from "@/components/ui/Canvas";
 import { StaggerGroup, RevealItem } from "@/components/Stagger";
-import VariationExploder from "@/components/graphics/VariationExploder";
+import VolumeCadence from "@/components/graphics/VolumeCadence";
 import FormatMorphVideo from "@/components/graphics/FormatMorphVideo";
 import SpeedDial from "@/components/graphics/SpeedDial";
 import CostLadder from "@/components/graphics/CostLadder";
@@ -98,7 +98,7 @@ export default function Why() {
           </BentoCard>
         </RevealItem>
 
-        {/* Volume — carries the VariationExploder graphic (§14) */}
+        {/* Volume — the calendar-cadence graphic (§14) */}
         <RevealItem className="md:col-span-3">
           <BentoCard icon={Layers} label="VOLUME">
             <h3 className="title-1 mt-4">The volume you need</h3>
@@ -106,7 +106,7 @@ export default function Why() {
               Most brands ship 2 to 4 ads a month. Winning on paid social takes
               15 to 20. We produce at that pace.
             </p>
-            <VariationExploder className="w-full mt-4" />
+            <VolumeCadence className="mt-5" />
           </BentoCard>
         </RevealItem>
 
