@@ -4,6 +4,9 @@ import { StaggerGroup, RevealItem } from "@/components/Stagger";
 import CountUp from "@/components/ui/CountUp";
 import VariationExploder from "@/components/graphics/VariationExploder";
 import FormatMorph from "@/components/graphics/FormatMorph";
+import SpeedDelivery from "@/components/graphics/SpeedDelivery";
+import CostDrop from "@/components/graphics/CostDrop";
+import InViewVideo from "@/components/ui/InViewVideo";
 import { Users, Zap, Clock, Layers, PoundSterling, Smartphone } from "lucide-react";
 
 /**
@@ -86,7 +89,7 @@ export default function Why() {
           </BentoCard>
         </RevealItem>
 
-        {/* Speed — stat variant */}
+        {/* Speed — stat + delivery-speed graphic */}
         <RevealItem className="md:col-span-3">
           <BentoCard icon={Clock} label="SPEED">
             <div className="mt-4 flex items-baseline gap-2">
@@ -95,7 +98,8 @@ export default function Why() {
               </span>
               <span className="mono-note">HOURS</span>
             </div>
-            <p className="body-copy mt-3">Not two weeks.</p>
+            <p className="body-copy mt-2">Not two weeks.</p>
+            <SpeedDelivery className="mt-5" />
           </BentoCard>
         </RevealItem>
 
@@ -111,7 +115,7 @@ export default function Why() {
           </BentoCard>
         </RevealItem>
 
-        {/* Cost */}
+        {/* Cost — carries the CostDrop graphic (§14) */}
         <RevealItem className="md:col-span-3">
           <BentoCard icon={PoundSterling} label="COST">
             <h3 className="title-1 mt-4">A fraction of the cost</h3>
@@ -119,10 +123,11 @@ export default function Why() {
               Creator video runs £150 to £500 a piece. Our plans work out from
               around £100 an ad.
             </p>
+            <CostDrop className="mt-5" />
           </BentoCard>
         </RevealItem>
 
-        {/* Native — carries the FormatMorph graphic (§14) */}
+        {/* Native — a real 9:16 video (reuses hero phone 2), FormatMorph fallback */}
         <RevealItem className="md:col-span-3">
           <BentoCard icon={Smartphone} label="NATIVE">
             <h3 className="title-1 mt-4">Native, not glossy</h3>
@@ -130,7 +135,19 @@ export default function Why() {
               UGC-style creative built to convert on paid social, not studio
               gloss that gets scrolled past.
             </p>
-            <FormatMorph className="mx-auto mt-3" />
+            <div className="relative mx-auto mt-5 aspect-[9/16] w-[150px] overflow-hidden rounded-[14px] border border-line bg-bg-inset">
+              <InViewVideo
+                src="/videos/Main%20Hero%20(2).mp4"
+                fallback={
+                  <div className="absolute inset-0 grid place-items-center">
+                    <FormatMorph />
+                  </div>
+                }
+              />
+              <span className="mono-note absolute bottom-2 left-2 z-10 rounded-[4px] bg-white/[0.92] px-1.5 py-0.5 text-[10px]! leading-tight text-ink">
+                9:16
+              </span>
+            </div>
           </BentoCard>
         </RevealItem>
       </StaggerGroup>

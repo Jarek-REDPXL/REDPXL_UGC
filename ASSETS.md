@@ -35,6 +35,8 @@ blurred SVG texture + a two-chip hook/meta caption) and reel slots render a
 
 > Referenced with encoded spaces, e.g. `/videos/Main%20Hero%20(1).mp4`. Below
 > 1024 the hero drops slots 1 & 5 (shows 2/3/4); below 768 same three, cropped.
+> The Why/Native card (§03) reuses `Main Hero (2).mp4` in a small 9:16 frame
+> (viewport-gated, FormatMorph fallback) — no extra file.
 
 **Work reel — 10 slots · FILLED** (left → right). Each blank `--bg-inset` phone
 plays its real video (muted, looped, object-cover), **viewport-gated** by
