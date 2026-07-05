@@ -1,9 +1,9 @@
 // Central site constants. Update links/contact details here.
 
+// Primary CTA (WhatsApp) lives in lib/config.ts → WHATSAPP_URL.
 export const site = {
   name: "REDPXL",
   productName: "REDPXL UGC",
-  bookingUrl: "https://calendly.com/meeting-redpxl",
   email: "hello@redpxl.uk",
   supportEmail: "support@redpxl.uk",
   location: "Canary Wharf, London",

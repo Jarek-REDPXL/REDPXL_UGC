@@ -1,7 +1,6 @@
 import Canvas from "@/components/ui/Canvas";
-import Button from "@/components/ui/Button";
+import WhatsAppButton from "@/components/ui/WhatsAppButton";
 import Reveal from "@/components/Reveal";
-import { site } from "@/lib/site";
 
 /**
  * DESIGN.md §9 [10] THE GUARANTEE — the risk-reversal hammer.
@@ -26,14 +25,7 @@ export default function Guarantee() {
           there, the batch is on us. If you continue, the £750 comes off
           month one.
         </p>
-        <Button
-          href={site.bookingUrl}
-          external
-          variant="invert"
-          className="mt-6"
-        >
-          Start a trial batch
-        </Button>
+        <WhatsAppButton variant="invert" className="mt-6" />
       </Reveal>
     </Canvas>
   );

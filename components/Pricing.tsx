@@ -1,8 +1,7 @@
 import { Check } from "lucide-react";
 import Canvas from "@/components/ui/Canvas";
 import { StaggerGroup, RevealItem } from "@/components/Stagger";
-import Button from "@/components/ui/Button";
-import { site } from "@/lib/site";
+import WhatsAppButton from "@/components/ui/WhatsAppButton";
 
 /**
  * DESIGN.md §8.9 pricing card + §9 [09] PRICING.
@@ -81,10 +80,7 @@ export default function Pricing() {
             <span className="stat">£750</span>
             <span className="mono-note">ONE-TIME</span>
           </div>
-          {/* TODO:STRIPE checkout link */}
-          <Button href="#" external={false} variant="primary" className="mt-4">
-            Start a trial batch
-          </Button>
+          <WhatsAppButton variant="primary" className="mt-4" />
         </div>
       </div>
 
@@ -131,14 +127,10 @@ export default function Pricing() {
                 ))}
               </ul>
 
-              <Button
-                href={site.bookingUrl}
-                external
+              <WhatsAppButton
                 variant={plan.featured ? "primary" : "secondary"}
                 className="mt-8 w-full"
-              >
-                Book a call
-              </Button>
+              />
             </div>
           </RevealItem>
         ))}

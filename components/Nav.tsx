@@ -2,9 +2,9 @@
 
 import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
-import { navLinks, site } from "@/lib/site";
+import { navLinks } from "@/lib/site";
 import Logo from "./Logo";
-import Button from "./ui/Button";
+import WhatsAppButton from "./ui/WhatsAppButton";
 
 export default function Nav() {
   const [scrolled, setScrolled] = useState(false);
@@ -91,17 +91,9 @@ export default function Nav() {
           })}
         </ul>
 
-        {/* Right: contact + CTA */}
-        <div className="hidden items-center gap-5 lg:flex">
-          <a
-            href={`mailto:${site.email}`}
-            className="mono-note text-text-3 transition-colors hover:text-ink"
-          >
-            {site.email}
-          </a>
-          <Button href={site.bookingUrl} external variant="primary">
-            Book a call
-          </Button>
+        {/* Right: CTA */}
+        <div className="hidden items-center lg:flex">
+          <WhatsAppButton variant="primary" />
         </div>
 
         {/* Mobile toggle */}
@@ -136,20 +128,7 @@ export default function Nav() {
             ))}
           </ul>
           <div className="content-x flex flex-col gap-3 pb-5 pt-3">
-            <a
-              href={`mailto:${site.email}`}
-              className="mono-note text-text-3"
-            >
-              {site.email}
-            </a>
-            <Button
-              href={site.bookingUrl}
-              external
-              variant="primary"
-              className="w-full"
-            >
-              Book a call
-            </Button>
+            <WhatsAppButton variant="primary" className="w-full" />
           </div>
         </div>
       )}

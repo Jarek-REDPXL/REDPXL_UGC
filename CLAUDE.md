@@ -96,4 +96,6 @@ classes (`.display-1`, `.title-1`, `.body-copy`, `.stat`, `.mono-note`,
 - **Prices** → `Pricing.tsx` (`£X` placeholders).
 - **Metrics / quotes** → `Results.tsx` (all `TODO:REAL-DATA`).
 - **Comparison price** → `Comparison.tsx` ("From £40" TODO).
-- **Booking link** → `lib/site.ts` (`https://calendly.com/meeting-redpxl`).
+- **Primary CTA is WhatsApp** → single source in `lib/config.ts` (`WHATSAPP_URL`,
+  wa.me to +44 7525 832432 / `447525832432`). Every "WhatsApp us" button renders
+  `<WhatsAppButton>`; change the number/prefilled text in `lib/config.ts` only.

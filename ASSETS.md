@@ -110,14 +110,18 @@ Drop the files in with zero code change ([MeetTheTeam.tsx](components/MeetTheTea
 
 ## 4 · Links / contact
 
-All in [lib/site.ts](lib/site.ts):
+Primary CTA (WhatsApp) is in [lib/config.ts](lib/config.ts); the rest in
+[lib/site.ts](lib/site.ts):
 
 | Constant | Current value | Action |
 |----------|---------------|--------|
-| `bookingUrl` | `https://calendly.com/meeting-redpxl` | confirm real booking link |
+| `WHATSAPP_URL` (lib/config.ts) | wa.me to **+44 7525 832432** (`447525832432`) | confirm number + prefilled text |
 | `email` | `hello@redpxl.uk` | confirm |
 | `supportEmail` | `support@redpxl.uk` | confirm |
 | `location` | `Canary Wharf, London` | confirm |
+
+> Every "WhatsApp us" button renders `<WhatsAppButton>` → `WHATSAPP_URL`. Change
+> the number in `lib/config.ts` only; opens in a new tab, prefilled message.
 
 ---
 
@@ -127,6 +131,6 @@ All in [lib/site.ts](lib/site.ts):
 - [ ] No dashed **PLACEHOLDER** badges remain in `npm run dev`
 - [ ] Real client logos in `LogoStrip.tsx`
 - [ ] All `TODO:REAL-DATA` numbers verified or removed
-- [ ] `bookingUrl` + contact details confirmed in `lib/site.ts`
+- [ ] `WHATSAPP_URL` (lib/config.ts) + contact details confirmed
 - [ ] `node scripts/gen-og.mjs` re-run if the headline changed
 - [ ] `npm run build` clean · `npm run audit:shots` → zero overflow

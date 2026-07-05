@@ -43,7 +43,7 @@ export default function Button({
         href={href}
         className={cls}
         aria-label={ariaLabel}
-        {...(external ? { target: "_blank", rel: "noreferrer" } : {})}
+        {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
       >
         {content}
       </a>

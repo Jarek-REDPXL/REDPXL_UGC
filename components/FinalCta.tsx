@@ -1,6 +1,7 @@
 import Canvas from "@/components/ui/Canvas";
 import Grain from "@/components/ui/Grain";
 import Button from "@/components/ui/Button";
+import WhatsAppButton from "@/components/ui/WhatsAppButton";
 import Reveal from "@/components/Reveal";
 import { site } from "@/lib/site";
 
@@ -25,9 +26,7 @@ export default function FinalCta() {
 
       <Reveal>
         <div className="flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
-          <Button href={site.bookingUrl} external variant="invert">
-            Book a free strategy call
-          </Button>
+          <WhatsAppButton variant="invert" />
           <Button href={`mailto:${site.email}`} variant="ghost">
             {site.email}
           </Button>

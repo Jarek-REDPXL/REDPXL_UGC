@@ -1,6 +1,6 @@
 import Button from "./ui/Button";
+import WhatsAppButton from "./ui/WhatsAppButton";
 import PhoneFrame from "./ui/PhoneFrame";
-import { site } from "@/lib/site";
 import type { EditorialSpec } from "./ui/VideoSlot";
 
 // center phone: its two-chip caption crossfades through these
@@ -112,9 +112,7 @@ export default function Hero() {
           className="hero-rise mt-8 flex w-full flex-col gap-3 sm:w-auto sm:flex-row sm:items-center sm:justify-center sm:gap-4"
           style={{ animationDelay: "0.32s" }}
         >
-          <Button href={site.bookingUrl} external variant="primary" className="w-full sm:w-auto">
-            Book a free strategy call
-          </Button>
+          <WhatsAppButton variant="primary" className="w-full sm:w-auto" />
           <Button href="#work" variant="secondary" className="w-full sm:w-auto">
             See the work →
           </Button>
