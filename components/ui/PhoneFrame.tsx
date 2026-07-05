@@ -10,12 +10,14 @@ export default function PhoneFrame({
   className = "",
   cycleHooks,
   editorial,
+  blank,
 }: {
   src?: string;
-  chip: string;
+  chip?: string;
   className?: string;
   cycleHooks?: string[];
   editorial?: EditorialSpec;
+  blank?: boolean;
 }) {
   return (
     <div
@@ -29,6 +31,7 @@ export default function PhoneFrame({
           rounded="rounded-[20px]"
           cycleHooks={cycleHooks}
           editorial={editorial}
+          blank={blank}
         />
       </div>
     </div>

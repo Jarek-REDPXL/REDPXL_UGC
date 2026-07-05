@@ -20,7 +20,7 @@ type VideoSlotProps = {
   src?: string;
   poster?: string;
   /** factual chip label, format SUBJECT · PLATFORM (e.g. "SKINCARE · TIKTOK") */
-  chip: string;
+  chip?: string;
   ratio?: Ratio;
   /** rounding of the media surface (PhoneFrame inner uses a tighter radius) */
   rounded?: string;
@@ -29,6 +29,9 @@ type VideoSlotProps = {
   /** hero posters: use the editorial poster (texture + two-chip caption) and
       suppress the niche chip; when absent the marquee PosterCanvas is used */
   editorial?: EditorialSpec;
+  /** marquee mode: a blank --bg-inset screen (no poster/chip/play). A `src`
+      video autoplays over it if the file exists; otherwise the blank shows. */
+  blank?: boolean;
 };
 
 const ratioClass: Record<Ratio, string> = {
@@ -46,7 +49,31 @@ export default function VideoSlot({
   rounded = "rounded-card",
   cycleHooks,
   editorial,
+  blank,
 }: VideoSlotProps) {
+  // marquee: a clean blank screen; a work-0X.mp4 autoplays over it if present.
+  if (blank) {
+    return (
+      <div
+        className={`relative w-full overflow-hidden bg-bg-inset ${ratioClass[ratio]} ${rounded}`}
+      >
+        {src && (
+          <video
+            className="absolute inset-0 h-full w-full object-cover"
+            src={src}
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="metadata"
+            aria-hidden
+          />
+        )}
+        <div className="pointer-events-none absolute inset-0 z-10 rounded-[inherit] border border-line" />
+      </div>
+    );
+  }
+
   return (
     <div
       className={`group relative w-full overflow-hidden bg-bg-inset ${ratioClass[ratio]} ${rounded}`}
@@ -57,7 +84,7 @@ export default function VideoSlot({
           {editorial ? (
             <EditorialPoster {...editorial} />
           ) : (
-            <PosterCanvas chip={chip} cycleHooks={cycleHooks} />
+            <PosterCanvas chip={chip ?? ""} cycleHooks={cycleHooks} />
           )}
         </div>
       )}
@@ -90,7 +117,7 @@ export default function VideoSlot({
 
       {/* niche label chip — suppressed for editorial hero posters (they carry
           their own two-chip caption) */}
-      {!editorial && (
+      {!editorial && chip && (
         <span className="mono-note absolute left-2 top-2 z-20 rounded-chip border border-line bg-white/[0.92] px-2 py-[3px] !text-ink">
           {chip}
         </span>

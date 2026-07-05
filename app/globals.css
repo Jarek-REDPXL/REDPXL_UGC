@@ -520,8 +520,22 @@ button:focus-visible,
 .reel-track {
   display: flex;
   width: max-content;
+  /* translateX(-50%) always moves exactly one pass (seamless at any size).
+     Duration is set per breakpoint so the scroll speed stays ~40px/s as the
+     phones (and therefore the pass width) scale up: mobile pass ~2200px → 55s,
+     md ~2500px → 62.5s, lg ~2800px → 70s. */
   animation: reel-rtl 55s linear infinite;
   will-change: transform;
+}
+@media (min-width: 768px) {
+  .reel-track {
+    animation-duration: 62.5s;
+  }
+}
+@media (min-width: 1024px) {
+  .reel-track {
+    animation-duration: 70s;
+  }
 }
 .reel-viewport:hover .reel-track {
   animation-play-state: paused;
@@ -598,7 +612,8 @@ button:focus-visible,
   html {
     scroll-behavior: auto;
   }
-  .marquee-track {
+  .marquee-track,
+  .reel-track {
     animation: none;
   }
   .btn:hover svg {

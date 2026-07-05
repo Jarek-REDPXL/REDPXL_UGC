@@ -33,33 +33,33 @@ placeholder until real stills/clips land). Set `src` on each `<PhoneFrame>` in
 | 4 | ripple · blush | `CLEAN SKIN, NO COMPROMISES` / `27S · HOOK: OBJECTION` | `hero-04.mp4` |
 | 5 | gel · sage | `DAILY CARE, REAL RESULTS` / `20S · HOOK: REMINDER` | `hero-05.mp4` |
 
-**Work reel — 10 niche slots.** Set `src` once per niche in the `Work.tsx` map:
+**Work reel — 10 blank slots.** The marquee phones are blank `--bg-inset`
+screens by default. Each is already wired to a file path (below): **drop the MP4
+in and it autoplays (muted, looped, `playsInline`) with zero code changes.** No
+file → the blank screen stays. Files: **MP4 H.264, 9:16, 1080×1920, ≤8MB each.**
 
-| # | `chip` | Suggested file |
-|---|--------|----------------|
-| 6 | `SKINCARE · TIKTOK` | `skincare.mp4` |
-| 7 | `SUPPLEMENTS · META` | `supplements.mp4` |
-| 8 | `FASHION · TIKTOK` | `fashion.mp4` |
-| 9 | `MOBILE APP · META` | `app.mp4` |
-| 10 | `BEAUTY · TIKTOK` | `beauty.mp4` |
-| 11 | `FITNESS · REELS` | `fitness.mp4` |
-| 12 | `FOOD & BEV · TIKTOK` | `food.mp4` |
-| 13 | `SAAS · YOUTUBE` | `saas.mp4` |
-| 14 | `PET CARE · TIKTOK` | `pet.mp4` |
-| 15 | `HOME & LIVING · REELS` | `home.mp4` |
+| # | File |
+|---|------|
+| 6 | `public/videos/work-01.mp4` |
+| 7 | `public/videos/work-02.mp4` |
+| 8 | `public/videos/work-03.mp4` |
+| 9 | `public/videos/work-04.mp4` |
+| 10 | `public/videos/work-05.mp4` |
+| 11 | `public/videos/work-06.mp4` |
+| 12 | `public/videos/work-07.mp4` |
+| 13 | `public/videos/work-08.mp4` |
+| 14 | `public/videos/work-09.mp4` |
+| 15 | `public/videos/work-10.mp4` |
 
 > Below 1024 the hero drops its outer pair (slots 1 & 5); below 768 it shows
 > slots 2–4 with the neighbours cropped at the edges — no extra files.
-> The Work reel duplicates its 10 phones for the seamless marquee; set `src`
-> once per niche.
+> The Work reel duplicates its 10 phones for the seamless marquee; one file per
+> slot covers both passes.
 
 **How to wire the hero:** add `src="/videos/hero-0X.mp4"` to each entry of the
-`PHONES` array in [Hero.tsx](components/Hero.tsx). **How to wire the reel:** in
-[Work.tsx](components/Work.tsx) map over `{ chip, src }` and pass `src` to
-`<PhoneFrame>`.
-
-Optional: pass a `poster="/videos/….jpg"` first-frame image per slot for a
-crisper initial paint.
+`PHONES` array in [Hero.tsx](components/Hero.tsx). **The Work reel is already
+wired** ([Work.tsx](components/Work.tsx) `SLOTS`): just add the `work-0X.mp4`
+files. The annotation note reads `/ WORK IN PROGRESS · LOOPING` until they land.
 
 ---
 
