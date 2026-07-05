@@ -38,11 +38,11 @@ export default function Problem() {
   return (
     <Canvas id="problem" idx="01" name="THE PROBLEM" note="CREATIVE FATIGUE" tint="sand">
       {/* header row: two-tone headline left, supporting paragraph right */}
-      <div className="grid gap-6 lg:grid-cols-2 lg:items-baseline">
+      <div className="grid gap-6 lg:grid-cols-[1fr_1.3fr] lg:items-baseline">
         <h2 id="problem-title" className="display-2">
           Your winning ad is <span className="title-deep">already dying.</span>
         </h2>
-        <p className="body-lg max-w-[46ch] lg:justify-self-end">
+        <p className="body-lg max-w-none">
           The gap between how fast creative fatigues and how fast most brands can
           replace it is where media efficiency quietly disappears.
         </p>
