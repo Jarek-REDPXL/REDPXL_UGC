@@ -35,6 +35,7 @@ export default function EditorialVideo({
   hook,
   meta,
   cycleSets,
+  hideCaption,
 }: {
   src: string;
   variant: PosterVariant;
@@ -42,6 +43,7 @@ export default function EditorialVideo({
   hook: string;
   meta: string;
   cycleSets?: { hook: string; meta: string }[];
+  hideCaption?: boolean;
 }) {
   const ref = useRef<HTMLVideoElement>(null);
   const [failed, setFailed] = useState(false);
@@ -83,13 +85,15 @@ export default function EditorialVideo({
         preload="metadata"
         onError={() => setFailed(true)}
       />
-      <div className="absolute inset-x-3 bottom-[20%]">
-        {cycleSets && cycleSets.length > 1 ? (
-          <CyclingChips sets={cycleSets} />
-        ) : (
-          <ChipPair hook={hook} meta={meta} />
-        )}
-      </div>
+      {!hideCaption && (
+        <div className="absolute inset-x-3 bottom-[20%]">
+          {cycleSets && cycleSets.length > 1 ? (
+            <CyclingChips sets={cycleSets} />
+          ) : (
+            <ChipPair hook={hook} meta={meta} />
+          )}
+        </div>
+      )}
     </div>
   );
 }

@@ -11,6 +11,7 @@ export default function PhoneFrame({
   cycleHooks,
   editorial,
   blank,
+  hideCaption,
 }: {
   src?: string;
   chip?: string;
@@ -18,6 +19,7 @@ export default function PhoneFrame({
   cycleHooks?: string[];
   editorial?: EditorialSpec;
   blank?: boolean;
+  hideCaption?: boolean;
 }) {
   return (
     <div
@@ -32,6 +34,7 @@ export default function PhoneFrame({
           cycleHooks={cycleHooks}
           editorial={editorial}
           blank={blank}
+          hideCaption={hideCaption}
         />
       </div>
     </div>

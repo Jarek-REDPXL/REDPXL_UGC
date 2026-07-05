@@ -34,6 +34,8 @@ type VideoSlotProps = {
   /** marquee mode: a blank --bg-inset screen (no poster/chip/play). A `src`
       video autoplays over it if the file exists; otherwise the blank shows. */
   blank?: boolean;
+  /** editorial hero: render the video with no two-chip caption (just video). */
+  hideCaption?: boolean;
 };
 
 const ratioClass: Record<Ratio, string> = {
@@ -52,6 +54,7 @@ export default function VideoSlot({
   cycleHooks,
   editorial,
   blank,
+  hideCaption,
 }: VideoSlotProps) {
   // hero: a live video with the editorial two-chip caption overlaid, falling
   // back to the EditorialPoster if the video can't load. Keeps the hairline; no
@@ -61,7 +64,7 @@ export default function VideoSlot({
       <div
         className={`relative w-full overflow-hidden bg-bg-inset ${ratioClass[ratio]} ${rounded}`}
       >
-        <EditorialVideo src={src} {...editorial} />
+        <EditorialVideo src={src} {...editorial} hideCaption={hideCaption} />
         <div className="pointer-events-none absolute inset-0 z-10 rounded-[inherit] border border-line" />
       </div>
     );

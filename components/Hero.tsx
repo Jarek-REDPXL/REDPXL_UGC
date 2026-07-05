@@ -130,11 +130,12 @@ export default function Hero() {
               className={`phone-rise -mx-1.5 shrink-0 ${p.wrap}`}
               style={{ zIndex: p.z, animationDelay: p.delay }}
             >
-              {/* real videos, left → right (spaces encoded); 2 & 4 swapped */}
+              {/* real videos, left → right (spaces encoded); just video, no caption */}
               <PhoneFrame
                 chip={p.chip}
                 editorial={p.editorial}
                 src={`/videos/Main%20Hero%20(${VIDEO_ORDER[i]}).mp4`}
+                hideCaption
               />
             </div>
           ))}
