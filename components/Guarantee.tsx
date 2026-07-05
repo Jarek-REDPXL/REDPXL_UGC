@@ -23,7 +23,7 @@ export default function Guarantee() {
         {/* TODO:REAL-DATA trial terms */}
         <p className="body-lg text-white/70">
           Start with a £750 trial batch of 8 ads. If the quality isn&apos;t
-          there, the batch is on us — and if you continue, the £750 comes off
+          there, the batch is on us. If you continue, the £750 comes off
           month one.
         </p>
         <Button

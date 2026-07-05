@@ -1,29 +1,43 @@
-"use client";
-
-import { useReducedMotion } from "motion/react";
-
 /**
  * DESIGN.md §14 — FatigueCurve. The ad-fatigue story for the Problem canvas
  * (sand → deep companion tone = deep-sand).
  *
  * A decaying CTR line drops from a high left start toward the right (a top
  * creative fatiguing over ~14 days). An accent dot rides the exact decay path
- * on a 6s loop; a dashed deep-sand "fresh batch" line rises off the fatigued
- * tail, marching upward to suggest a reset.
+ * on a 6s loop (CSS Motion Path); a dashed deep-sand "fresh batch" line rises
+ * off the fatigued tail, marching upward to suggest a reset.
+ *
+ * Pure-CSS server component — no JS, no hydration. Motion is gated by
+ * `prefers-reduced-motion: no-preference`; the un-animated base state is the
+ * static rest (dot parked at the curve tail), so reduced-motion users and any
+ * browser without CSS Motion Path get the correct static render.
  *
  * Fixed 340×240 viewBox + preserveAspectRatio → zero layout shift; the SVG
  * fills its container (w-full h-auto). Mono labels are absolutely-positioned
- * HTML over the SVG so they use the real .mono-note face. Under reduced motion
- * the dot rests at the bottom of the curve and the fresh line is static.
+ * HTML over the SVG so they use the real .mono-note face.
  */
+
+// The single source of truth for the decay curve; the dot rides this exact path.
+const CURVE = "M40 46 C74 50 92 92 138 122 C184 152 244 170 320 176";
+
 export default function FatigueCurve({ className = "" }: { className?: string }) {
-  const reduced = useReducedMotion();
-
-  // The single source of truth for the decay curve; the dot rides this exact id.
-  const CURVE = "M40 46 C74 50 92 92 138 122 C184 152 244 170 320 176";
-
   return (
     <div aria-hidden className={`relative ${className}`}>
+      <style>{`
+        .fc-dot{
+          offset-path:path("${CURVE}");
+          offset-rotate:0deg;
+          offset-distance:100%;
+        }
+        .fc-dash{stroke-dashoffset:0}
+        @media (prefers-reduced-motion: no-preference){
+          .fc-dot{animation:fc-ride 6s linear infinite}
+          .fc-dash{animation:fc-dash 1.4s linear infinite}
+        }
+        @keyframes fc-ride{from{offset-distance:0%}to{offset-distance:100%}}
+        @keyframes fc-dash{from{stroke-dashoffset:11}to{stroke-dashoffset:0}}
+      `}</style>
+
       <svg
         viewBox="0 0 340 240"
         preserveAspectRatio="xMidYMid meet"
@@ -49,29 +63,19 @@ export default function FatigueCurve({ className = "" }: { className?: string })
 
         {/* fresh-batch reset — dashed deep-sand line rising off the tail */}
         <path
+          className="fc-dash"
           d="M232 166 C258 158 266 116 302 80"
           fill="none"
           stroke="var(--deep-sand)"
           strokeWidth="1.5"
           strokeLinecap="round"
           strokeDasharray="6 5"
-        >
-          {!reduced && (
-            <animate
-              attributeName="stroke-dashoffset"
-              from="11"
-              to="0"
-              dur="1.4s"
-              repeatCount="indefinite"
-            />
-          )}
-        </path>
+        />
         {/* fresh endpoint marker */}
         <circle cx="302" cy="80" r="2.5" fill="var(--deep-sand)" />
 
         {/* the decaying CTR curve — the prominent line the dot rides */}
         <path
-          id="curve"
           d={CURVE}
           fill="none"
           stroke="var(--ink)"
@@ -79,21 +83,8 @@ export default function FatigueCurve({ className = "" }: { className?: string })
           strokeLinecap="round"
         />
 
-        {/* travelling CTR dot: rides #curve on a 6s loop; rests at the tail when reduced */}
-        <circle
-          r="5"
-          fill="var(--accent)"
-          stroke="#fff"
-          strokeWidth="1.5"
-          cx={reduced ? 320 : 0}
-          cy={reduced ? 176 : 0}
-        >
-          {!reduced && (
-            <animateMotion dur="6s" repeatCount="indefinite" rotate="0">
-              <mpath href="#curve" />
-            </animateMotion>
-          )}
-        </circle>
+        {/* travelling CTR dot: rides the curve on a 6s loop; rests at the tail */}
+        <circle className="fc-dot" r="5" fill="var(--accent)" stroke="#fff" strokeWidth="1.5" />
       </svg>
 
       {/* mono-note labels (real .mono-note face) positioned over the SVG */}

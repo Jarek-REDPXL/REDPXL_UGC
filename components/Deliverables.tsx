@@ -10,7 +10,7 @@ import BatchDrop from "@/components/graphics/BatchDrop";
  */
 
 const DELIVERABLES = [
-  "Scripted, edited, captioned — nothing to finish",
+  "Scripted, edited, captioned. Nothing to finish.",
   "Named + labeled files, organised by hook & format",
   "Statics and video, your chosen split",
   "All sizes: 9:16 · 1:1 · 4:5",

@@ -1,7 +1,3 @@
-"use client";
-
-import { useReducedMotion } from "motion/react";
-
 /**
  * DESIGN.md §14 — VariationExploder. The "unlimited variations" story for the
  * Why canvas: one master creative branching into many.
@@ -9,13 +5,16 @@ import { useReducedMotion } from "motion/react";
  * A single "MASTER" phone on the left fans six thin deep-sand connectors out to
  * six tiny variant cards, each carrying a different mock hook chip. The variant
  * cards float gently (translate on the y-axis only) on a staggered ~4s loop via
- * SMIL, so labels stay locked to their card. prefers-reduced-motion renders the
- * static, evenly-placed end-state.
+ * a namespaced CSS keyframe, so labels stay locked to their card.
+ *
+ * Pure-CSS server component — no JS, no hydration. Per-card duration + negative
+ * delay (organic desync) are static inline styles; motion is gated by
+ * `prefers-reduced-motion: no-preference`, so reduced-motion renders the static,
+ * evenly-placed end-state.
  *
  * Fixed 300×260 viewBox + preserveAspectRatio → zero layout shift; the SVG
  * fills its container (w-full h-auto). aria-hidden. Labels ride inside each
- * animated group via foreignObject so they use the real .mono-note face and
- * float in sync with their card.
+ * group via foreignObject so they use the real .mono-note face.
  */
 
 const START_X = 62;
@@ -31,17 +30,15 @@ const CARDS: { label: string; cy: number }[] = [
 ];
 
 // organic desync — vary duration + phase so no two cards breathe in lockstep.
-// negative begins start each loop mid-flight (no initial pop).
+// negative delays start each loop mid-flight (no initial pop).
 const DUR = ["4s", "4.4s", "3.8s", "4.2s", "3.6s", "4.6s"];
-const BEGIN = ["0s", "-0.7s", "-1.4s", "-2.1s", "-2.8s", "-3.5s"];
+const DELAY = ["0s", "-0.7s", "-1.4s", "-2.1s", "-2.8s", "-3.5s"];
 
 export default function VariationExploder({
   className = "",
 }: {
   className?: string;
 }) {
-  const reduced = useReducedMotion();
-
   return (
     <svg
       aria-hidden
@@ -50,6 +47,13 @@ export default function VariationExploder({
       className={`h-auto w-full ${className}`}
       role="presentation"
     >
+      <style>{`
+        @keyframes ve-float{0%,100%{transform:translateY(-4px)}50%{transform:translateY(4px)}}
+        @media (prefers-reduced-motion: no-preference){
+          .ve-card{animation:ve-float 4s ease-in-out infinite}
+        }
+      `}</style>
+
       {/* connectors — behind everything, fan from the master's right edge */}
       {CARDS.map(({ cy }) => (
         <path
@@ -115,21 +119,11 @@ export default function VariationExploder({
 
       {/* variant cards — gently floating, each label locked to its card */}
       {CARDS.map(({ label, cy }, i) => (
-        <g key={label}>
-          {!reduced && (
-            <animateTransform
-              attributeName="transform"
-              type="translate"
-              values="0 -4; 0 4; 0 -4"
-              keyTimes="0;0.5;1"
-              calcMode="spline"
-              keySplines="0.42 0 0.58 1;0.42 0 0.58 1"
-              dur={DUR[i]}
-              begin={BEGIN[i]}
-              repeatCount="indefinite"
-              additive="sum"
-            />
-          )}
+        <g
+          key={label}
+          className="ve-card"
+          style={{ animationDuration: DUR[i], animationDelay: DELAY[i] }}
+        >
           <rect
             x="200"
             y={cy - 14}

@@ -100,7 +100,9 @@ export default function Canvas({
             </span>
             <span className={`h-px flex-1 self-center ${ruleColor}`} aria-hidden />
             {note && (
-              <span className={`mono-note whitespace-nowrap ${noteColor}`}>
+              <span
+                className={`mono-note hidden whitespace-nowrap min-[380px]:inline ${noteColor}`}
+              >
                 / {note}
               </span>
             )}

@@ -33,6 +33,7 @@ const VIEWPORTS = [
 
 // section ids to capture individually (must match component `id`s in page.tsx)
 const SECTION_IDS = [
+  "problem",
   "work",
   "why",
   "maths",
@@ -120,7 +121,7 @@ const run = async () => {
 
   // interaction states at a representative desktop + mobile width
   for (const vp of [{ w: 1280, h: 800 }, { w: 390, h: 844 }]) {
-    const ctx = await browser.newContext({ viewport: vp });
+    const ctx = await browser.newContext({ viewport: { width: vp.w, height: vp.h } });
     const page = await ctx.newPage();
     await page.goto(BASE, { waitUntil: "networkidle" });
     await page.waitForTimeout(800);

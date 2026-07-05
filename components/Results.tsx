@@ -24,7 +24,7 @@ const STATS: { parts: Part[]; desc: string }[] = [
   },
   {
     parts: [
-      { t: "−", tone: "accent" },
+      { t: "-", tone: "accent" },
       { value: 38, tone: "ink" },
       { t: "%", tone: "accent" },
     ],
@@ -33,7 +33,7 @@ const STATS: { parts: Part[]; desc: string }[] = [
   {
     parts: [
       { value: 10, tone: "ink" },
-      { t: "×", tone: "accent" },
+      { t: "x", tone: "accent" },
     ],
     desc: "Creative output.",
   },
@@ -68,6 +68,7 @@ const QUOTES = [
 export default function Results() {
   return (
     <Canvas
+      id="results"
       idx="07"
       name="RESULTS"
       note="PLACEHOLDER DATA"
@@ -94,7 +95,7 @@ export default function Results() {
             </div>
             <p className="body-copy mt-4">{s.desc}</p>
             <p className="mono-note text-text-3 mt-6">
-              Source: campaign data — pending
+              Source: campaign data, pending
             </p>
           </RevealItem>
         ))}
@@ -108,7 +109,7 @@ export default function Results() {
             className="rounded-card border border-line bg-bg p-7"
           >
             {/* TODO:REAL-DATA */}
-            <p className="quote">“{q.quote}”</p>
+            <p className="quote">&quot;{q.quote}&quot;</p>
             <div className="mt-5 flex items-center gap-3">
               <div className="grid h-8 w-8 place-items-center rounded-full bg-bg-inset">
                 <span className="mono-note text-text-2">{q.initials}</span>

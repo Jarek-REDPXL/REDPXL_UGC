@@ -1,16 +1,15 @@
-"use client";
-
-import { useRef } from "react";
-import { motion, useInView, useReducedMotion } from "motion/react";
-
 /**
  * MathsBars — horizontal cost comparison for the Maths canvas (sage).
  *
  * Two full-width tracks. The long bar (creator video, --text-3) fills its
  * track completely; the short bar (Redpxl plan, --accent) fills ~30% of it,
- * so the fraction reads visually. Bars fill from 0 → target once, when
- * scrolled into view. Under prefers-reduced-motion they render at full width
- * immediately (no animation). Values use .label + tabular figures.
+ * so the fraction reads visually. Values use .label + tabular figures.
+ *
+ * Pure-CSS server component — no JS, no hydration. Each bar grows from
+ * scaleX(0) → scaleX(1) (transform-origin left, compositor-friendly) as the
+ * graphic scrolls into view, via a CSS scroll-driven animation. The base state
+ * is scaleX(1) (full), so reduced-motion users and any browser without
+ * scroll-timeline support get the correct static full bars — no flash of empty.
  *
  * aria-hidden per the graphics convention — the Maths canvas copy carries the
  * accessible statement of the same numbers.
@@ -23,36 +22,44 @@ type Row = {
   pct: number;
   barClass: string;
   valueClass: string;
-  delay: number;
 };
 
 const ROWS: Row[] = [
   {
     label: "Creator video",
-    value: "£150–500",
+    value: "£150 to £500",
     pct: 100,
     barClass: "bg-text-3",
     valueClass: "text-ink",
-    delay: 0,
   },
   {
     label: "Redpxl plan",
-    value: "£100–133/AD",
+    value: "£100 to £133/AD",
     pct: 30,
     barClass: "bg-accent",
     valueClass: "text-accent-dark",
-    delay: 0.12,
   },
 ];
 
 export default function MathsBars({ className = "" }: { className?: string }) {
-  const ref = useRef<HTMLDivElement>(null);
-  const reduced = useReducedMotion();
-  const inView = useInView(ref, { once: true, margin: "-15% 0px" });
-  const shouldFill = reduced || inView;
-
   return (
-    <div ref={ref} aria-hidden className={className}>
+    <div aria-hidden className={className}>
+      <style>{`
+        /* base = static full (reduced-motion + no scroll-timeline support) */
+        .mb-fill{transform-origin:left;transform:scaleX(1)}
+        @media (prefers-reduced-motion: no-preference){
+          @supports (animation-timeline: view()){
+            .mb-fill{
+              transform:scaleX(0);
+              animation:mb-grow linear both;
+              animation-timeline:view();
+              animation-range:entry 15% cover 45%;
+            }
+          }
+        }
+        @keyframes mb-grow{to{transform:scaleX(1)}}
+      `}</style>
+
       <div className="flex flex-col gap-5">
         {ROWS.map((r) => (
           <div key={r.label}>
@@ -63,15 +70,9 @@ export default function MathsBars({ className = "" }: { className?: string }) {
               </span>
             </div>
             <div className="mt-3 h-7 w-full overflow-hidden rounded-[4px] bg-ink/5">
-              <motion.div
-                className={`h-full rounded-[4px] ${r.barClass}`}
-                initial={false}
-                animate={{ width: shouldFill ? `${r.pct}%` : "0%" }}
-                transition={
-                  reduced
-                    ? { duration: 0 }
-                    : { duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: r.delay }
-                }
+              <div
+                className={`mb-fill h-full rounded-[4px] ${r.barClass}`}
+                style={{ width: `${r.pct}%` }}
               />
             </div>
           </div>
@@ -79,7 +80,7 @@ export default function MathsBars({ className = "" }: { className?: string }) {
       </div>
 
       <p className="mono-note text-text-3 mt-6">
-        Based on starter→scale plans · excl. VAT
+        Based on starter to scale plans · excl. VAT
       </p>
     </div>
   );

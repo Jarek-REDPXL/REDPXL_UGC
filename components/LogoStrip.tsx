@@ -17,7 +17,7 @@ const WORDMARKS = [
 // three wordmarks in both marquee passes so the loop stays seamless.
 const CHIPS: Record<string, string> = {
   LUMEN: "+212% ROAS",
-  MERIDIAN: "−38% CPA",
+  MERIDIAN: "-38% CPA",
   VERAX: "72H DELIVERY",
 };
 

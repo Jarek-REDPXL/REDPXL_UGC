@@ -34,7 +34,7 @@ export default function Footer() {
         {/* Row 2 — company + legal meta */}
         <div className="mt-8 flex flex-col gap-3 border-t border-line pt-6 sm:flex-row sm:flex-wrap sm:items-center sm:gap-x-6">
           <span className="mono-note">
-            A Redpxl company — {site.location}
+            A Redpxl company, {site.location}
           </span>
           <a
             href={`mailto:${site.supportEmail}`}

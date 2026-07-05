@@ -34,7 +34,7 @@ export default function Work() {
               <span className="mono-note text-text-3">THE WORK</span>
             </span>
             <span className="h-px flex-1 self-center bg-line" aria-hidden />
-            <span className="mono-note whitespace-nowrap">
+            <span className="mono-note hidden whitespace-nowrap min-[380px]:inline">
               / 10 NICHES · LOOPING
             </span>
           </div>
@@ -48,8 +48,8 @@ export default function Work() {
 
         <Reveal>
           <p className="body-lg mt-3">
-            See it, then judge it. Most people can&apos;t tell it&apos;s AI — and
-            on paid social, native beats polished.
+            See it, then judge it. Most people can&apos;t tell it&apos;s AI. On
+            paid social, native beats polished.
           </p>
         </Reveal>
       </div>

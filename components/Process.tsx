@@ -12,7 +12,7 @@ const STEPS = [
   {
     num: "02",
     title: "Produce",
-    body: "We generate platform-ready statics and videos — fresh hooks, new angles, native formats — built to your brand.",
+    body: "We generate platform-ready statics and videos built to your brand. Fresh hooks, new angles, native formats.",
   },
   {
     num: "03",
@@ -27,7 +27,7 @@ export default function Process() {
       id="process"
       idx="05"
       name="PROCESS"
-      note="BRIEF → LIVE IN 72H"
+      note="BRIEF TO LIVE IN 72H"
       tint="mist"
       title="Three steps. "
       titleDeep="Zero friction."

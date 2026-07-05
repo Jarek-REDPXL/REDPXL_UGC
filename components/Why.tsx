@@ -66,12 +66,12 @@ export default function Why() {
             <h3 className="title-1">Hooks that convert</h3>
             <p className="body-copy mt-2">
               Every script is built from a library of 50+ proven direct-response
-              hook frameworks — not guesswork.
+              hook frameworks, not guesswork.
             </p>
             <div className="mt-4 rounded-btn border border-line bg-bg-subtle p-3">
               {[
                 "POV: YOU'VE BEEN DOING IT WRONG",
-                "STOP SCROLLING IF YOU…",
+                "STOP SCROLLING IF YOU RUN ADS",
                 "3 REASONS YOUR ADS FLOP",
               ].map((line) => (
                 <div
@@ -104,8 +104,8 @@ export default function Why() {
           <BentoCard icon={Layers} label="VOLUME">
             <h3 className="title-1 mt-4">The volume you need</h3>
             <p className="body-copy mt-2">
-              Most brands ship 2–4 ads a month. Winning on paid social takes
-              15–20. We produce at that pace.
+              Most brands ship 2 to 4 ads a month. Winning on paid social takes
+              15 to 20. We produce at that pace.
             </p>
             <VariationExploder className="w-full mt-4" />
           </BentoCard>
@@ -116,7 +116,7 @@ export default function Why() {
           <BentoCard icon={PoundSterling} label="COST">
             <h3 className="title-1 mt-4">A fraction of the cost</h3>
             <p className="body-copy mt-2">
-              Creator video runs £150–500 a piece. Our plans work out from
+              Creator video runs £150 to £500 a piece. Our plans work out from
               around £100 an ad.
             </p>
           </BentoCard>
@@ -127,7 +127,7 @@ export default function Why() {
           <BentoCard icon={Smartphone} label="NATIVE">
             <h3 className="title-1 mt-4">Native, not glossy</h3>
             <p className="body-copy mt-2">
-              UGC-style creative built to convert on paid social — not studio
+              UGC-style creative built to convert on paid social, not studio
               gloss that gets scrolled past.
             </p>
             <FormatMorph className="mx-auto mt-3" />

@@ -1,4 +1,4 @@
-# REDPXL UGC — Design Specification v2.0
+# REDPXL UGC — Design Specification v2.1
 
 This document is the single source of truth for the REDPXL UGC landing page.
 Every colour, size, weight, spacing value and interaction on the page derives
@@ -48,7 +48,7 @@ mapped into the Tailwind theme. No raw hex anywhere in components.
 | `--ink`        | `#17181A` | Headings, primary buttons, final CTA band bg      |
 | `--ink-2`      | `#2B2C2F` | Primary button hover                              |
 | `--text-2`     | `#5F6368` | Body copy, secondary text                         |
-| `--text-3`     | `#8A8D93` | Captions, annotations, footer meta                |
+| `--text-3`     | `#6B6E75` | Captions, annotations, footer meta (AA on tints)  |
 | `--line`       | `#E8E9EC` | ALL hairline borders, dividers                    |
 | `--line-hover` | `#D9DADE` | Card border on hover                              |
 | `--bezel`      | `#1D1E20` | Phone frame bezels                                |
@@ -583,9 +583,14 @@ wordmark + red square left; anchor links `label` white/70 right; then a
 
 ## 10. Accessibility & quality floor
 
-- Contrast: `--text-2` on white = 5.9:1 ✓; `--text-3` only for 12px+ mono
-  captions (4.0:1 — acceptable for incidental text, never for body copy).
-  Never `--accent` text below 14px except annotations (incidental).
+- Contrast: `--text-2` on white = 5.9:1 ✓; `--text-3` (`#6B6E75`, darkened in
+  v2.1) is legible on both white and the canvas tints, used for mono captions
+  and quiet meta (never for body copy). Never `--accent` text below 14px except
+  annotations (incidental).
+- Cascade: the §3 type-scale classes live in `@layer components` so Tailwind
+  colour utilities (e.g. `text-white/70` on the dark ink canvas) reliably
+  override a class's default colour. Unlayered type classes would beat
+  `@layer utilities` and silently render dark-on-dark.
 - All interactive elements keyboard reachable; focus-visible per §8.1.
 - Videos: `muted playsInline`, `preload="none"`, `aria-label` from chip text.
 - Semantic landmarks: `header / main / section[aria-labelledby] / footer`.
@@ -754,3 +759,5 @@ PhoneFrame reel — note reads `/ 10 NICHES · LOOPING`.
 *v1.2 — Ultra polish pass: PosterCanvas placeholder system (§12); count-up stats; hero life (cycling caption, corner ticks, batch tick); motion/craft details (tabular figures, text-wrap, annotation rule-fill, nav active dot, reel momentum, comparison row hover, 6px bezels); 32px SVG favicon + og.png.*
 
 *v2.0 — Clay-desaturated section-canvas architecture; bespoke SVG graphics system; infinite marquee reel; 3 new sections (The Maths, What You Get, The Guarantee); sections renumbered 00–12.*
+
+*v2.1 — Graphics converted to pure-CSS server components (no client hydration) for mobile perf. Contrast + cascade fix: type scale moved to `@layer components` so colour utilities override on the dark canvas; `--text-3` darkened to `#6B6E75` for AA legibility on tints. Copy humanised across all sections (no em/en dashes, ellipses or fancy punctuation; plain professional voice). Responsive: hero cluster stacks below xl and clips decorative bleed; canvas annotation note hides below 380px. Responsive audit tooling (Playwright, 8 widths, automated overflow check) + ASSETS.md drop-in map + dev-only placeholder badges.*

@@ -41,14 +41,14 @@ function CornerTick({ className }: { className: string }) {
  */
 export default function Hero() {
   return (
-    <section id="top" aria-labelledby="hero-title">
-      <div className="container-x grid grid-cols-1 items-center gap-12 pb-24 pt-16 lg:grid-cols-[7fr_5fr] lg:gap-16">
+    <section id="top" aria-labelledby="hero-title" className="overflow-x-clip">
+      <div className="container-x grid grid-cols-1 items-center gap-12 pb-24 pt-16 xl:grid-cols-[7fr_5fr] xl:gap-16">
         {/* Left column — server-rendered text, CSS staggered rise */}
         <div>
           <div className="hero-rise" style={{ animationDelay: "0.05s" }}>
             <Annotation
               idx="00"
-              name="AI UGC video ads — done for you"
+              name="AI UGC video ads, done for you"
               labelId="hero-title"
             />
           </div>
@@ -78,7 +78,7 @@ export default function Hero() {
               Book a free strategy call
             </Button>
             <Button href="#work" variant="secondary">
-              See the work →
+              See the work
             </Button>
           </div>
         </div>
@@ -104,16 +104,16 @@ export default function Hero() {
               {/* TODO:REAL-DATA drop MP4s in /public/videos and pass src */}
               <PhoneFrame
                 chip="FITNESS · REELS"
-                className="-mr-6 w-[200px] -rotate-[2.5deg] lg:w-[220px]"
+                className="-mr-6 w-[180px] -rotate-[2.5deg] lg:w-[200px] xl:w-[220px]"
               />
               <PhoneFrame
                 chip="SKINCARE · TIKTOK"
                 cycleHooks={HERO_HOOKS}
-                className="relative z-10 w-[220px] -translate-y-3 lg:w-[240px]"
+                className="relative z-10 w-[200px] -translate-y-3 lg:w-[220px] xl:w-[240px]"
               />
               <PhoneFrame
                 chip="SAAS · YOUTUBE"
-                className="-ml-6 w-[200px] rotate-[2deg] lg:w-[220px]"
+                className="-ml-6 w-[180px] rotate-[2deg] lg:w-[200px] xl:w-[220px]"
               />
             </div>
 

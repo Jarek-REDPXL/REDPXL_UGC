@@ -28,7 +28,7 @@ export default function BatchCaption() {
   return (
     <p className="mono-note mt-4 text-center">
       output / batch{" "}
-      <span className="tabular-nums">{String(batch).padStart(3, "0")}</span> —
+      <span className="tabular-nums">{String(batch).padStart(3, "0")}</span> ·
       skincare · 9:16 · 72h
     </p>
   );

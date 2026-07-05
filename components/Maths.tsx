@@ -20,8 +20,8 @@ export default function Maths() {
     >
       <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-2">
         <p className="body-lg max-w-[480px]!">
-          A single UGC creator video runs £150–£500. Our Growth plan lands 30
-          ads a month at £117 each — statics and video, delivered in one batch.
+          A single UGC creator video runs £150 to £500. Our Growth plan lands 30
+          ads a month at £117 each. Statics and video, delivered in one batch.
         </p>
         <MathsBars className="w-full" />
       </div>

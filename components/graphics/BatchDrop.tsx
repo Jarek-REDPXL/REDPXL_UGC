@@ -1,7 +1,4 @@
-"use client";
-
 import { Image as ImageIcon, Package, Play } from "lucide-react";
-import { useReducedMotion } from "motion/react";
 
 /**
  * DESIGN.md — Deliverables canvas graphic (cream). A folder/delivery mock: a
@@ -9,8 +6,10 @@ import { useReducedMotion } from "motion/react";
  * labelled ad tiles (image / video) on the left and a mono file-list column on
  * the right (hidden on narrow — mobile keeps just the tile grid).
  *
- * Motion: the 8 tiles do a gentle staggered opacity pulse (0.85 -> 1) on a ~6s
- * loop, transform/opacity only. prefers-reduced-motion -> fully static.
+ * Pure-CSS server component: the 8 tiles do a gentle staggered opacity pulse
+ * (0.85 → 1) on a ~6s loop via a namespaced keyframe; per-tile delay is a static
+ * inline style. Motion is gated by `prefers-reduced-motion: no-preference`, so
+ * reduced-motion users get the fully static grid with zero JS.
  */
 
 /* TODO:REAL-DATA sample tiles */
@@ -36,11 +35,15 @@ const FILES = [
 ];
 
 export default function BatchDrop({ className = "" }: { className?: string }) {
-  const reduced = useReducedMotion();
-
   return (
     <div className={`w-full ${className}`} aria-hidden>
-      <style>{`@keyframes batchdrop-pulse{0%,100%{opacity:.85}50%{opacity:1}}`}</style>
+      <style>{`
+        @keyframes bd-pulse{0%,100%{opacity:.85}50%{opacity:1}}
+        .bd-tile{opacity:.85}
+        @media (prefers-reduced-motion: no-preference){
+          .bd-tile{animation:bd-pulse 6s ease-in-out infinite}
+        }
+      `}</style>
 
       <div className="overflow-hidden rounded-frame border border-line bg-bg">
         {/* header — BATCH_014 / 30 ASSETS / READY */}
@@ -57,16 +60,8 @@ export default function BatchDrop({ className = "" }: { className?: string }) {
             {TILES.map((t, i) => (
               <div
                 key={t.label}
-                style={
-                  reduced
-                    ? undefined
-                    : {
-                        animation: `batchdrop-pulse 6s ease-in-out ${(
-                          i * 0.22
-                        ).toFixed(2)}s infinite`,
-                      }
-                }
-                className="flex aspect-square flex-col items-center justify-center gap-1 rounded-chip border border-line bg-bg-inset"
+                style={{ animationDelay: `${(i * 0.22).toFixed(2)}s` }}
+                className="bd-tile flex aspect-square flex-col items-center justify-center gap-1 rounded-chip border border-line bg-bg-inset"
               >
                 {t.type === "video" ? (
                   <Play size={16} className="text-text-2" />

@@ -14,7 +14,7 @@
   --ink: #17181a;
   --ink-2: #2b2c2f;
   --text-2: #5f6368;
-  --text-3: #8a8d93;
+  --text-3: #6b6e75;
   --line: #e8e9ec;
   --line-hover: #d9dade;
   --bezel: #1d1e20;
@@ -186,7 +186,11 @@ button:focus-visible,
 
 /* ============================================================
    §3.2 Type scale (exact) — tokenised utility classes
+   In @layer components so Tailwind color utilities (e.g. text-white/70 on the
+   dark ink canvas) reliably override the class's default color. Unlayered CSS
+   would otherwise beat @layer utilities regardless of order.
    ============================================================ */
+@layer components {
 .display-1 {
   font-size: clamp(2.875rem, 6vw, 4.5rem);
   font-weight: 600;
@@ -275,6 +279,7 @@ button:focus-visible,
   text-transform: uppercase;
   color: var(--accent);
   font-variant-numeric: tabular-nums;
+}
 }
 
 /* ============================================================

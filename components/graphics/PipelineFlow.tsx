@@ -1,18 +1,19 @@
-"use client";
-
-import { useReducedMotion } from "motion/react";
-
 /**
  * DESIGN.md §13 / §14 — PipelineFlow graphic (Process canvas, mist).
  *
  * A flat horizontal "marble-run": a single gentle S-curve (deep-mist, 1.5px)
  * threads three evenly-spaced nodes — BRIEF -> PRODUCE -> TEST — each a white
  * circle holding a lucide-style icon (document / sparkles / target), with a
- * mono-note label beneath. A 6px accent dot rides the path on an 8s loop.
+ * mono-note label beneath. A 6px accent dot rides the path on an 8s loop
+ * (CSS Motion Path).
+ *
+ * Pure-CSS server component — no JS, no hydration. Motion is gated by
+ * `prefers-reduced-motion: no-preference`; the un-animated base parks the dot
+ * at the first node, so reduced-motion users (and any browser without CSS
+ * Motion Path) get the correct static render.
  *
  * Fixed 720x140 viewBox + preserveAspectRatio => zero layout shift; the SVG
  * fills its container width and scales down cleanly above the three cards.
- * Under prefers-reduced-motion the dot parks at the first node, no motion.
  */
 
 const CY = 54;
@@ -68,10 +69,20 @@ function NodeIcon({ kind, cx, cy }: { kind: 0 | 1 | 2; cx: number; cy: number })
 }
 
 export default function PipelineFlow({ className = "" }: { className?: string }) {
-  const reduced = useReducedMotion();
-
   return (
     <div aria-hidden className={`relative w-full ${className}`}>
+      <style>{`
+        .pf-dot{
+          offset-path:path("${PATH}");
+          offset-rotate:0deg;
+          offset-distance:0%;
+        }
+        @media (prefers-reduced-motion: no-preference){
+          .pf-dot{animation:pf-ride 8s linear infinite}
+        }
+        @keyframes pf-ride{from{offset-distance:0%}to{offset-distance:100%}}
+      `}</style>
+
       <svg
         viewBox="0 0 720 140"
         preserveAspectRatio="xMidYMid meet"
@@ -101,24 +112,11 @@ export default function PipelineFlow({ className = "" }: { className?: string })
           </g>
         ))}
 
-        {/* travelling accent dot (halo + core) */}
-        {reduced ? (
-          <g>
-            <circle cx={120} cy={CY} r={6} fill="var(--accent)" opacity={0.16} />
-            <circle cx={120} cy={CY} r={3} fill="var(--accent)" />
-          </g>
-        ) : (
-          <g>
-            <circle r={6} fill="var(--accent)" opacity={0.16} />
-            <circle r={3} fill="var(--accent)" />
-            <animateMotion
-              dur="8s"
-              repeatCount="indefinite"
-              calcMode="linear"
-              path={PATH}
-            />
-          </g>
-        )}
+        {/* travelling accent dot (halo + core) — rides the path via CSS Motion Path */}
+        <g className="pf-dot">
+          <circle r={6} fill="var(--accent)" opacity={0.16} />
+          <circle r={3} fill="var(--accent)" />
+        </g>
       </svg>
 
       {/* mono-note labels — crisp overlaid HTML, positioned under each node */}

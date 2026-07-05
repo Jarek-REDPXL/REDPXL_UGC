@@ -72,6 +72,14 @@ export default function VideoSlot({
       <span className="mono-note absolute left-2 top-2 z-20 rounded-chip border border-line bg-white/[0.92] px-2 py-[3px] !text-ink">
         {chip}
       </span>
+
+      {/* dev-only placeholder badge — flags an unfilled slot in development;
+          never renders in the production build (see ASSETS.md drop-in map) */}
+      {!src && process.env.NODE_ENV === "development" && (
+        <span className="mono-note absolute bottom-2 right-2 z-20 rounded-chip border border-dashed border-accent bg-white/[0.92] px-2 py-[3px] !text-[9px] uppercase tracking-wider !text-accent">
+          Placeholder
+        </span>
+      )}
     </div>
   );
 }

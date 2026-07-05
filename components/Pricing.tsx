@@ -18,7 +18,7 @@ type Plan = {
 
 // Every plan starts with these four shared inclusions, in this order.
 const SHARED_INCLUSIONS = [
-  "Mix of image + video ads — you choose the split",
+  "Mix of image + video ads, you choose the split",
   "All sizes: 9:16 · 1:1 · 4:5",
   "1 revision per ad",
   "Full paid usage rights",
@@ -72,7 +72,7 @@ export default function Pricing() {
           <h3 className="title-1 mt-4">See the quality before you commit.</h3>
           <p className="body-copy mt-2 max-w-[520px]">
             8 ads, delivered in 72 hours. The full £750 is credited toward month
-            one if you start a plan within 14 days — so trying us is effectively
+            one if you start a plan within 14 days, so trying us is effectively
             free.
           </p>
         </div>
@@ -151,8 +151,8 @@ export default function Pricing() {
           Prefer a one-off batch? £150 per ad, 10-ad minimum.
         </p>
         <p className="mono-note text-center">
-          Rush 48-hour delivery +25% · Pay 3 months upfront −10% · Pay 12 months
-          −15%
+          Rush 48-hour delivery +25% · Pay 3 months upfront -10% · Pay 12 months
+          -15%
         </p>
         <p className="mono-note text-center">All prices excluding VAT</p>
       </div>
