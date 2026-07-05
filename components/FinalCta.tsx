@@ -26,7 +26,7 @@ export default function FinalCta() {
 
       <Reveal>
         <div className="flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
-          <WhatsAppButton variant="invert" />
+          <WhatsAppButton />
           <Button href={`mailto:${site.email}`} variant="ghost">
             {site.email}
           </Button>

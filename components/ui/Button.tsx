@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 
-type Variant = "primary" | "secondary" | "invert" | "ghost";
+type Variant = "primary" | "secondary" | "invert" | "ghost" | "whatsapp";
 
 type ButtonProps = {
   children: ReactNode;
@@ -17,6 +17,7 @@ const variantClass: Record<Variant, string> = {
   secondary: "btn-secondary",
   invert: "btn-invert",
   ghost: "btn-ghost",
+  whatsapp: "btn-whatsapp",
 };
 
 /** DESIGN.md §8.1 — buttons. Renders an anchor when href is given. */

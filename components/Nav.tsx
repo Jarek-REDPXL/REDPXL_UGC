@@ -93,7 +93,7 @@ export default function Nav() {
 
         {/* Right: CTA */}
         <div className="hidden items-center lg:flex">
-          <WhatsAppButton variant="primary" />
+          <WhatsAppButton />
         </div>
 
         {/* Mobile toggle */}
@@ -128,7 +128,7 @@ export default function Nav() {
             ))}
           </ul>
           <div className="content-x flex flex-col gap-3 pb-5 pt-3">
-            <WhatsAppButton variant="primary" className="w-full" />
+            <WhatsAppButton className="w-full" />
           </div>
         </div>
       )}

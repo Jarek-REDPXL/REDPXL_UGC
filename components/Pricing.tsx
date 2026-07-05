@@ -80,7 +80,7 @@ export default function Pricing() {
             <span className="stat">£750</span>
             <span className="mono-note">ONE-TIME</span>
           </div>
-          <WhatsAppButton variant="primary" className="mt-4" />
+          <WhatsAppButton className="mt-4" />
         </div>
       </div>
 
@@ -129,10 +129,7 @@ export default function Pricing() {
                 ))}
               </ul>
 
-              <WhatsAppButton
-                variant={plan.featured ? "primary" : "secondary"}
-                className="mt-8 w-full"
-              />
+              <WhatsAppButton className="mt-8 w-full" />
             </div>
           </RevealItem>
         ))}

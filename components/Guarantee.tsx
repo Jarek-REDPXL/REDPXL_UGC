@@ -25,7 +25,7 @@ export default function Guarantee() {
           there, the batch is on us. If you continue, the £750 comes off
           month one.
         </p>
-        <WhatsAppButton variant="invert" className="mt-6" />
+        <WhatsAppButton className="mt-6" />
       </Reveal>
     </Canvas>
   );

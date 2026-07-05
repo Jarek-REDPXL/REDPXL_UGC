@@ -114,7 +114,7 @@ export default function Hero() {
           className="hero-rise mt-8 flex w-full flex-col gap-3 sm:w-auto sm:flex-row sm:items-center sm:justify-center sm:gap-4"
           style={{ animationDelay: "0.32s" }}
         >
-          <WhatsAppButton variant="primary" className="w-full sm:w-auto" />
+          <WhatsAppButton className="w-full sm:w-auto" />
           <Button href="#work" variant="secondary" className="w-full sm:w-auto">
             See the work →
           </Button>
