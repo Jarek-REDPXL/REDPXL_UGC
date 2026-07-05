@@ -19,11 +19,12 @@ export default function FinalCta() {
       tint="ink"
       title="Stop running tired ads."
       sub="Get your first batch this week and give your paid social the creative volume it's been missing."
+      centered
     >
-      <Grain opacity={0.04} />
+      <Grain opacity={0.025} />
 
       <Reveal>
-        <div className="flex flex-col gap-4 sm:flex-row sm:items-center">
+        <div className="flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
           <Button href={site.bookingUrl} external variant="invert">
             Book a free strategy call
           </Button>
@@ -33,7 +34,7 @@ export default function FinalCta() {
         </div>
       </Reveal>
 
-      <p className="mono-note mt-10 text-white/40">
+      <p className="mono-note mt-8 text-white/40">
         REDPXL UGC · LONDON · EST. 2024
       </p>
     </Canvas>

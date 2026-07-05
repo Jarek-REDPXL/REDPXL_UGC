@@ -5,19 +5,13 @@ import sharp from "sharp";
 import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
 
-const SIZE = 96;
-// deterministic pseudo-random so the texture is stable across builds
-let seed = 1337;
-const rand = () => {
-  seed = (seed * 1103515245 + 12345) & 0x7fffffff;
-  return seed / 0x7fffffff;
-};
-
-// grayscale noise, single channel; contrast kept mild so the overlay reads soft
+const SIZE = 128;
+// Uniform white noise (no large-scale clustering) centred on mid-grey so the
+// mix-blend-overlay stays even and subtle on both light tints and the dark ink
+// band — no muddy gradient. Grays kept in a tight band around 128.
 const buf = Buffer.alloc(SIZE * SIZE);
 for (let i = 0; i < buf.length; i++) {
-  const n = rand();
-  buf[i] = Math.round(90 + n * 130); // mid-range grays 90..220
+  buf[i] = Math.round(108 + Math.random() * 40); // grays 108..148 (soft, even)
 }
 
 const png = await sharp(buf, {
