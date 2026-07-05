@@ -74,7 +74,7 @@ Drop the files in with zero code change ([MeetTheTeam.tsx](components/MeetTheTea
 
 | Slot | File | Spec |
 |------|------|------|
-| 5 member portraits | `public/images/team/member-01.jpg` … `member-05.jpg` | ~800×1000, 4:5, object-cover |
+| 5 member portraits | `public/images/team/member-01.jpg` … `member-05.jpg` | ~900×1200, 3:4, object-cover |
 | Social video tile | `public/videos/team-social.mp4` | 1080×1920, 9:16, click-to-play |
 
 > Roles are placeholders (Founder / Creative Lead / AI Video Specialist /

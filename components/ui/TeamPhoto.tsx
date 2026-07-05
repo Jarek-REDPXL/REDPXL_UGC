@@ -14,7 +14,7 @@ export default function TeamPhoto({ src }: { src: string }) {
   return (
     <div className="absolute inset-0">
       <div className="grid h-full w-full place-items-center bg-bg-inset">
-        <User className="h-5 w-5 text-text-3" aria-hidden />
+        <User className="h-7 w-7 text-text-3" aria-hidden />
       </div>
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
