@@ -26,19 +26,26 @@ export default function Deliverables() {
       name="WHAT YOU GET"
       note="EVERY BATCH"
       tint="cream"
-      title="One brief in. "
-      titleDeep="A ready-to-run batch out."
       contentClassName="!mt-8"
     >
+      {/* Headline lives in the left column so the headline + checklist and the
+          visual share a real top baseline (items-start), instead of the visual
+          sitting below a full-width title. */}
       <div className="grid grid-cols-1 items-start gap-8 lg:grid-cols-[0.82fr_1.18fr] lg:gap-10">
-        <ul className="flex flex-col gap-4">
-          {DELIVERABLES.map((item) => (
-            <li key={item} className="flex items-start gap-2.5 body-copy">
-              <Check className="h-4 w-4 mt-0.5 shrink-0 text-pos" aria-hidden />
-              {item}
-            </li>
-          ))}
-        </ul>
+        <div>
+          <h2 className="display-2 text-ink">
+            One brief in.{" "}
+            <span className="title-deep">A ready-to-run batch out.</span>
+          </h2>
+          <ul className="mt-7 flex flex-col gap-4">
+            {DELIVERABLES.map((item) => (
+              <li key={item} className="flex items-start gap-2.5 body-copy">
+                <Check className="h-4 w-4 mt-0.5 shrink-0 text-pos" aria-hidden />
+                {item}
+              </li>
+            ))}
+          </ul>
+        </div>
 
         <BatchPreview className="w-full" />
       </div>
