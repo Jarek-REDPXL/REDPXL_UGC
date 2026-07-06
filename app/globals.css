@@ -508,10 +508,10 @@ button:focus-visible,
 }
 .btn-ghost {
   background: transparent;
-  color: rgb(255 255 255 / 0.7);
+  color: var(--text-2);
 }
 .btn-ghost:hover {
-  color: #fff;
+  color: var(--ink);
 }
 
 /* ============================================================
