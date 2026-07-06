@@ -40,14 +40,13 @@ function LinkCol({ title, children }: { title: string; children: React.ReactNode
 /**
  * DESIGN.md §9 [FOOTER] — the statement footer. A single dark ink band: a
  * display-2 CTA headline + sub + green WhatsApp CTA on the left, three
- * config-driven link columns (Explore / Contact / Social) on the right, a giant
- * low-opacity REDPXL watermark behind the lower-right, and a hairline meta row
- * carrying the real wordmark + legal links.
+ * config-driven link columns (Explore / Contact / Social) on the right, and a
+ * giant low-opacity REDPXL watermark behind the lower-right.
  */
 export default function Footer() {
   return (
     <footer className="relative mt-4 overflow-hidden bg-ink text-white">
-      <div className="content-x relative isolate pb-12 pt-24">
+      <div className="content-x relative isolate pb-20 pt-24">
         {/* giant watermark — the real logo asset (light), faint, bottom-right,
             constrained to the container so it never clips. */}
         <Logo
@@ -108,18 +107,6 @@ export default function Footer() {
                 </a>
               </li>
             </LinkCol>
-          </div>
-        </div>
-
-        {/* meta row on a hairline */}
-        <div className="relative z-10 mt-20 flex flex-col gap-4 border-t border-white/10 pt-6 sm:flex-row sm:items-center sm:justify-between">
-          <span className="mono-note text-text-3-dark">© 2026 REDPXL LIMITED</span>
-          <div className="flex items-center gap-6">
-            <a href="#top" aria-label="REDPXL home" className="flex items-center">
-              <Logo variant="light" className="h-[18px] w-auto" />
-            </a>
-            <a href="#" className="mono-note text-text-3-dark transition-colors hover:text-white">Terms</a>
-            <a href="#" className="mono-note text-text-3-dark transition-colors hover:text-white">Privacy</a>
           </div>
         </div>
       </div>
