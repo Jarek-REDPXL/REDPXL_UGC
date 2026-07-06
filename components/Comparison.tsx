@@ -128,7 +128,7 @@ export default function Comparison() {
                       : "body-copy p-5 align-top";
                     return (
                       <td key={i} className={cls}>
-                        <span className="flex items-start gap-2">
+                        <span className="flex items-center gap-2">
                           <VerdictIcon verdict={cell.verdict} />
                           <span>{cell.text}</span>
                         </span>
