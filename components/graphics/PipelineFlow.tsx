@@ -45,7 +45,7 @@ const SEQ: Point[] = [
 
 /* ---- horizontal geometry ---- */
 const HW = 1180;
-const HH = 360;
+const HH = 400;
 const RAIL_Y = 168;
 const HX0 = 60;
 const HX1 = 1116;
@@ -56,9 +56,10 @@ function Horizontal() {
   const testX = hx(12);
   let subN = -1;
 
-  // dot path: full rail, then the iterate arc back Test → Produce
-  const dotPath = `M${HX0} ${RAIL_Y} H${testX} C${testX} 300 ${produceX} 300 ${produceX} ${RAIL_Y}`;
-  const arcPath = `M${testX} ${RAIL_Y + 22} C${testX} 300 ${produceX} 300 ${produceX} ${RAIL_Y + 22}`;
+  // dot path: full rail, then the iterate arc back Test → Produce (dips deep so
+  // the arc clears the below-rail sub-labels with breathing room)
+  const dotPath = `M${HX0} ${RAIL_Y} H${testX} C${testX} 344 ${produceX} 344 ${produceX} ${RAIL_Y}`;
+  const arcPath = `M${testX} ${RAIL_Y + 22} C${testX} 344 ${produceX} 344 ${produceX} ${RAIL_Y + 22}`;
 
   return (
     <div className="hidden md:block">
@@ -83,7 +84,7 @@ function Horizontal() {
 
         {/* iterate arc + label */}
         <path d={arcPath} fill="none" stroke="var(--text-3)" strokeWidth="1.5" strokeDasharray="5 4" vectorEffect="non-scaling-stroke" opacity="0.7" />
-        <foreignObject x={(produceX + testX) / 2 - 90} y={290} width="180" height="22">
+        <foreignObject x={(produceX + testX) / 2 - 90} y={336} width="180" height="22">
           <div className="flex h-full w-full items-center justify-center">
             <span className="mono-note text-[10px]! text-accent-dark">ITERATE WINNERS ↺</span>
           </div>
@@ -95,9 +96,9 @@ function Horizontal() {
           subN += 1;
           const x = hx(i);
           const above = subN % 2 === 0;
-          const labelY = above ? 96 : 214;
+          const labelY = above ? 96 : 206;
           const tickY1 = above ? RAIL_Y - 6 : RAIL_Y + 6;
-          const tickY2 = above ? 122 : 200;
+          const tickY2 = above ? 122 : 194;
           return (
             <g key={p.label}>
               <line x1={x} y1={tickY1} x2={x} y2={tickY2} stroke="var(--line)" strokeWidth="1" vectorEffect="non-scaling-stroke" />
