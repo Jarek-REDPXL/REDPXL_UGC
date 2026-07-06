@@ -97,18 +97,6 @@ export default function Why() {
           </BentoCard>
         </RevealItem>
 
-        {/* Cost — the descending price ladder (§14) */}
-        <RevealItem className="md:col-span-3">
-          <BentoCard icon={PoundSterling} label="COST">
-            <h3 className="title-1 mt-4">A fraction of the cost</h3>
-            <p className="body-copy mt-2">
-              Creator video runs £150 to £500 a piece. Our plans work out from
-              around £100 an ad.
-            </p>
-            <CostLadder className="mt-5" />
-          </BentoCard>
-        </RevealItem>
-
         {/* Native — the real clip (hero phone 2) inside the morphing "every
             format" frame: 9:16 → 1:1 → 4:5 with a synced ratio label */}
         <RevealItem className="md:col-span-3">
@@ -119,6 +107,18 @@ export default function Why() {
               gloss that gets scrolled past.
             </p>
             <FormatMorphVideo src="/videos/Main%20Hero%20(2).mp4" className="mt-5 flex-1" />
+          </BentoCard>
+        </RevealItem>
+
+        {/* Cost — the looping odometer count-down (§14) */}
+        <RevealItem className="md:col-span-3">
+          <BentoCard icon={PoundSterling} label="COST">
+            <h3 className="title-1 mt-4">A fraction of the cost</h3>
+            <p className="body-copy mt-2">
+              Creator video runs £150 to £500 a piece. Our plans work out from
+              around £100 an ad.
+            </p>
+            <CostLadder className="mt-5" />
           </BentoCard>
         </RevealItem>
       </StaggerGroup>
