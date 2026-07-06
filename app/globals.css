@@ -21,6 +21,7 @@
   --line-hover: #d9dade;
   --bezel: #1d1e20;
   --dot-grey: #e3e5e8; /* calendar day-dot base (VolumeCadence) */
+  --rail: #cdd0d6; /* visible track/tick grey (PipelineFlow) */
 
   /* 2.2 Accent — Redpxl Red */
   --accent: #e62e2e;
