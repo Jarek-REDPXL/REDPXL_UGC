@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Canvas from "@/components/ui/Canvas";
 import TeamPhoto from "@/components/ui/TeamPhoto";
 import TeamSocialVideo from "@/components/ui/TeamSocialVideo";
@@ -29,19 +30,32 @@ export default function MeetTheTeam() {
       tint="blush"
     >
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-11">
-        {/* Intro — wide banner, row 1 */}
-        <div className="flex flex-col justify-center rounded-frame border border-line bg-bg p-6 sm:p-7 md:col-span-2 lg:col-span-6 lg:col-start-1 lg:row-start-1">
-          <span className="mono-note text-text-3">REDPXL UGC · STUDIO</span>
-          <h3 className="title-1 mt-3 text-balance text-[26px] leading-tight">
-            The people behind the work.
-          </h3>
-          <p className="body-copy mt-3 max-w-[46ch]">
-            A small team of designers, strategists and AI creative specialists,
-            obsessed with ads that actually convert.
-          </p>
-          <span className="mono-note mt-4 text-text-3">
-            CANARY WHARF, LONDON · EST. 2024
-          </span>
+        {/* Intro — wide banner, row 1, over the Canary Wharf skyline with a dark
+            --ink scrim + gradient so the white text stays AA-readable. */}
+        <div className="relative flex flex-col justify-center overflow-hidden rounded-frame border border-line p-6 sm:p-7 md:col-span-2 lg:col-span-6 lg:col-start-1 lg:row-start-1">
+          <Image
+            src="/images/team/canarywharf.jpg"
+            alt=""
+            fill
+            sizes="(max-width: 1024px) 100vw, 55vw"
+            className="z-0 object-cover object-center"
+          />
+          <div className="absolute inset-0 z-0 bg-ink/70" />
+          <div className="absolute inset-0 z-0 bg-gradient-to-r from-ink/50 to-ink/15" />
+
+          <div className="relative z-10">
+            <span className="mono-note block text-white/70">REDPXL UGC · STUDIO</span>
+            <h3 className="title-1 mt-3 text-balance text-[26px] leading-tight text-white">
+              The people behind the work.
+            </h3>
+            <p className="body-copy mt-3 max-w-[46ch] text-white/85">
+              A small team of designers, strategists and AI creative specialists,
+              obsessed with ads that actually convert.
+            </p>
+            <span className="mono-note mt-4 block text-white/60">
+              CANARY WHARF, LONDON · EST. 2024
+            </span>
+          </div>
         </div>
 
         {/* Tall social-video tile — col-span-3 (cols 9-11), spans both rows on
