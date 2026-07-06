@@ -1,9 +1,10 @@
 /**
  * MathsBars — horizontal cost comparison for the Maths canvas (sage).
  *
- * Two full-width tracks. The long bar (creator video, --text-3) fills its
- * track completely; the short bar (Redpxl plan, --accent) fills ~30% of it,
- * so the fraction reads visually. Values use .label + tabular figures.
+ * Two full-width tracks. The short bar (Redpxl plan, --pos green — the cheaper,
+ * positive option) sits on top and fills ~30%; the long bar (creator video,
+ * --text-3 grey) below fills its track completely, so the fraction reads
+ * visually. Values use .label + tabular figures.
  *
  * Pure-CSS server component — no JS, no hydration. Each bar grows from
  * scaleX(0) → scaleX(1) (transform-origin left, compositor-friendly) as the
@@ -26,18 +27,18 @@ type Row = {
 
 const ROWS: Row[] = [
   {
+    label: "Redpxl plan",
+    value: "£100 to £133/AD",
+    pct: 30,
+    barClass: "bg-pos",
+    valueClass: "text-pos",
+  },
+  {
     label: "Creator video",
     value: "£150 to £500",
     pct: 100,
     barClass: "bg-text-3",
     valueClass: "text-ink",
-  },
-  {
-    label: "Redpxl plan",
-    value: "£100 to £133/AD",
-    pct: 30,
-    barClass: "bg-accent",
-    valueClass: "text-accent-dark",
   },
 ];
 
