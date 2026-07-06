@@ -41,7 +41,7 @@ export default function BatchPreview({ className = "" }: { className?: string })
             hook: "THE £40 AD THAT SOLD OUT",
             meta: "30S · HOOK: POV",
           }}
-          src="/videos/AI_UGC1.mp4"
+          src="/videos/AI_UGC4.mp4"
           hideCaption
           className="w-full"
         />
