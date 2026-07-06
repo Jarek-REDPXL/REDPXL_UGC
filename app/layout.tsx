@@ -19,9 +19,9 @@ const SITE_URL = "https://redpxl.uk";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
-  title: "REDPXL UGC — AI UGC Video Ads That Convert",
+  title: "REDPXL UGC — AI UGC ads that convert",
   description:
-    "Done-for-you, hyper-realistic AI UGC video and static ads. Scripted with proven direct-response hooks, delivered in 72 hours, ready for TikTok, Meta and YouTube. A Redpxl company, London.",
+    "15–30 fresh, scroll-stopping UGC ads a month, delivered in 72 hours. Done-for-you AI UGC video and static ads for TikTok, Meta and YouTube. A Redpxl company, London.",
   keywords: [
     "AI UGC",
     "UGC video ads",
@@ -35,26 +35,27 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     url: SITE_URL,
-    siteName: "REDPXL UGC",
-    title: "REDPXL UGC — AI UGC Video Ads That Convert",
+    siteName: "REDPXL",
+    title: "REDPXL UGC — AI UGC ads that convert",
     description:
-      "Hyper-realistic AI-generated UGC video and static ads for your brand. Proven direct-response hooks, delivered in 72 hours.",
+      "15–30 fresh, scroll-stopping UGC ads a month, delivered in 72 hours.",
     locale: "en_GB",
     images: [
       {
-        url: "/og.png",
+        // ?v=2 busts the old cached preview on platforms that key by URL
+        url: "/og.png?v=2",
         width: 1200,
         height: 630,
-        alt: "REDPXL UGC — AI UGC ads engineered to convert.",
+        alt: "REDPXL UGC — never run a tired ad again.",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "REDPXL UGC — AI UGC Video Ads That Convert",
+    title: "REDPXL UGC — AI UGC ads that convert",
     description:
-      "Hyper-realistic AI-generated UGC video and static ads for your brand. Delivered in 72 hours.",
-    images: ["/og.png"],
+      "15–30 fresh, scroll-stopping UGC ads a month, delivered in 72 hours.",
+    images: ["/og.png?v=2"],
   },
   robots: { index: true, follow: true },
   // favicon + apple-touch icon are provided by app/icon.png and
