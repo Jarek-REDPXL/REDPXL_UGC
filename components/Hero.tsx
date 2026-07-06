@@ -86,7 +86,7 @@ export default function Hero() {
           className="hero-rise inline-flex items-center rounded-full border border-line bg-bg-subtle px-4 py-1.5"
           style={{ animationDelay: "0.05s" }}
         >
-          <span className="mono-note">AI UGC VIDEO ADS · DONE FOR YOU</span>
+          <span className="mono-note">UGC AD CREATIVE ON TAP · DONE FOR YOU</span>
         </span>
 
         {/* H1 — one line at >=1280, balances to two below */}
@@ -95,7 +95,7 @@ export default function Hero() {
           className="display-1 hero-rise mx-auto mt-6 max-w-[1120px] text-balance text-[clamp(2.5rem,5.3vw,3.9rem)]"
           style={{ animationDelay: "0.14s" }}
         >
-          UGC ads engineered to convert.
+          Never run a tired ad again.
         </h1>
 
         {/* sub */}
@@ -103,9 +103,8 @@ export default function Hero() {
           className="body-lg hero-rise mx-auto mt-5 max-w-[620px] text-center"
           style={{ animationDelay: "0.23s" }}
         >
-          Hyper-realistic AI-generated video and static ads for your brand.
-          Scripted with proven direct-response hooks, delivered in 72 hours,
-          ready for TikTok, Meta and YouTube.
+          15 to 30 fresh, scroll-stopping UGC ads a month, delivered in 72
+          hours, at a fraction of what creators charge.
         </p>
 
         {/* CTAs */}

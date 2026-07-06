@@ -7,7 +7,10 @@ import Why from "@/components/Why";
 import Maths from "@/components/Maths";
 import Process from "@/components/Process";
 import Deliverables from "@/components/Deliverables";
-import Results from "@/components/Results";
+// TODO:REAL-DATA — [07] Results hidden until real campaign numbers + named
+// testimonials exist (trust guardrail: never ship fabricated proof). Restore
+// this import and <Results /> below before considering the page final.
+// import Results from "@/components/Results";
 import Comparison from "@/components/Comparison";
 import Pricing from "@/components/Pricing";
 import Guarantee from "@/components/Guarantee";
@@ -31,7 +34,9 @@ export default function Home() {
         <Maths />
         <Process />
         <Deliverables />
-        <Results />
+        {/* TODO:REAL-DATA — [07] Results hidden (fabricated stats + placeholder
+            testimonials). Restore <Results /> with real numbers + named quotes. */}
+        {/* <Results /> */}
         <Comparison />
         <Pricing />
         <Guarantee />

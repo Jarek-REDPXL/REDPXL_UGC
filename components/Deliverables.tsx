@@ -12,7 +12,7 @@ import BatchPreview from "@/components/graphics/BatchPreview";
 
 const DELIVERABLES = [
   "Scripted, edited, captioned. Nothing to finish.",
-  "Named + labeled files, organised by hook & format",
+  "Named + labelled files, organised by hook & format",
   "Statics and video, your chosen split",
   "All sizes: 9:16 · 1:1 · 4:5",
   "Paid usage rights included",

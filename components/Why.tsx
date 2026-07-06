@@ -50,40 +50,15 @@ export default function Why() {
       title="Everything creators do. None of what slows you down."
     >
       <StaggerGroup className="grid grid-cols-1 gap-4 md:grid-cols-12">
-        {/* Wide A — Generation */}
-        <RevealItem className="md:col-span-7">
-          <BentoCard icon={Users} label="GENERATION">
-            <h3 className="title-1">Hyper-realistic creators</h3>
+        {/* Volume — leads: the outcome that maps to the fatigue problem (§14) */}
+        <RevealItem className="md:col-span-3">
+          <BentoCard icon={Layers} label="VOLUME">
+            <h3 className="title-1 mt-4">The volume you need</h3>
             <p className="body-copy mt-2">
-              AI-generated people indistinguishable from filmed UGC. No casting
-              calls, no shipping products, no chasing creators for reshoots.
+              Most brands ship 2 to 4 ads a month. Winning on paid social takes
+              15 to 20. We produce at that pace.
             </p>
-          </BentoCard>
-        </RevealItem>
-
-        {/* Wide B — Scripting */}
-        <RevealItem className="md:col-span-5">
-          <BentoCard icon={Zap} label="SCRIPTING">
-            <h3 className="title-1">Hooks that convert</h3>
-            <p className="body-copy mt-2">
-              Every script is built from a library of 50+ proven direct-response
-              hook frameworks, not guesswork.
-            </p>
-            <div className="mt-4 rounded-btn border border-line bg-bg-subtle p-3">
-              {[
-                "POV: YOU'VE BEEN DOING IT WRONG",
-                "STOP SCROLLING IF YOU RUN ADS",
-                "3 REASONS YOUR ADS FLOP",
-              ].map((line) => (
-                <div
-                  key={line}
-                  className="mono-note flex items-center gap-2 py-1"
-                >
-                  <span className="h-1 w-1 rounded-full bg-accent" />
-                  {line}
-                </div>
-              ))}
-            </div>
+            <VolumeCadence className="mt-5" />
           </BentoCard>
         </RevealItem>
 
@@ -95,18 +70,6 @@ export default function Why() {
               Every batch is briefed, produced and delivered inside three days.
             </p>
             <SpeedDial className="mt-5" />
-          </BentoCard>
-        </RevealItem>
-
-        {/* Volume — the calendar-cadence graphic (§14) */}
-        <RevealItem className="md:col-span-3">
-          <BentoCard icon={Layers} label="VOLUME">
-            <h3 className="title-1 mt-4">The volume you need</h3>
-            <p className="body-copy mt-2">
-              Most brands ship 2 to 4 ads a month. Winning on paid social takes
-              15 to 20. We produce at that pace.
-            </p>
-            <VolumeCadence className="mt-5" />
           </BentoCard>
         </RevealItem>
 
@@ -132,6 +95,45 @@ export default function Why() {
               gloss that gets scrolled past.
             </p>
             <FormatMorphVideo src="/videos/Main%20Hero%20(2).mp4" className="mt-5 flex-1" />
+          </BentoCard>
+        </RevealItem>
+
+        {/* Wide — Scripting */}
+        <RevealItem className="md:col-span-5">
+          <BentoCard icon={Zap} label="SCRIPTING">
+            <h3 className="title-1">Hooks that convert</h3>
+            <p className="body-copy mt-2">
+              Every script is built from a library of 50+ proven direct-response
+              hook frameworks, not guesswork.
+            </p>
+            <div className="mt-4 rounded-btn border border-line bg-bg-subtle p-3">
+              {[
+                "POV: YOU'VE BEEN DOING IT WRONG",
+                "STOP SCROLLING IF YOU RUN ADS",
+                "3 REASONS YOUR ADS FLOP",
+              ].map((line) => (
+                <div
+                  key={line}
+                  className="mono-note flex items-center gap-2 py-1"
+                >
+                  <span className="h-1 w-1 rounded-full bg-accent" />
+                  {line}
+                </div>
+              ))}
+            </div>
+          </BentoCard>
+        </RevealItem>
+
+        {/* Wide — Generation, moved down and reframed as reassurance (not the
+            opening argument): it's indistinguishable from filmed UGC. */}
+        <RevealItem className="md:col-span-7">
+          <BentoCard icon={Users} label="GENERATION">
+            <h3 className="title-1">Hyper-realistic creators</h3>
+            <p className="body-copy mt-2">
+              Indistinguishable from filmed UGC. No one can tell it&apos;s AI, so
+              your ads read as real creator content, not synthetic. No casting
+              calls, no shipping product, no chasing reshoots.
+            </p>
           </BentoCard>
         </RevealItem>
       </StaggerGroup>

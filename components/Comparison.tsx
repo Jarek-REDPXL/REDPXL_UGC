@@ -39,7 +39,7 @@ const ROWS: { label: string; cells: [Cell, Cell, Cell] }[] = [
     cells: [
       { verdict: "neutral", text: "Varies per creator" },
       { verdict: "neg", text: "Varies per prompt" },
-      { verdict: "pos", text: "Engineered pipeline" },
+      { verdict: "pos", text: "Same pipeline, every batch" },
     ],
   },
   {

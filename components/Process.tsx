@@ -14,7 +14,7 @@ const STEPS = [
   },
   {
     title: "Test",
-    body: "A clean, labeled, ready-to-run batch in 72 hours. Rotate them, find your winners, and we refresh before they fatigue.",
+    body: "A clean, labelled, ready-to-run batch in 72 hours. Rotate them, find your winners, and we refresh before they fatigue.",
   },
 ];
 
