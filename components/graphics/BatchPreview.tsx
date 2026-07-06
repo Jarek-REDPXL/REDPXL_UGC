@@ -29,8 +29,10 @@ const FILES: { name: string; sub: string; fmt: string }[] = [
 export default function BatchPreview({ className = "" }: { className?: string }) {
   return (
     <div className={`grid grid-cols-1 items-stretch gap-5 sm:grid-cols-[264px_1fr] ${className}`}>
-      {/* the phone — our real shared component, live video only (no caption) */}
-      <div className="mx-auto flex w-[264px] items-center sm:mx-0">
+      {/* the phone — our real shared component, live video only (no caption).
+          Mobile (<sm, stacked): full column width so it scales up proportionally
+          (9:16 ratio drives height). sm+ (beside the list): fixed 264px as before. */}
+      <div className="flex w-full items-center sm:w-[264px]">
         <PhoneFrame
           chip="Skincare UGC ad"
           editorial={{
