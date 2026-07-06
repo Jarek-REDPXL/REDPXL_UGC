@@ -25,7 +25,7 @@ export default function MeetTheTeam() {
       idx="11"
       name="MEET THE TEAM"
       note="THE PEOPLE BEHIND THE WORK"
-      tint="mist"
+      tint="blush"
     >
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-10">
         {/* Intro — wide banner, row 1 */}

@@ -4,9 +4,9 @@ import Reveal from "@/components/Reveal";
 
 /**
  * DESIGN.md §9 [10] THE GUARANTEE — the risk-reversal hammer.
- * A compact white mini-canvas (hairline --line border) placed right after
- * pricing: short centered copy plus one green WhatsApp CTA. Reads smaller than
- * the full sections by design. Light mode — black lives only in the footer.
+ * A compact soft-grey mini-canvas (--bg-subtle + hairline --line border) placed
+ * right after pricing: short centered copy plus one green WhatsApp CTA. Reads
+ * smaller than the full sections by design. Light mode.
  */
 export default function Guarantee() {
   return (
@@ -15,7 +15,7 @@ export default function Guarantee() {
       idx="10"
       name="THE GUARANTEE"
       note="ZERO RISK"
-      tint="white-border"
+      tint="grey"
       title="If you wouldn't run them, you don't pay."
       centered
     >

@@ -4,6 +4,7 @@ import Grain from "./Grain";
 export type Tint =
   | "white"
   | "white-border"
+  | "grey"
   | "sand"
   | "sage"
   | "blush"

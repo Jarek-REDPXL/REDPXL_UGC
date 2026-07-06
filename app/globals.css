@@ -386,6 +386,10 @@ button:focus-visible,
   background: var(--bg);
   border: 1px solid var(--line);
 }
+.canvas--grey {
+  background: var(--bg-subtle);
+  border: 1px solid var(--line);
+}
 .canvas--sand {
   background: var(--canvas-sand);
   --deep: var(--deep-sand);

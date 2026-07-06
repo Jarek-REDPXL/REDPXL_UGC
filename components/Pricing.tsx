@@ -58,7 +58,7 @@ export default function Pricing() {
       idx="09"
       name="PRICING"
       note="EXCL. VAT · NO CONTRACTS"
-      tint="blush"
+      tint="sage"
       title="Start with a trial. "
       titleDeep="Scale with a plan."
     >
