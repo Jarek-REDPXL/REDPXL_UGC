@@ -20,8 +20,9 @@ type HeroPhone = {
 };
 
 // Video file number per phone position (left → right). Reordered from the
-// natural 1-5 so the arc plays Main Hero (1)(4)(3)(5)(2).
-const VIDEO_ORDER = [1, 4, 3, 5, 2];
+// natural 1-5 so the arc plays Main Hero (1)(4)(2)(5)(3) — middle and far-right
+// swapped so the clip that was on the far right now plays in the centre.
+const VIDEO_ORDER = [1, 4, 2, 5, 3];
 
 // left → right; variants a–e, palettes sand/mist/cream/blush/sage.
 // Each phone plays /public/videos/Main Hero (1…5).mp4; the editorial poster is
