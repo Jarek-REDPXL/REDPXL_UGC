@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
-import { GeistMono } from "geist/font/mono";
 import "lenis/dist/lenis.css";
 import "./globals.css";
 import SmoothScroll from "@/components/SmoothScroll";
@@ -70,7 +69,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${GeistMono.variable} h-full`}
+      className={`${inter.variable} h-full`}
     >
       <body className="min-h-full flex flex-col antialiased">
         <SmoothScroll>{children}</SmoothScroll>

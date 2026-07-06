@@ -51,10 +51,13 @@
   --radius-phone: 28px;
   --radius-chip: 6px;
 
-  /* §3 Fonts (--font-inter / --font-geist-mono injected by next/font) */
+  /* §3 Fonts — single typeface: Inter everywhere (--font-inter injected by
+     next/font). The "mono" label look is kept via uppercase + tracking +
+     tabular figures on .mono-note/.mono-idx, not an actual monospace face. */
   --font-sans: var(--font-inter), Inter, -apple-system, BlinkMacSystemFont,
     "Segoe UI", sans-serif;
-  --font-mono: var(--font-geist-mono), "SFMono-Regular", ui-monospace, monospace;
+  --font-mono: var(--font-inter), Inter, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", sans-serif;
 
   /* §7 Motion */
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
@@ -282,6 +285,9 @@ button:focus-visible,
   line-height: 1.4;
   text-transform: uppercase;
   color: var(--text-3);
+  /* Inter tabular figures keep numbers/filenames/units aligned like the old
+     monospace did — the engineered-label look without a mono face. */
+  font-variant-numeric: tabular-nums;
 }
 .mono-idx {
   font-family: var(--font-mono);
