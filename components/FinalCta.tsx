@@ -6,9 +6,8 @@ import { site } from "@/lib/site";
 
 /**
  * DESIGN.md §9 [12] START — the closing invitation.
- * Soft cream Canvas, centered, typography only. Canvas auto-grains tinted
- * canvases and lends the key phrase its deep companion tone. Light mode —
- * the only dark block left is the footer.
+ * White Canvas (hairline --line border), centered, typography only. Light
+ * mode — the only dark block left is the footer.
  */
 export default function FinalCta() {
   return (
@@ -17,9 +16,8 @@ export default function FinalCta() {
       idx="13"
       name="START"
       note="15 MIN CALL"
-      tint="cream"
-      title="Stop running "
-      titleDeep="tired ads."
+      tint="white-border"
+      title="Stop running tired ads."
       sub="Get your first batch this week and give your paid social the creative volume it's been missing."
       centered
     >
