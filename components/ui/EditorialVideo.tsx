@@ -56,8 +56,22 @@ export default function EditorialVideo({
       if (p) p.catch(() => {});
     };
     tryPlay();
+    // Viewport-gate: pause when scrolled away or hidden (the mobile-hidden hero
+    // phones, the below-fold [06] batch phone) so off-screen clips stop
+    // decoding; resume in view. Hero phones are in view on load → play at once.
+    const io = new IntersectionObserver(
+      (entries) => {
+        if (entries[0]?.isIntersecting) tryPlay();
+        else v.pause();
+      },
+      { rootMargin: "200px 0px" }
+    );
+    io.observe(v);
     v.addEventListener("canplay", tryPlay);
-    return () => v.removeEventListener("canplay", tryPlay);
+    return () => {
+      io.disconnect();
+      v.removeEventListener("canplay", tryPlay);
+    };
   }, []);
 
   if (failed) {

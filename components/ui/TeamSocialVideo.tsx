@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const SAND_POSTER =
   "linear-gradient(158deg, var(--canvas-sand) 0%, color-mix(in oklab, var(--canvas-sand) 66%, var(--deep-sand)) 100%)";
@@ -12,7 +12,33 @@ const SAND_POSTER =
  * On error the quiet --canvas-sand poster shows so it never looks broken.
  */
 export default function TeamSocialVideo() {
+  const ref = useRef<HTMLVideoElement>(null);
   const [failed, setFailed] = useState(false);
+
+  // Viewport-gate: this tile is always below the fold, so play only while it's
+  // in/near view (IntersectionObserver) and pause otherwise — it never decodes
+  // on initial load. Muted, so play() when in view is an allowed autoplay.
+  useEffect(() => {
+    const v = ref.current;
+    if (!v) return;
+    const tryPlay = () => {
+      const p = v.play();
+      if (p) p.catch(() => {});
+    };
+    const io = new IntersectionObserver(
+      (entries) => {
+        if (entries[0]?.isIntersecting) tryPlay();
+        else v.pause();
+      },
+      { rootMargin: "200px 0px" }
+    );
+    io.observe(v);
+    v.addEventListener("canplay", tryPlay);
+    return () => {
+      io.disconnect();
+      v.removeEventListener("canplay", tryPlay);
+    };
+  }, []);
 
   if (failed) {
     return (
@@ -24,13 +50,13 @@ export default function TeamSocialVideo() {
 
   return (
     <video
+      ref={ref}
       className="absolute inset-0 h-full w-full object-cover"
       src="/videos/socialmedia.mp4"
       muted
       loop
-      autoPlay
       playsInline
-      preload="metadata"
+      preload="none"
       onError={() => setFailed(true)}
     />
   );
