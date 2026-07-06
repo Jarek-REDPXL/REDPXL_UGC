@@ -3,10 +3,11 @@ import TeamPhoto from "@/components/ui/TeamPhoto";
 import TeamSocialVideo from "@/components/ui/TeamSocialVideo";
 
 /**
- * DESIGN.md §9 [11] MEET THE TEAM — a mist-canvas bento. A 10-column grid:
- * Row 1 = wide intro banner + Zain's portrait; Row 2 = Hendrix, Reis, Maya,
- * Jarek; a tall social-video tile spans both rows on the far right. First-name
- * labels. DOM order (intro → video → members) is the small-screen stack.
+ * DESIGN.md §9 [11] MEET THE TEAM — a blush-canvas bento. An 11-column grid:
+ * Row 1 = wide intro banner (6) + Zain's portrait (2); Row 2 = Hendrix, Reis,
+ * Maya, Jarek (2 each = 8); a tall social-video tile (col-span-3, ~9:16) spans
+ * both rows on the far right. 6+2+3 = 8+3 = 11, so it tessellates with no gaps.
+ * First-name labels. DOM order (intro → video → members) is the small stack.
  */
 
 // Real team, first-name only. Zain leads the top row beside the intro.
@@ -27,7 +28,7 @@ export default function MeetTheTeam() {
       note="THE PEOPLE BEHIND THE WORK"
       tint="blush"
     >
-      <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-10">
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-11">
         {/* Intro — wide banner, row 1 */}
         <div className="flex flex-col justify-center rounded-frame border border-line bg-bg p-6 sm:p-7 md:col-span-2 lg:col-span-6 lg:col-start-1 lg:row-start-1">
           <span className="mono-note text-text-3">REDPXL UGC · STUDIO</span>
@@ -43,9 +44,9 @@ export default function MeetTheTeam() {
           </span>
         </div>
 
-        {/* Tall social-video tile — no forced aspect; on lg it spans both rows
-            and takes the grid height, the video fills it (object-cover). */}
-        <div className="relative aspect-[3/4] overflow-hidden rounded-frame border border-line bg-bg-inset lg:col-span-2 lg:col-start-9 lg:row-span-2 lg:row-start-1 lg:aspect-auto">
+        {/* Tall social-video tile — col-span-3 (cols 9-11), spans both rows on
+            lg and takes the grid height (~9:16); the video fills it (cover). */}
+        <div className="relative aspect-[3/4] overflow-hidden rounded-frame border border-line bg-bg-inset lg:col-span-3 lg:col-start-9 lg:row-span-2 lg:row-start-1 lg:aspect-auto">
           <TeamSocialVideo />
         </div>
 
