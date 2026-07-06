@@ -40,24 +40,29 @@ export default function TeamSocialVideo() {
     };
   }, []);
 
-  if (failed) {
-    return (
-      <div className="absolute inset-0" style={{ background: SAND_POSTER }}>
-        <div className="grain-tex absolute inset-0 opacity-[0.04]" />
-      </div>
-    );
-  }
+  const Poster = () => (
+    <div className="absolute inset-0" style={{ background: SAND_POSTER }}>
+      <div className="grain-tex absolute inset-0 opacity-[0.04]" />
+    </div>
+  );
+
+  if (failed) return <Poster />;
 
   return (
-    <video
-      ref={ref}
-      className="absolute inset-0 h-full w-full object-cover"
-      src="/videos/socialmedia.mp4"
-      muted
-      loop
-      playsInline
-      preload="none"
-      onError={() => setFailed(true)}
-    />
+    <>
+      {/* poster sits behind the video so the gated (preload=none) tile is never
+          an empty grey box while it loads; the video covers it once it paints */}
+      <Poster />
+      <video
+        ref={ref}
+        className="absolute inset-0 h-full w-full object-cover"
+        src="/videos/socialmedia.mp4"
+        muted
+        loop
+        playsInline
+        preload="none"
+        onError={() => setFailed(true)}
+      />
+    </>
   );
 }
