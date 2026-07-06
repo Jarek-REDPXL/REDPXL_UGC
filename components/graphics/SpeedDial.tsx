@@ -2,27 +2,28 @@
  * DESIGN.md §14 — SpeedDial. The delivery-speed story for the Why canvas.
  *
  * Element 1: the "72 HOURS" stat on the left, a clock-face dial on the right —
- * a thin 1.5px ring with faint dashed inner ticks, a hand that sweeps from 12
- * o'clock to the top-right (accent tip dot) as the card scrolls in, then rests;
- * a small ink hub. Below it, the "DELIVERY WINDOW / COMPRESSED" caption.
- * Element 2: a faint TRADITIONAL / 2-WEEKS rail from BRIEF to BATCH, with our
- * 72H segment filling only the first ~15% — a tiny fast slice vs the long wait.
+ * a thin 1.5px ring with faint dashed inner ticks, a hand that sweeps to the
+ * top-right, a small ink hub, and a "DELIVERY WINDOW / COMPRESSED" caption.
+ * Element 2: a dead-simple two-bar comparison — YOU · 72H is a short --accent
+ * bar; OTHERS · 2 WEEKS is a long faded grey bar. "Way faster" at a glance.
  *
- * Pure-CSS server component. The hand sweeps on a gentle infinite loop (0→52°
- * and back, ~3.6s) so it stays alive whenever the card is on screen; the
- * un-animated base state rests the hand at its final angle, so reduced-motion
- * gets the correct still.
- * SVG strokes use non-scaling-stroke so the ring + hand stay crisp 1.5px.
+ * Pure-CSS server component. The hand sweeps and the bars grow in on gentle
+ * infinite loops so they stay alive while on screen; the un-animated base state
+ * rests the hand at its final angle and the bars at full width, so reduced-
+ * motion gets the correct still. SVG strokes use non-scaling-stroke.
  */
 export default function SpeedDial({ className = "" }: { className?: string }) {
   return (
     <div className={`w-full ${className}`} aria-hidden>
       <style>{`
         .sd-hand{transform:rotate(52deg);transform-box:view-box;transform-origin:40px 40px}
+        .sd-bar{transform:scaleX(1);transform-origin:left center}
         @media (prefers-reduced-motion: no-preference){
           .sd-hand{animation:sd-sweep 3.6s ease-in-out infinite}
+          .sd-bar{animation:sd-grow 4.2s ease-in-out infinite}
         }
         @keyframes sd-sweep{0%,8%{transform:rotate(0deg)}42%,74%{transform:rotate(52deg)}100%{transform:rotate(0deg)}}
+        @keyframes sd-grow{0%,6%{transform:scaleX(0)}30%,82%{transform:scaleX(1)}100%{transform:scaleX(0)}}
       `}</style>
 
       {/* Element 1 — stat + dial */}
@@ -50,21 +51,23 @@ export default function SpeedDial({ className = "" }: { className?: string }) {
         </div>
       </div>
 
-      {/* Element 2 — traditional 2-week rail, ours a tiny fast slice */}
-      <div className="mt-6">
-        <div className="flex items-center justify-between mono-note text-text-3">
-          <span>BRIEF</span>
-          <span>BATCH</span>
+      {/* Element 2 — two bars: us (short red) vs others (long grey) */}
+      <div className="mt-6 flex flex-col gap-3.5">
+        <div>
+          <div className="mono-note text-ink">
+            YOU · <span className="tabular-nums">72H</span>
+          </div>
+          <div className="mt-1.5 h-2 w-full overflow-hidden rounded-full bg-bg-inset">
+            <div className="sd-bar h-full w-[20%] rounded-full bg-accent" />
+          </div>
         </div>
-        <div className="relative mt-2 h-1.5 w-full rounded-full bg-bg-inset">
-          <div className="absolute inset-y-0 left-0 w-[15%] rounded-full bg-accent" />
-          <span className="absolute left-[15%] top-1/2 h-2.5 w-2.5 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-white bg-accent" />
-        </div>
-        <div className="relative mt-1.5 h-4">
-          <span className="mono-note absolute left-[15%] -translate-x-1/2 text-accent-dark">72H</span>
-          <span className="mono-note absolute right-0 top-0.5 text-[8.5px]! text-text-3">
-            TRADITIONAL · 2 WEEKS
-          </span>
+        <div>
+          <div className="mono-note text-text-3">
+            OTHERS · <span className="tabular-nums">2 WEEKS</span>
+          </div>
+          <div className="mt-1.5 h-2 w-full overflow-hidden rounded-full bg-bg-inset">
+            <div className="sd-bar h-full w-full rounded-full bg-dot-grey" />
+          </div>
         </div>
       </div>
     </div>

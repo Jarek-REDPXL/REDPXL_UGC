@@ -71,21 +71,6 @@ export default function Why() {
               Every script is built from a library of 50+ proven direct-response
               hook frameworks, not guesswork.
             </p>
-            <div className="mt-4 rounded-btn border border-line bg-bg-subtle p-3">
-              {[
-                "POV: YOU'VE BEEN DOING IT WRONG",
-                "STOP SCROLLING IF YOU RUN ADS",
-                "3 REASONS YOUR ADS FLOP",
-              ].map((line) => (
-                <div
-                  key={line}
-                  className="mono-note flex items-center gap-2 py-1"
-                >
-                  <span className="h-1 w-1 rounded-full bg-accent" />
-                  {line}
-                </div>
-              ))}
-            </div>
           </BentoCard>
         </RevealItem>
 

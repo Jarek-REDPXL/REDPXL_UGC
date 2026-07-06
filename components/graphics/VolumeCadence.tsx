@@ -1,77 +1,59 @@
 /**
- * DESIGN.md §14 — VolumeCadence ("Calendar Drop", Option C). The output-cadence
- * story for the Why canvas: a typical brand posts a sparse 2-4 ads a month, we
- * post a steady 15-20.
+ * DESIGN.md §14 — VolumeCadence. The output-volume story for the Why canvas,
+ * as a literal "few vs many" quantity: a typical brand ships a sparse 2–4 ads a
+ * month; winning on paid social needs 15–20.
  *
- * A 7×4 calendar of quiet grey day-dots. A few sparse "typical" days carry a
- * darker inner fill; many "redpxl" days get a small --accent dot dropping onto
- * them on a gentle staggered loop, so drops feel continuous but calm. A hairline
- * legend reads SPARSE 2-4 / STEADY 15-20.
+ * Two rows of small identical duotone ad-tiles: 3 tiles (2–4 · YOU SHIP) above
+ * a wrapping ~18 tiles (15–20 · YOU NEED). The eye reads the gap in quantity
+ * instantly. The long row fills in on a gentle staggered loop so it feels alive
+ * without pulling focus.
  *
- * Pure-CSS server component. The drop is the single quiet motion cue, gated by
- * `prefers-reduced-motion`; the un-animated base state rests every accent dot in
- * place (visible, no drop), so reduced-motion still shows the sparse-vs-steady
- * contrast. aria-hidden. Tokens only.
+ * Pure-CSS server component; the fade-in is the single quiet cue, gated by
+ * `prefers-reduced-motion` (base state = all tiles solid). aria-hidden. Tokens
+ * only — each tile is a token duotone (accent-soft → warmer accent).
  */
-const DAYS = 28;
-const TYPICAL = new Set([9, 16, 23]); // sparse 2-4 typical ads (darker dots)
-// steady 15-20 REDPXL days that receive an accent drop
-const REDPXL = new Set([0, 1, 3, 4, 6, 7, 8, 11, 13, 14, 17, 18, 20, 21, 25, 26, 27]);
+const TILE =
+  "linear-gradient(155deg, var(--accent-soft) 50%, color-mix(in oklab, var(--accent) 45%, var(--bg)) 100%)";
 
 export default function VolumeCadence({ className = "" }: { className?: string }) {
   return (
     <div className={`w-full ${className}`} aria-hidden>
       <style>{`
-        /* base = reduced/static rest state: accent dot resting in place */
-        .vc-drop{opacity:1;transform:none}
+        .vq-tile{opacity:1}
         @media (prefers-reduced-motion: no-preference){
-          .vc-drop{animation:vc-drop 3.8s ease-in-out infinite}
+          .vq-tile{animation:vq-fill 4.6s ease-in-out infinite}
         }
-        @keyframes vc-drop{
-          0%{opacity:0;transform:translateY(-9px)}
-          14%{opacity:1;transform:translateY(0)}
-          72%{opacity:1;transform:translateY(0)}
-          88%,100%{opacity:0;transform:translateY(-9px)}
-        }
+        @keyframes vq-fill{0%{opacity:0.18}16%{opacity:1}84%{opacity:1}100%{opacity:0.18}}
       `}</style>
 
-      {/* header row */}
-      <div className="flex items-center justify-between gap-2">
-        <span className="inline-flex items-center gap-1.5 rounded-full border border-line px-2.5 py-1 mono-note text-text-2">
-          <span className="h-1.5 w-1.5 rounded-full bg-accent" /> FRESH DROPS / MONTH
-        </span>
-        <span className="mono-note text-[9px]! text-text-3">TYPICAL → REDPXL</span>
-      </div>
+      <div className="flex flex-col gap-4">
+        {/* few — what most brands ship */}
+        <div>
+          <div className="flex flex-wrap gap-1.5">
+            {Array.from({ length: 3 }).map((_, i) => (
+              <span key={i} className="h-3.5 w-3.5 rounded-[3px]" style={{ background: TILE }} />
+            ))}
+          </div>
+          <span className="mono-note mt-2 block text-text-3">
+            <span className="tabular-nums text-ink">2–4</span> · YOU SHIP
+          </span>
+        </div>
 
-      {/* calendar grid */}
-      <div className="mt-4 grid grid-cols-7 gap-2">
-        {Array.from({ length: DAYS }).map((_, i) => {
-          const typical = TYPICAL.has(i);
-          const redpxl = REDPXL.has(i);
-          return (
-            <div key={i} className="relative flex aspect-square items-center justify-center">
+        {/* many — what it takes to win (fills in on loop) */}
+        <div>
+          <div className="flex flex-wrap gap-1.5">
+            {Array.from({ length: 18 }).map((_, i) => (
               <span
-                className={`h-[9px] w-[9px] rounded-full ${typical ? "bg-text-3" : "bg-dot-grey"}`}
+                key={i}
+                className="vq-tile h-3.5 w-3.5 rounded-[3px]"
+                style={{ background: TILE, animationDelay: `-${((i * 0.24) % 4.6).toFixed(2)}s` }}
               />
-              {redpxl && (
-                <span
-                  className="vc-drop absolute h-[5px] w-[5px] rounded-full bg-accent"
-                  style={{ animationDelay: `-${((i * 1.3) % 3.8).toFixed(2)}s` }}
-                />
-              )}
-            </div>
-          );
-        })}
-      </div>
-
-      {/* legend */}
-      <div className="mt-4 flex items-center justify-between border-t border-line pt-3">
-        <span className="mono-note text-[9px]! text-text-3">
-          SPARSE: <span className="tabular-nums text-ink">2–4</span>
-        </span>
-        <span className="mono-note text-[9px]! text-text-3">
-          STEADY: <span className="tabular-nums text-ink">15–20</span>
-        </span>
+            ))}
+          </div>
+          <span className="mono-note mt-2 block text-text-3">
+            <span className="tabular-nums text-ink">15–20</span> · YOU NEED
+          </span>
+        </div>
       </div>
     </div>
   );
