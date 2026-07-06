@@ -28,8 +28,9 @@ export default function Deliverables() {
       tint="cream"
       title="One brief in. "
       titleDeep="A ready-to-run batch out."
+      contentClassName="!mt-8"
     >
-      <div className="grid grid-cols-1 items-start gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:gap-10">
+      <div className="grid grid-cols-1 items-start gap-8 lg:grid-cols-[0.82fr_1.18fr] lg:gap-10">
         <ul className="flex flex-col gap-4">
           {DELIVERABLES.map((item) => (
             <li key={item} className="flex items-start gap-2.5 body-copy">
