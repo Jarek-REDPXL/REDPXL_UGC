@@ -4,7 +4,7 @@ import TeamPhoto from "@/components/ui/TeamPhoto";
 import TeamSocialVideo from "@/components/ui/TeamSocialVideo";
 
 /**
- * DESIGN.md §9 [11] MEET THE TEAM — a blush-canvas bento. An 11-column grid:
+ * DESIGN.md §9 [11] MEET THE TEAM — a cream-canvas bento. An 11-column grid:
  * Row 1 = wide intro banner (6) + Zain's portrait (2); Row 2 = Hendrix, Reis,
  * Maya, Jarek (2 each = 8); a tall social-video tile (col-span-3, ~9:16) spans
  * both rows on the far right. 6+2+3 = 8+3 = 11, so it tessellates with no gaps.
@@ -27,7 +27,7 @@ export default function MeetTheTeam() {
       idx="11"
       name="MEET THE TEAM"
       note="THE PEOPLE BEHIND THE WORK"
-      tint="blush"
+      tint="cream"
     >
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-11">
         {/* Intro — wide banner, row 1, over the Canary Wharf skyline with a dark
