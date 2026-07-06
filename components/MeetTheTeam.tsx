@@ -14,9 +14,9 @@ import TeamSocialVideo from "@/components/ui/TeamSocialVideo";
 const MEMBERS = [
   { name: "Zain", role: "Founder", img: "/images/team/zain.png", place: "lg:col-start-7 lg:row-start-1" },
   { name: "Hendrix", role: "Creative Director", img: "/images/team/hendrix.png", place: "lg:col-start-1 lg:row-start-2" },
-  { name: "Reis", role: "Project Manager", img: "/images/team/reis.png", place: "lg:col-start-3 lg:row-start-2" },
-  { name: "Maya", role: "Story Teller", img: "/images/team/maya.png", place: "lg:col-start-5 lg:row-start-2" },
-  { name: "Jarek", role: "Tool Developer", img: "/images/team/jarek.png", place: "lg:col-start-7 lg:row-start-2" },
+  { name: "Reis", role: "Creative Producer", img: "/images/team/reis.png", place: "lg:col-start-3 lg:row-start-2" },
+  { name: "Maya", role: "Storyteller", img: "/images/team/maya.png", place: "lg:col-start-5 lg:row-start-2" },
+  { name: "Jarek", role: "Platform Technologist", img: "/images/team/jarek.png", place: "lg:col-start-7 lg:row-start-2" },
 ];
 
 export default function MeetTheTeam() {
