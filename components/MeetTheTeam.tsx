@@ -43,8 +43,9 @@ export default function MeetTheTeam() {
           </span>
         </div>
 
-        {/* Tall social-video tile — spans both rows on the far right (no overlay) */}
-        <div className="relative aspect-[9/16] overflow-hidden rounded-frame border border-line bg-bg-inset md:aspect-[3/4] lg:col-span-2 lg:col-start-9 lg:row-span-2 lg:row-start-1 lg:aspect-auto">
+        {/* Tall social-video tile — no forced aspect; on lg it spans both rows
+            and takes the grid height, the video fills it (object-cover). */}
+        <div className="relative aspect-[3/4] overflow-hidden rounded-frame border border-line bg-bg-inset lg:col-span-2 lg:col-start-9 lg:row-span-2 lg:row-start-1 lg:aspect-auto">
           <TeamSocialVideo />
         </div>
 

@@ -32,7 +32,6 @@ export default function TeamSocialVideo() {
       playsInline
       preload="metadata"
       onError={() => setFailed(true)}
-      aria-hidden
     />
   );
 }
