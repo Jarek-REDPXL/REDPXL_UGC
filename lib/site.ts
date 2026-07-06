@@ -4,8 +4,7 @@
 export const site = {
   name: "REDPXL",
   productName: "REDPXL UGC",
-  email: "hello@redpxl.uk",
-  supportEmail: "support@redpxl.uk",
+  email: "zain@redpxl.uk",
   location: "Canary Wharf, London",
 } as const;
 

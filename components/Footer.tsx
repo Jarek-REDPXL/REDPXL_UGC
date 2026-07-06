@@ -1,7 +1,7 @@
 import Logo from "@/components/Logo";
 import WhatsAppButton from "@/components/ui/WhatsAppButton";
 import { navLinks, site } from "@/lib/site";
-import { INSTAGRAM_URL, TIKTOK_URL } from "@/lib/config";
+import { INSTAGRAM_URL, TIKTOK_URL, WHATSAPP_URL } from "@/lib/config";
 
 // lucide-react dropped brand glyphs — inline monochrome currentColor icons.
 function InstagramIcon({ className = "" }: { className?: string }) {
@@ -23,8 +23,8 @@ function TikTokIcon({ className = "" }: { className?: string }) {
 
 const EXPLORE = navLinks;
 const CONTACT = [
-  { label: site.email, href: `mailto:${site.email}` },
-  { label: site.supportEmail, href: `mailto:${site.supportEmail}` },
+  { label: site.email, href: `mailto:${site.email}`, external: false },
+  { label: "+44 7525 832432", href: WHATSAPP_URL, external: true },
 ];
 
 /** A quiet right-hand link column: mono-note header + white links → hover accent. */
@@ -89,7 +89,11 @@ export default function Footer() {
             <LinkCol title="CONTACT">
               {CONTACT.map((l) => (
                 <li key={l.href}>
-                  <a href={l.href} className="label text-white/85 transition-colors hover:text-accent">
+                  <a
+                    href={l.href}
+                    {...(l.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+                    className="label text-white/85 transition-colors hover:text-accent"
+                  >
                     {l.label}
                   </a>
                 </li>

@@ -1,8 +1,6 @@
 import Canvas from "@/components/ui/Canvas";
-import Button from "@/components/ui/Button";
 import WhatsAppButton from "@/components/ui/WhatsAppButton";
 import Reveal from "@/components/Reveal";
-import { site } from "@/lib/site";
 
 /**
  * DESIGN.md §9 [12] START — the closing invitation.
@@ -22,11 +20,8 @@ export default function FinalCta() {
       centered
     >
       <Reveal>
-        <div className="flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
+        <div className="flex justify-center">
           <WhatsAppButton />
-          <Button href={`mailto:${site.email}`} variant="ghost">
-            {site.email}
-          </Button>
         </div>
       </Reveal>
 
