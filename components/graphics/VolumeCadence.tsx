@@ -5,21 +5,21 @@ import { useLoopCount } from "@/components/ui/useLoopCount";
 /**
  * DESIGN.md §14 — VolumeCadence. The output-volume story as a looping count-UP,
  * the mirror of CostLadder (rising, not falling): the big number ticks from what
- * most brands ship (2–4) up to what winning takes (15–20), ~2s ease-out, while a
+ * most brands ship (2–4) up to what winning takes (15+), ~2s ease-out, while a
  * subtle row of small tiles fills in sync beneath it — so you SEE the volume
  * accumulate, not just a number change. Holds ~2s, fades, resets, repeats. Same
  * number size / label style / timing as Cost (siblings, opposite directions).
  * Reduced-motion: static final. Inter, tabular-nums, tokens only, aria-hidden.
  */
-const TILES = 20;
+const TILES = 15;
 
 export default function VolumeCadence({ className = "" }: { className?: string }) {
-  const { value, phase, ref } = useLoopCount(4, 20);
+  const { value, phase, ref } = useLoopCount(4, 15);
   const rolling = phase === "roll";
   const resetting = phase === "reset";
   const n = Math.round(value);
   const filled = rolling ? Math.max(0, Math.min(TILES, n)) : TILES;
-  const display = rolling ? (n <= 4 ? "2–4" : n) : "15–20";
+  const display = rolling ? (n <= 4 ? "2–4" : n) : "15+";
 
   return (
     <div ref={ref} className={`w-full ${className}`} aria-hidden>

@@ -51,7 +51,7 @@ export default function CostLadder({ className = "" }: { className?: string }) {
     <div ref={ref} className={`w-full ${className}`} aria-hidden>
       <div className="flex flex-col gap-4">
         <div>
-          <span className="mono-note text-text-3">CREATOR</span>
+          <span className="mono-note block text-text-3">CREATOR</span>
           <div className="relative mt-1 inline-block">
             <span className="title-2 tabular-nums text-text-3">£150–500</span>
             <span
