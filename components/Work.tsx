@@ -18,11 +18,7 @@ const PHONE = "shrink-0 w-[200px] md:w-[230px] lg:w-[260px] mx-2.5";
  */
 export default function Work() {
   return (
-    <section
-      id="work"
-      aria-labelledby="work-title"
-      className="section-y [content-visibility:auto] [contain-intrinsic-size:auto_720px]"
-    >
+    <section id="work" aria-labelledby="work-title" className="section-y">
       <div className="content-x">
         <Reveal>
           {/* §6.1 annotation row — [02] pill matches the canvas pill style */}
@@ -54,10 +50,11 @@ export default function Work() {
 
       {/* §15 full-bleed infinite reel — track rendered twice for a seamless
           left→right loop; motion is pure CSS (.reel-track). Videos AI_UGC1…10
-          play viewport-gated (ReelGate). Clips horizontally only (overflow-x)
-          with py breathing room so frames + shadows + the translateY offset are
-          never sliced top/bottom. */}
-      <ReelGate className="reel-viewport mask-fade-x mt-12 overflow-x-clip py-8">
+          play per-phone viewport-gated (ReelGate) so only the phones in the
+          window decode. Edge fade is two static gradient overlays (cheaper than
+          masking the animated, promoted track layer every frame). Clips
+          horizontally only (overflow-x) with py breathing room. */}
+      <ReelGate className="reel-viewport relative mt-12 overflow-x-clip py-8">
         <div className="reel-track">
           {SLOTS.map((src, i) => (
             <div key={`a-${i}`} className={`${PHONE} ${i % 2 === 1 ? "translate-y-3" : ""}`}>
@@ -74,6 +71,9 @@ export default function Work() {
             </div>
           ))}
         </div>
+        {/* cheap edge fade (replaces the mask-image over the promoted layer) */}
+        <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-12 bg-gradient-to-r from-bg to-transparent" aria-hidden />
+        <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-12 bg-gradient-to-l from-bg to-transparent" aria-hidden />
       </ReelGate>
     </section>
   );
