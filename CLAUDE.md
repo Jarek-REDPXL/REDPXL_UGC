@@ -66,23 +66,38 @@ classes (`.display-1`, `.title-1`, `.body-copy`, `.stat`, `.mono-note`,
    real.** Mark them `{/* TODO:REAL-DATA */}` (DESIGN.md §1.8).
 5. **Hairlines over shadows; one dark moment (Final CTA); red is a scalpel
    (≤1% per screen).** (DESIGN.md §1).
-6. `npm run build` must pass with zero errors/warnings before any handoff.
-7. **No visual change is complete until screenshots have been captured and
-   reviewed across the responsive range.** Run `npm run audit:shots` (dev
-   server up) — it screens all 8 widths (320→1920), captures per-section +
-   interaction states into `/audit`, and runs an automated horizontal-overflow
-   check. **Zero overflow at every width is a hard gate**; the script exits
-   non-zero on any breach. Review the shots before calling work done.
+6. `npm run build` must pass before any handoff — but only run it when a change
+   could break the build (see Workflow).
 
 ---
 
-## Responsive & audit
+## Workflow (default: FAST) — overrides any earlier self-audit-loop instruction
 
-- **Envelope:** 320, 390, 430, 768, 1024, 1280, 1440, 1920. No horizontal
-  scroll at any width — `document.scrollWidth <= innerWidth` everywhere.
-- **Capture:** `npm run audit:shots` → `/audit` (gitignored). Full-page per
-  width, per-section at 390/768/1280/1920, FAQ-open + nav-scrolled states, and
-  `audit/overflow-report.json`.
+For the vast majority of requests (any small/medium change — colours, spacing,
+copy, moving elements, swapping assets, single-section tweaks, wiring a video,
+renaming): **make the change, build only if it could break, commit, push. Nothing
+more.**
+
+1. Make the change directly. Touch ONLY the section/component named. Don't
+   re-read the whole codebase, re-derive tokens, or "improve" untouched sections.
+2. Run `npm run build` **only if** the change could break it (new component,
+   import, dependency). For pure CSS/text/value tweaks, skip the build.
+3. **Do NOT** run `audit:shots` / the 8-breakpoint screenshot loop, write
+   PASS-N / deviation / rationale reports, or run Lighthouse. If one thing
+   genuinely needs a look at mobile, do a SINGLE mobile check — not the matrix.
+4. Commit with a short message and push. Done.
+
+Trust the design system that's already built. Speed and directness are the
+priority.
+
+**Go slow/thorough ONLY when explicitly asked** — "full audit", "check
+everything", "do this properly across breakpoints", or a big new-section build.
+Then the full process applies: `npm run audit:shots` (dev server up) screens all
+8 widths (320→1920) into `/audit` with an automated horizontal-overflow check
+(zero overflow is the gate; script exits non-zero on breach).
+
+- **Responsive envelope** (when auditing): 320, 390, 430, 768, 1024, 1280, 1440,
+  1920 — no horizontal scroll anywhere (`document.scrollWidth <= innerWidth`).
 - **Drop-in assets:** see [ASSETS.md](./ASSETS.md) for the video-slot / image /
   `TODO:REAL-DATA` registry. Dev-only placeholder badges mark every unfilled
   slot (`NODE_ENV=development`).
