@@ -1,5 +1,4 @@
 import Canvas from "@/components/ui/Canvas";
-import Button from "@/components/ui/Button";
 import DyingAdCard from "@/components/graphics/DyingAdCard";
 import VolumeGap from "@/components/graphics/VolumeGap";
 import { StaggerGroup, RevealItem } from "@/components/Stagger";
@@ -71,16 +70,6 @@ export default function Problem() {
           );
         })}
       </StaggerGroup>
-
-      {/* footer strip */}
-      <div className="mt-4 flex flex-col gap-5 rounded-frame border border-line bg-bg p-6 sm:flex-row sm:items-center sm:justify-between sm:gap-8">
-        <p className="title-2 text-ink">
-          The bottleneck is production. We remove it.
-        </p>
-        <Button href="#process" variant="primary" className="w-full sm:w-auto">
-          See how it works →
-        </Button>
-      </div>
     </Canvas>
   );
 }
