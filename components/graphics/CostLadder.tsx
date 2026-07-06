@@ -9,9 +9,10 @@ import { ArrowDown } from "lucide-react";
  * draws in left→right as the card scrolls in. A "UNIT COST / DESCENDING"
  * caption sits bottom-left; a bordered "↓ UP TO 80% LESS" chip bottom-right.
  *
- * Pure-CSS server component. The draw-in is a scroll-driven `animation-timeline:
- * view()` on stroke-dashoffset (with an `@supports` fallback); the base state is
- * the fully-drawn ladder, so no-support + reduced-motion get the static final.
+ * Pure-CSS server component. The line draws down on a gentle infinite loop
+ * (draw in ~1s, hold, retract, ~4.2s) so it stays alive whenever the card is on
+ * screen; the base state is the fully-drawn ladder, so reduced-motion gets the
+ * static final.
  * SVG strokes use non-scaling-stroke so the steps stay crisp 1.5px. Tabular
  * figures throughout.
  */
@@ -28,11 +29,9 @@ export default function CostLadder({ className = "" }: { className?: string }) {
       <style>{`
         .cl-line{stroke-dasharray:1;stroke-dashoffset:0}
         @media (prefers-reduced-motion: no-preference){
-          @supports (animation-timeline: view()){
-            .cl-line{animation:cl-draw linear both;animation-timeline:view();animation-range:entry 10% cover 40%}
-          }
+          .cl-line{animation:cl-draw 4.2s ease-in-out infinite}
         }
-        @keyframes cl-draw{from{stroke-dashoffset:1}to{stroke-dashoffset:0}}
+        @keyframes cl-draw{0%,6%{stroke-dashoffset:1}30%,82%{stroke-dashoffset:0}100%{stroke-dashoffset:1}}
       `}</style>
 
       <svg viewBox="0 0 240 150" preserveAspectRatio="xMidYMid meet" className="h-auto w-full">

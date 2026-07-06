@@ -8,9 +8,10 @@
  * Element 2: a faint TRADITIONAL / 2-WEEKS rail from BRIEF to BATCH, with our
  * 72H segment filling only the first ~15% — a tiny fast slice vs the long wait.
  *
- * Pure-CSS server component. The sweep is a scroll-driven `animation-timeline:
- * view()` (with an `@supports` fallback); the un-animated base state rests the
- * hand at its final angle, so no-support + reduced-motion get the correct still.
+ * Pure-CSS server component. The hand sweeps on a gentle infinite loop (0→52°
+ * and back, ~3.6s) so it stays alive whenever the card is on screen; the
+ * un-animated base state rests the hand at its final angle, so reduced-motion
+ * gets the correct still.
  * SVG strokes use non-scaling-stroke so the ring + hand stay crisp 1.5px.
  */
 export default function SpeedDial({ className = "" }: { className?: string }) {
@@ -19,11 +20,9 @@ export default function SpeedDial({ className = "" }: { className?: string }) {
       <style>{`
         .sd-hand{transform:rotate(52deg);transform-box:view-box;transform-origin:40px 40px}
         @media (prefers-reduced-motion: no-preference){
-          @supports (animation-timeline: view()){
-            .sd-hand{animation:sd-sweep linear both;animation-timeline:view();animation-range:entry 18% cover 42%}
-          }
+          .sd-hand{animation:sd-sweep 3.6s ease-in-out infinite}
         }
-        @keyframes sd-sweep{from{transform:rotate(0deg)}to{transform:rotate(52deg)}}
+        @keyframes sd-sweep{0%,8%{transform:rotate(0deg)}42%,74%{transform:rotate(52deg)}100%{transform:rotate(0deg)}}
       `}</style>
 
       {/* Element 1 — stat + dial */}
