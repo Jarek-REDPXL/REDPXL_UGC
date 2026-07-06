@@ -65,6 +65,13 @@ export default function VideoSlot({
         className={`relative w-full overflow-hidden bg-bg-inset ${ratioClass[ratio]} ${rounded}`}
       >
         <EditorialVideo src={src} {...editorial} hideCaption={hideCaption} />
+        {/* niche chip (top-left) — shown only when a caption is wanted, so the
+            caption-less hero phones stay clean */}
+        {chip && !hideCaption && (
+          <span className="mono-note absolute left-2 top-2 z-20 rounded-chip border border-line bg-white/[0.92] px-2 py-[3px] !text-ink">
+            {chip}
+          </span>
+        )}
         <div className="pointer-events-none absolute inset-0 z-10 rounded-[inherit] border border-line" />
       </div>
     );

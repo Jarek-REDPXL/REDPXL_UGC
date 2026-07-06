@@ -528,8 +528,12 @@ deliverables checklist (lucide `Check` 14px `--pos` + `body`): "Mix of image +
 video ads — you choose the split", "All sizes: 9:16 · 1:1 · 4:5", "Native cuts
 for TikTok, Reels, Meta & YouTube", "Clean, labelled, ready-to-run files",
 "1 revision per ad", "Full paid usage rights — yours forever". Beside it the
-**BatchDrop** graphic (§14) — a single brief resolving into a stacked, labelled
-batch of deliverables.
+**BatchPreview** graphic (§14, Concept D) — our real shared `PhoneFrame` playing
+a live batch clip (niche + hook/meta chips), standing on its own beside a white
+batch **file-list** panel (`BATCH_014 · 30 ASSETS`, green `● READY`, ~7 named
+`.MP4`/`.JPG` rows with a format chip each, footer). Phone left + list right on
+lg/md; phone stacked above the list on mobile. The phone uses no bespoke
+chrome — same bezel/shadow as the hero.
 
 ### [07] RESULTS — canvas `white-border` — note `/ PLACEHOLDER DATA`
 Title: "Built for performance, measured in revenue." 3 stat cards (§8.12), each
@@ -755,7 +759,7 @@ SVG component (default export, `{ className?: string }`) in
 | `FormatMorph`      | 03 Why AI UGC  | one frame morphing 9:16 → 1:1 → 4:5       |
 | `MathsBars`        | 04 The Maths   | creator vs REDPXL cost/volume bars        |
 | `PipelineFlow`     | 05 Process     | Brief → Produce → Test as a flow          |
-| `BatchDrop`        | 06 What You Get| one brief resolving into a labelled batch |
+| `BatchPreview`     | 06 What You Get| real PhoneFrame + live clip beside a batch file-list panel (Concept D) |
 
 Rules for all six:
 

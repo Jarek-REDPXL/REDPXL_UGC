@@ -1,12 +1,13 @@
 import { Check } from "lucide-react";
 import Canvas from "@/components/ui/Canvas";
-import BatchDrop from "@/components/graphics/BatchDrop";
+import BatchPreview from "@/components/graphics/BatchPreview";
 
 /**
  * DESIGN.md §9 [06] / §13 — WHAT YOU GET canvas (cream, deep `--deep-sand`).
  * "One brief in. A ready-to-run batch out." A deliverables checklist on the
- * left, the BatchDrop batch-resolution graphic on the right. Two-column on
- * lg+, stacking to a single column (BatchDrop full-width below) on mobile.
+ * left; on the right, the BatchPreview — our real shared PhoneFrame with a live
+ * clip beside the batch file list. Two-column on lg+ (checklist narrower),
+ * stacking to a single column (checklist → phone → list) on mobile.
  */
 
 const DELIVERABLES = [
@@ -28,7 +29,7 @@ export default function Deliverables() {
       title="One brief in. "
       titleDeep="A ready-to-run batch out."
     >
-      <div className="grid grid-cols-1 items-start gap-12 lg:grid-cols-2">
+      <div className="grid grid-cols-1 items-start gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:gap-10">
         <ul className="flex flex-col gap-4">
           {DELIVERABLES.map((item) => (
             <li key={item} className="flex items-start gap-2.5 body-copy">
@@ -38,7 +39,7 @@ export default function Deliverables() {
           ))}
         </ul>
 
-        <BatchDrop className="w-full" />
+        <BatchPreview className="w-full" />
       </div>
     </Canvas>
   );

@@ -59,6 +59,9 @@ Falls back to the blank screen on error. Files: **MP4 H.264, 9:16, 1080×1920.**
 > Several are ~5.5MB (AI_UGC1/7/8/9/10). Consider compressing to ~2MB each
 > (short 9:16 loops) to lighten mobile — total is ~36MB across the ten.
 
+> The [06] What You Get phone (BatchPreview) reuses **`AI_UGC1.mp4`** interim via
+> the shared editorial PhoneFrame — swap for a real skincare batch clip later.
+
 > Below 1024 the hero drops its outer pair (slots 1 & 5); below 768 it shows
 > slots 2–4 with the neighbours cropped at the edges — no extra files.
 > The Work reel duplicates its 10 phones for the seamless marquee; one file per
